@@ -1,14 +1,23 @@
 
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:swanapp/Controllers/OrderController.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({Key? key}) : super(key: key);
 
   @override
-  State<OrderHistoryScreen> createState() => _OrderHistoryScreenState();
+  State createState() => _OrderHistoryScreenState();
 }
 
-class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
+class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
+
+  late OrderController _con;
+
+  _OrderHistoryScreenState() : super(OrderController()) {
+    /// Acquire a reference to the passed Controller.
+    _con = controller as OrderController;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
