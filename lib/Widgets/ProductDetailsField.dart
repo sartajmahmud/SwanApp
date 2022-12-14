@@ -13,7 +13,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
 
   var _currentSelectedValue;
 
-  final _currencies = [
+  final _productList = [
     "Product 1",
     "Product 2",
     "Product 3",
@@ -82,7 +82,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                           _currentSelectedValue = newValue;
                         });
                       },
-                      items: _currencies.map((String value) {
+                      items: _productList.map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),

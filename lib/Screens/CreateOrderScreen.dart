@@ -131,7 +131,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               addProductDetailsField();
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 80),
+              margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 90),
               width: 200,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 1),
@@ -140,10 +140,10 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: const [
                     Expanded(
-                        flex: 8,
+                        flex: 7,
                         child: Center(
                             child: Text(
                           'Add Product',
@@ -166,7 +166,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               Navigator.pushNamed(context, '/createOrder');
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 6,horizontal: 120),
+              margin: const EdgeInsets.symmetric(vertical: 6,horizontal: 125),
               width: 150,
               decoration: const BoxDecoration(
                 color: Colors.black,
