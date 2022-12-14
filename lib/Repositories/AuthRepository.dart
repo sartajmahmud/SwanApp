@@ -51,6 +51,7 @@ Future <bool> userLogin(User user) async {
       body: user.toMap()
   );
   Map result = jsonDecode(response.body);
+  print(result);
 
   if (response.statusCode == 200) {
     // print(User.fromJSON(result['data']).name);
