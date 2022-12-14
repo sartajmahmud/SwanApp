@@ -44,8 +44,9 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
       dynamicList = [];
     }
     setState(() {});
-    dynamicList.add(new ProductDetailsField());
+    dynamicList.add(new ProductDetailsField(dynamicList.length));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

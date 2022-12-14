@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
 
 class ProductDetailsField extends StatefulWidget {
+  late int serialNo;
+  ProductDetailsField(this.serialNo) : super();
   @override
   State<ProductDetailsField> createState() => _ProductDetailsFieldState();
 }
 
 class _ProductDetailsFieldState extends State<ProductDetailsField> {
-  TextEditingController Product = new TextEditingController();
-
-  TextEditingController Price = new TextEditingController();
+  // TextEditingController Product = new TextEditingController();
+  // TextEditingController quantity = new TextEditingController();
 
   var _currentSelectedValue;
 
   final _currencies = [
-    "Food",
-    "Transport",
-    "Personal",
-    "Shopping",
-    "Medical",
-    "Rent",
-    "Movie",
-    "Salary"
+    "Product 1",
+    "Product 2",
+    "Product 3",
+    "Product 4",
+    "Product 5",
+    "Product 6",
+    "Product 7",
+    "Product 8"
   ];
 
   var _SelectedFabric;
 
   final _fabricID = ["1", "2", "3", "4", "5"];
 
-  final customProducts = ["Medical", "Rent", "Movie", "Salary"];
+  final customProducts = [ "Product 5", "Product 6", "Product 7", "Product 8"];
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,8 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
             padding: const EdgeInsets.all(10),
             child: Row(
               children: <Widget>[
-                const Text(
-                  "Product Details",
+                Text(
+                  "Product ${widget.serialNo+1} :",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
