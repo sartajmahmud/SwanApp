@@ -56,6 +56,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
         title: const Text('Create New Order'),
       ),
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           Container(
             margin: const EdgeInsets.all(10),
@@ -163,31 +164,34 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               ),
             ),
           ),
-          InkWell(
-            onTap: () {
-              _con.submitOrder();
-              // Navigator.pushNamed(context, '/createOrder');
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 125),
-              width: 150,
-              decoration: const BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(10),
-                child: Center(
-                    child: Text(
-                  'Submit',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
-                )),
-              ),
-            ),
-          ),
+          dynamicList.length > 0
+              ? InkWell(
+                  onTap: () {
+                    _con.submitOrder();
+                    // Navigator.pushNamed(context, '/createOrder');
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 6, horizontal: 125),
+                    width: 150,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Center(
+                          child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+                      )),
+                    ),
+                  ),
+                )
+              : Container()
         ],
       ),
     );
