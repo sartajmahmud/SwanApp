@@ -18,7 +18,7 @@ void main() {
       '/orderHistory' : (context) => const OrderHistoryScreen(),
       '/createOrder' : (context) => const CreateOrderScreen(),
     },
-    initialRoute: '/createOrder',
+    initialRoute: '/',
   ));
 }
 

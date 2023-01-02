@@ -1,4 +1,7 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:swanapp/Models/Product.dart';
 import 'package:swanapp/Repositories/OrderRepository.dart';
 import 'package:swanapp/Repositories/ProductRepository.dart';
@@ -30,5 +33,15 @@ class OrderController extends ControllerMVC{
     for(Order order in orders){
       print(order.product_name);
     }
+  }
+
+  getChallanDoc(int ID) async {
+    await getChallanPDF(ID);
+  }
+
+  getInvoiceDoc(int ID) async {
+
+      var data = await getInvoicePDF(ID);
+    await Printing.layoutPdf(onLayout: (_) => data.bodyBytes);
   }
 }

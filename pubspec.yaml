@@ -40,6 +40,8 @@ dependencies:
   mvc_pattern: ^8.12.0
   shared_preferences: ^2.0.15
   dropdown_formfield: ^0.1.4
+  printing: ^5.9.3
+
 
 dev_dependencies:
   flutter_test:

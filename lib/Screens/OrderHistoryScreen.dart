@@ -24,6 +24,16 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
       appBar: AppBar(
         title: Text('Order History'),
       ),
+      body: Container(
+        child: Column(
+          children: [
+            IconButton(
+                onPressed: (){
+                _con.getInvoiceDoc(77);
+            }, icon: Icon(Icons.print))
+          ],
+        ),
+      ),
     );
   }
 }
