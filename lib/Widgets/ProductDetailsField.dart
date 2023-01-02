@@ -1,34 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:swanapp/Models/Product.dart';
+
+import '../Controllers/OrderController.dart';
+import '../Models/Fabric.dart';
 
 class ProductDetailsField extends StatefulWidget {
   late int serialNo;
-  ProductDetailsField(this.serialNo) : super();
+  late OrderController _con;
+
+  ProductDetailsField(this.serialNo, this._con) : super();
   @override
-  State<ProductDetailsField> createState() => _ProductDetailsFieldState();
+  State createState() => _ProductDetailsFieldState();
 }
 
-class _ProductDetailsFieldState extends State<ProductDetailsField> {
+class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
   // TextEditingController Product = new TextEditingController();
   // TextEditingController quantity = new TextEditingController();
 
-  var _currentSelectedValue;
-
-  final _productList = [
-    "Product 1",
-    "Product 2",
-    "Product 3",
-    "Product 4",
-    "Product 5",
-    "Product 6",
-    "Product 7",
-    "Product 8"
-  ];
-
+  late Product? _currentSelectedValue = widget._con.products[0];
   var _SelectedFabric;
-
-  final _fabricID = ["1", "2", "3", "4", "5"];
-
-  final customProducts = [ "Product 5", "Product 6", "Product 7", "Product 8"];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +32,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
             child: Row(
               children: <Widget>[
                 Text(
-                  "Product ${widget.serialNo+1} :",
+                  "Product ${widget.serialNo + 1} :",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -74,18 +65,19 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                   ),
                   // isEmpty: _currentSelectedValue == '',
                   child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
+                    child: DropdownButton<Product>(
                       value: _currentSelectedValue,
                       icon: const Icon(Icons.keyboard_arrow_down),
-                      onChanged: (String? newValue) {
+                      onChanged: (Product? newValue) {
                         setState(() {
+                          widget._con.po.items[widget.serialNo].productID = newValue?.id;
                           _currentSelectedValue = newValue;
                         });
                       },
-                      items: _productList.map((String value) {
-                        return DropdownMenuItem<String>(
+                      items: widget._con.products.map((Product value) {
+                        return DropdownMenuItem<Product>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value.product_name),
                         );
                       }).toList(),
                     ),
@@ -94,14 +86,18 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
               },
             ),
           ),
-          customProducts.contains(_currentSelectedValue)
+          // customProducts.contains(_currentSelectedValue)
+          _currentSelectedValue!.unit == 'cft'
               ? Column(
                   children: [
                     Container(
                       margin: const EdgeInsets.all(10),
                       height: 45,
                       child: TextField(
+                        keyboardType: TextInputType.number,
                         onChanged: (String password) {
+                          widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+
                           // this.password = password;
                         },
                         decoration: const InputDecoration(
@@ -122,7 +118,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
-                                // this.password = password;
+                                widget._con.po.items[widget.serialNo].height = double.parse(password);
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Height',
@@ -141,7 +137,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
-                                // this.password = password;
+                                widget._con.po.items[widget.serialNo].width = double.parse(password);
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Width',
@@ -160,7 +156,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
-                                // this.password = password;
+                                widget._con.po.items[widget.serialNo].length = double.parse(password);
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Length',
@@ -177,8 +173,8 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                     Container(
                       margin: const EdgeInsets.all(10),
                       height: 55,
-                      child: FormField<String>(
-                        builder: (FormFieldState<String> state) {
+                      child: FormField<Fabric>(
+                        builder: (FormFieldState<Fabric> state) {
                           return InputDecorator(
                             decoration: const InputDecoration(
                               labelText: 'Fabric ID',
@@ -189,18 +185,20 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                             ),
                             // isEmpty: _currentSelectedValue == '',
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
+                              child: DropdownButton<Fabric>(
                                 value: _SelectedFabric,
                                 icon: const Icon(Icons.keyboard_arrow_down),
-                                onChanged: (String? newValue) {
+                                onChanged: (Fabric? newValue) {
                                   setState(() {
+                                    widget._con.po.items[widget.serialNo].fabID = newValue?.id;
+
                                     _SelectedFabric = newValue;
                                   });
                                 },
-                                items: _fabricID.map((String value) {
-                                  return DropdownMenuItem<String>(
+                                items: widget._con.fabrics.map((Fabric value) {
+                                  return DropdownMenuItem<Fabric>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(value.fabric_name),
                                   );
                                 }).toList(),
                               ),
@@ -211,22 +209,126 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                     ),
                   ],
                 )
-              : Container(
-                  margin: const EdgeInsets.all(10),
-                  height: 45,
-                  child: TextField(
-                    onChanged: (String password) {
-                      // this.password = password;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Quantiy',
-                      labelStyle: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'PlayfairDisplay'),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
+              : _currentSelectedValue!.unit == 'sft'
+                  ? Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 45,
+                          child: TextField(
+                            onChanged: (String password) {
+                              widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Quantiy',
+                              labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'PlayfairDisplay'),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                height: 45,
+                                child: TextField(
+                                  onChanged: (String password) {
+                                    widget._con.po.items[widget.serialNo].height = double.parse(password);
+                                  },
+                                  decoration: const InputDecoration(
+                                    labelText: 'Height',
+                                    labelStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'PlayfairDisplay'),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                height: 45,
+                                child: TextField(
+                                  onChanged: (String password) {
+                                    widget._con.po.items[widget.serialNo].width = double.parse(password);
+                                  },
+                                  decoration: const InputDecoration(
+                                    labelText: 'Width',
+                                    labelStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'PlayfairDisplay'),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 55,
+                          child: FormField<Fabric>(
+                            builder: (FormFieldState<Fabric> state) {
+                              return InputDecorator(
+                                decoration: const InputDecoration(
+                                  labelText: 'Fabric ID',
+                                  labelStyle: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'PlayfairDisplay'),
+                                  border: OutlineInputBorder(),
+                                ),
+                                // isEmpty: _currentSelectedValue == '',
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<Fabric>(
+                                    value: _SelectedFabric,
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    onChanged: (Fabric? newValue) {
+                                      setState(() {
+                                        widget._con.po.items[widget.serialNo].fabID = newValue?.id;
+
+                                        _SelectedFabric = newValue;
+                                      });
+                                    },
+                                    items:
+                                        widget._con.fabrics.map((Fabric value) {
+                                      return DropdownMenuItem<Fabric>(
+                                        value: value,
+                                        child: Text(value.fabric_name),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+                  : _currentSelectedValue!.unit == 'pcs'
+                      ? Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 45,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (String password) {
+                              widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Quantiy',
+                              labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'PlayfairDisplay'),
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        )
+                      : Container()
         ],
       ),
     );

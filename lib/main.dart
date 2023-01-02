@@ -5,6 +5,7 @@ import 'package:swanapp/Screens/LoginScreen.dart';
 import 'package:swanapp/Screens/OrderHistoryScreen.dart';
 
 import 'Screens/CreateOrderScreen.dart';
+import 'Screens/OrderHistoryDetails.dart';
 import 'Screens/SplashScreen.dart';
 
 void main() {
@@ -17,8 +18,9 @@ void main() {
       '/chalanHistory' : (context) => const ChalanHistoryScreen(),
       '/orderHistory' : (context) => const OrderHistoryScreen(),
       '/createOrder' : (context) => const CreateOrderScreen(),
+      '/OrderDetails' : (context) => const OrderHistoryDetails(),
     },
-    initialRoute: '/createOrder',
+    initialRoute: '/orderHistory',
   ));
 }
 

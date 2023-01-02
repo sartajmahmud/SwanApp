@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:swanapp/Controllers/OrderController.dart';
-
+import 'package:swanapp/Models/Item.dart';
 import '../Widgets/ProductDetailsField.dart';
 
 class CreateOrderScreen extends StatefulWidget {
@@ -24,6 +24,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     // TODO: implement initState
     super.initState();
     _con.getProducts();
+    _con.getFabrics();
   }
 
   List<ProductDetailsField> dynamicList = [];
@@ -44,7 +45,8 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
       dynamicList = [];
     }
     setState(() {});
-    dynamicList.add(new ProductDetailsField(dynamicList.length));
+    _con.po.items.add(Item());
+    dynamicList.add(new ProductDetailsField(dynamicList.length, _con));
   }
 
   @override
@@ -60,7 +62,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             height: 45,
             child: TextField(
               onChanged: (String name) {
-                // this.email = name;
+                _con.po.name = name;
               },
               decoration: const InputDecoration(
                 labelText: 'Customer Name',
@@ -75,7 +77,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             height: 45,
             child: TextField(
               onChanged: (String password) {
-                // this.password = password;
+                _con.po.address = password;
               },
               decoration: const InputDecoration(
                 labelText: 'Customer Address',
@@ -90,7 +92,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             height: 45,
             child: TextField(
               onChanged: (String password) {
-                // this.password = password;
+                _con.po.mobile = password;
               },
               decoration: const InputDecoration(
                 labelText: 'Customer Mobile',
@@ -105,7 +107,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             height: 45,
             child: TextField(
               onChanged: (String password) {
-                // this.password = password;
+                _con.po.discount = password;
               },
               decoration: const InputDecoration(
                 labelText: 'Discount',
@@ -131,7 +133,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               addProductDetailsField();
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 90),
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
               width: 200,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 1),
@@ -163,10 +165,11 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/createOrder');
+              _con.submitOrder();
+              // Navigator.pushNamed(context, '/createOrder');
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 6,horizontal: 125),
+              margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 125),
               width: 150,
               decoration: const BoxDecoration(
                 color: Colors.black,
