@@ -1,4 +1,7 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:swanapp/Models/Fabric.dart';
 import 'package:swanapp/Models/OrderHistory.dart';
 import 'package:swanapp/Models/Product.dart';
@@ -13,7 +16,7 @@ class OrderController extends ControllerMVC{
 
   ProductOrder po = ProductOrder();
   List<Product> products = [];
-  // List<ProductOrder> productOrders = [];
+
   List<Order> orders = [];
 
   List<OrderHistory> orderHistory = [];
@@ -54,5 +57,15 @@ class OrderController extends ControllerMVC{
     // print(po.toMap());
     await createOrder(po);
 
+  }
+
+  getChallanDoc(int ID) async {
+    await getChallanPDF(ID);
+  }
+
+  getInvoiceDoc(int ID) async {
+
+      var data = await getInvoicePDF(ID);
+    await Printing.layoutPdf(onLayout: (_) => data.bodyBytes);
   }
 }

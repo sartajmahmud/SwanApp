@@ -53,3 +53,28 @@ Future<List<Order>> getTodaysChalans() async {
   return result2.map((e) => Order.fromJSON(e)).toList();
 
 }
+
+ getChallanPDF(int ID)async {
+   Uri url = Uri.http(serverUrl, 'api/get-challan/$ID',);
+
+
+   http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
+   print(response.body);
+   // Map<String,dynamic> result = jsonDecode(response.body);
+   // List result2 = result['data'];
+   // // print(result['data']);
+   // return result2.map((e) => Order.fromJSON(e)).toList();
+}
+
+getInvoicePDF(int ID)async {
+  Uri url = Uri.http(serverUrl, 'api/get-invoice/$ID',);
+
+
+  // http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
+  return http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
+  // print(response.body);
+  // Map<String,dynamic> result = jsonDecode(response.body);
+  // List result2 = result['data'];
+  // // print(result['data']);
+  // return result2.map((e) => Order.fromJSON(e)).toList();
+}
