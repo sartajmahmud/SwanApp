@@ -7,6 +7,7 @@ class Product{
   String unit = '';
   String created_at = '';
   String updated_at = '';
+  int attribute = 0;
 
 
   Product();
@@ -14,6 +15,7 @@ class Product{
   Product.fromJSON(Map<String, dynamic> jsonMap) {
 
   jsonMap['id'] != null ? id  = jsonMap['id'] : id = 0;
+  jsonMap['attribute'] != null ? id  = jsonMap['attribute'] : id = 0;
   jsonMap['product_name'] != null ? product_name = jsonMap['product_name'] : product_name = '';
   jsonMap['product_category'] != null ? product_category = jsonMap['product_category'] : product_category = '';
   jsonMap['rate'] != null ? rate = jsonMap['rate'] : rate = 0;

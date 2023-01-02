@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:swanapp/Models/Product.dart';
+
+import '../Models/Fabric.dart';
 
 class ProductDetailsField extends StatefulWidget {
   late int serialNo;
-  ProductDetailsField(this.serialNo) : super();
+  late List <Product> products;
+  late List <Fabric> fabrics;
+  ProductDetailsField(this.serialNo, this.products, this.fabrics) : super();
   @override
   State<ProductDetailsField> createState() => _ProductDetailsFieldState();
 }
 
 class _ProductDetailsFieldState extends State<ProductDetailsField> {
-  // TextEditingController Product = new TextEditingController();
-  // TextEditingController quantity = new TextEditingController();
-
-  var _currentSelectedValue;
-
-  final _productList = [
-    "Product 1",
-    "Product 2",
-    "Product 3",
-    "Product 4",
-    "Product 5",
-    "Product 6",
-    "Product 7",
-    "Product 8"
-  ];
 
   var _SelectedFabric;
 
-  final _fabricID = ["1", "2", "3", "4", "5"];
+  late Product _currentSelectedValue;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _currentSelectedValue = widget.products.first;
 
-  final customProducts = [ "Product 5", "Product 6", "Product 7", "Product 8"];
-
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
-//      margin: new EdgeInsets.all(8.0),
       child: ListBody(
         children: <Widget>[
           Padding(
@@ -74,18 +67,18 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                   ),
                   // isEmpty: _currentSelectedValue == '',
                   child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
+                    child: DropdownButton<Product>(
                       value: _currentSelectedValue,
                       icon: const Icon(Icons.keyboard_arrow_down),
-                      onChanged: (String? newValue) {
+                      onChanged: (Product? newValue) {
                         setState(() {
-                          _currentSelectedValue = newValue;
+                          _currentSelectedValue = newValue!;
                         });
                       },
-                      items: _productList.map((String value) {
-                        return DropdownMenuItem<String>(
+                      items: widget.products.map((Product value) {
+                        return DropdownMenuItem<Product>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value.product_name),
                         );
                       }).toList(),
                     ),
@@ -94,7 +87,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
               },
             ),
           ),
-          customProducts.contains(_currentSelectedValue)
+          _currentSelectedValue.attribute != 2
               ? Column(
                   children: [
                     Container(
@@ -105,7 +98,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                           // this.password = password;
                         },
                         decoration: const InputDecoration(
-                          labelText: 'Quantiy',
+                          labelText: 'Quantity',
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontFamily: 'PlayfairDisplay'),
@@ -189,18 +182,18 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                             ),
                             // isEmpty: _currentSelectedValue == '',
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
+                              child: DropdownButton<Fabric>(
                                 value: _SelectedFabric,
                                 icon: const Icon(Icons.keyboard_arrow_down),
-                                onChanged: (String? newValue) {
+                                onChanged: (Fabric? newValue) {
                                   setState(() {
                                     _SelectedFabric = newValue;
                                   });
                                 },
-                                items: _fabricID.map((String value) {
-                                  return DropdownMenuItem<String>(
+                                items: widget.fabrics.map((Fabric value) {
+                                  return DropdownMenuItem<Fabric>(
                                     value: value,
-                                    child: Text(value),
+                                    child: Text(value.fabric_name + value.fabric_type+'-BDT'+value.fabric_rate.toString()),
                                   );
                                 }).toList(),
                               ),
@@ -219,7 +212,7 @@ class _ProductDetailsFieldState extends State<ProductDetailsField> {
                       // this.password = password;
                     },
                     decoration: const InputDecoration(
-                      labelText: 'Quantiy',
+                      labelText: 'Quantity',
                       labelStyle: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontFamily: 'PlayfairDisplay'),

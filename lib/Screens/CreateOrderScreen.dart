@@ -24,6 +24,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     // TODO: implement initState
     super.initState();
     _con.getProducts();
+    _con.getFabrics();
   }
 
   List<ProductDetailsField> dynamicList = [];
@@ -44,7 +45,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
       dynamicList = [];
     }
     setState(() {});
-    dynamicList.add(new ProductDetailsField(dynamicList.length));
+    dynamicList.add(new ProductDetailsField(dynamicList.length,_con.products, _con.fabrics));
   }
 
   @override
@@ -116,15 +117,11 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             ),
           ),
           // ProductDetailsField(),
-          Flexible(
-            // flex: 1,
-            // fit:FlexFit.loose,
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: dynamicList.length,
-              itemBuilder: (_, index) => dynamicList[index],
-            ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: dynamicList.length,
+            itemBuilder: (_, index) => dynamicList[index],
           ),
           InkWell(
             onTap: () {

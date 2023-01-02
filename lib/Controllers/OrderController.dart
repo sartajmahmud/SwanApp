@@ -3,11 +3,13 @@ import 'package:swanapp/Models/Product.dart';
 import 'package:swanapp/Repositories/OrderRepository.dart';
 import 'package:swanapp/Repositories/ProductRepository.dart';
 
+import '../Models/Fabric.dart';
 import '../Models/Order.dart';
 
 class OrderController extends ControllerMVC{
 
   List<Product> products = [];
+  List<Fabric> fabrics = [];
 
   List<Order> orders = [];
   List<Order> chalans = [];
@@ -15,6 +17,13 @@ class OrderController extends ControllerMVC{
     products = await getAllProducts();
     for(Product product in products){
       print(product.product_name);
+    }
+  }
+
+  getFabrics() async {
+    fabrics = await getAllFabrics();
+    for(Fabric fabric in fabrics){
+      print(fabric.fabric_type);
     }
   }
 
@@ -30,5 +39,9 @@ class OrderController extends ControllerMVC{
     for(Order order in orders){
       print(order.product_name);
     }
+  }
+
+  submitOrder() async {
+
   }
 }
