@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:swanapp/Repositories/AuthRepository.dart';
 import 'package:swanapp/Widgets/HomeHistoryButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Center(child: Text('Dashboard')),
+        actions: [
+          IconButton(onPressed: (){
+            logout();
+            Navigator.pushReplacementNamed(context, '/login');
+
+          }, icon: Icon(Icons.logout))
+        ],
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

@@ -17,7 +17,7 @@ void main() {
       '/chalanHistory' : (context) => const ChalanHistoryScreen(),
       '/orderHistory' : (context) => const OrderHistoryScreen(),
       '/createOrder' : (context) => const CreateOrderScreen(),
-      '/OrderDetails' : (context) => const OrderHistoryDetails(),
+      // '/OrderDetails' : (context) => const OrderHistoryDetails(),
     },
     initialRoute: '/',
   ));

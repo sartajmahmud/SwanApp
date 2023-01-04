@@ -67,3 +67,9 @@ Future <bool> userLogin(User user) async {
 
 }
 
+Future<void> logout() async {
+  currentUser.value = new User();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('current_user');
+}
+
