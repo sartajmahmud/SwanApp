@@ -25,16 +25,16 @@ class OrderController extends ControllerMVC{
   List<Fabric> fabrics = [];
   getProducts() async {
     products = await getAllProducts();
-    for(Product product in products){
-      print(product.product_name);
-    }
+    // for(Product product in products){
+    //   print(product.product_name);
+    // }
   }
 
   getChalanHistory() async {
     chalans = await getTodaysChalans();
-    for(Order order in chalans){
-      print(order.product_name);
-    }
+    // for(Order order in chalans){
+    //   print(order.product_name);
+    // }
   }
 
   getOrderHistory() async {
@@ -47,9 +47,9 @@ class OrderController extends ControllerMVC{
 
   getFabrics() async {
     fabrics = await getAllFabrics();
-    for(Fabric fabric in fabrics){
-      print(fabric.fabric_name);
-    }
+    // for(Fabric fabric in fabrics){
+    //   // print(fabric.fabric_name);
+    // }
   }
 
   submitOrder()async{

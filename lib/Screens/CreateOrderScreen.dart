@@ -119,15 +119,11 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             ),
           ),
           // ProductDetailsField(),
-          Flexible(
-            // flex: 1,
-            // fit:FlexFit.loose,
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: dynamicList.length,
-              itemBuilder: (_, index) => dynamicList[index],
-            ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: dynamicList.length,
+            itemBuilder: (_, index) => dynamicList[index],
           ),
           InkWell(
             onTap: () {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:swanapp/Screens/ChalanHistoryScreen.dart';
-import 'package:swanapp/Screens/HomeScreen.dart';
-import 'package:swanapp/Screens/LoginScreen.dart';
-import 'package:swanapp/Screens/OrderHistoryScreen.dart';
-
+import 'Screens/ChalanHistoryScreen.dart';
+import 'Screens/HomeScreen.dart';
+import 'Screens/LoginScreen.dart';
+import 'Screens/OrderHistoryScreen.dart';
 import 'Screens/CreateOrderScreen.dart';
 import 'Screens/OrderHistoryDetails.dart';
 import 'Screens/SplashScreen.dart';

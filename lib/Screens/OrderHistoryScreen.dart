@@ -32,7 +32,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
       ),
       body: ListView.builder(
         shrinkWrap: true,
-        itemCount: 4, //_con.orderHistory.length,
+        itemCount: _con.orderHistory.length, //_con.orderHistory.length,
         itemBuilder: (_, index) => InkWell(
           onTap: (){
             Navigator.pushNamed(context, '/OrderDetails');
@@ -40,7 +40,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
           child: Row(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black, width: 1),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -48,7 +48,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "idx${index}",
+                    "id ${index}",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -56,13 +56,13 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
               Column(
                 children: [
                   Text(
-                    // "Order ID : ${_con.orderHistory[index].id.toString()}",
-                    "Order ID : ",
+                    "Order ID : ${_con.orderHistory[index].id.toString()}",
+                    // "Order ID : ",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    // "Order ID : ${_con.orderHistory[index].customer_name}",
-                    "Customer Name : ",
+                    "Customer Name : ${_con.orderHistory[index].customer_name}",
+                    // "Customer Name : ",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ],
@@ -70,11 +70,15 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Text(
-                  // "Order ID : ${_con.orderHistory[index].total_amount}",
-                  "Total Amount : ",
+                  "Total Amount : ${_con.orderHistory[index].total_amount}",
+                  // "Total Amount : ",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 ),
               ),
+              IconButton(
+                  onPressed: (){
+                    _con.getInvoiceDoc(int.parse(_con.orderHistory[index].order_id));
+                  }, icon: Icon(Icons.print))
             ],
           ),
         ),

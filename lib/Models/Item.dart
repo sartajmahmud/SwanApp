@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 class Item{
-  late int ? productID;
+  late int ? productID = 0;
    double height = 0;
    double width = 0;
    double length = 0;
@@ -8,7 +10,7 @@ class Item{
 
   Item();
 
-  Map toMap() {
+  String toMap() {
     var map = new Map<String, dynamic>();
     map["product_id"]=productID;
     map["height"] = height;
@@ -16,6 +18,6 @@ class Item{
     map["length"] = length;
     map["qty"] = quantity;
     map["fab_id"] = fabID;
-    return map;
+    return jsonEncode(map);
   }
 }

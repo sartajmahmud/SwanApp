@@ -211,105 +211,126 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                 )
               : _currentSelectedValue!.unit == 'sft'
                   ? Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          height: 45,
-                          child: TextField(
-                            onChanged: (String password) {
-                              widget._con.po.items[widget.serialNo].quantity = int.parse(password);
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'Quantiy',
-                              labelStyle: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'PlayfairDisplay'),
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: const EdgeInsets.all(10),
-                                height: 45,
-                                child: TextField(
-                                  onChanged: (String password) {
-                                    widget._con.po.items[widget.serialNo].height = double.parse(password);
-                                  },
-                                  decoration: const InputDecoration(
-                                    labelText: 'Height',
-                                    labelStyle: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'PlayfairDisplay'),
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: const EdgeInsets.all(10),
-                                height: 45,
-                                child: TextField(
-                                  onChanged: (String password) {
-                                    widget._con.po.items[widget.serialNo].width = double.parse(password);
-                                  },
-                                  decoration: const InputDecoration(
-                                    labelText: 'Width',
-                                    labelStyle: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'PlayfairDisplay'),
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          height: 55,
-                          child: FormField<Fabric>(
-                            builder: (FormFieldState<Fabric> state) {
-                              return InputDecorator(
-                                decoration: const InputDecoration(
-                                  labelText: 'Fabric ID',
-                                  labelStyle: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'PlayfairDisplay'),
-                                  border: OutlineInputBorder(),
-                                ),
-                                // isEmpty: _currentSelectedValue == '',
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<Fabric>(
-                                    value: _SelectedFabric,
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    onChanged: (Fabric? newValue) {
-                                      setState(() {
-                                        widget._con.po.items[widget.serialNo].fabID = newValue?.id;
+            children: [
+              Container(
+                margin: const EdgeInsets.all(10),
+                height: 45,
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  onChanged: (String password) {
+                    widget._con.po.items[widget.serialNo].quantity = int.parse(password);
 
-                                        _SelectedFabric = newValue;
-                                      });
-                                    },
-                                    items:
-                                        widget._con.fabrics.map((Fabric value) {
-                                      return DropdownMenuItem<Fabric>(
-                                        value: value,
-                                        child: Text(value.fabric_name),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                    // this.password = password;
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Quantiy',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'PlayfairDisplay'),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      height: 45,
+                      child: TextField(
+                        onChanged: (String password) {
+                          widget._con.po.items[widget.serialNo].height = double.parse(password);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Height',
+                          labelStyle: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'PlayfairDisplay'),
+                          border: OutlineInputBorder(),
                         ),
-                      ],
-                    )
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      height: 45,
+                      child: TextField(
+                        onChanged: (String password) {
+                          widget._con.po.items[widget.serialNo].width = double.parse(password);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Width',
+                          labelStyle: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'PlayfairDisplay'),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      height: 45,
+                      child: TextField(
+                        onChanged: (String password) {
+                          widget._con.po.items[widget.serialNo].length = double.parse(password);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Length',
+                          labelStyle: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'PlayfairDisplay'),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                height: 55,
+                child: FormField<Fabric>(
+                  builder: (FormFieldState<Fabric> state) {
+                    return InputDecorator(
+                      decoration: const InputDecoration(
+                        labelText: 'Fabric ID',
+                        labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'PlayfairDisplay'),
+                        border: OutlineInputBorder(),
+                      ),
+                      // isEmpty: _currentSelectedValue == '',
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<Fabric>(
+                          value: _SelectedFabric,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          onChanged: (Fabric? newValue) {
+                            setState(() {
+                              widget._con.po.items[widget.serialNo].fabID = newValue?.id;
+
+                              _SelectedFabric = newValue;
+                            });
+                          },
+                          items: widget._con.fabrics.map((Fabric value) {
+                            return DropdownMenuItem<Fabric>(
+                              value: value,
+                              child: Text(value.fabric_name),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
                   : _currentSelectedValue!.unit == 'pcs'
                       ? Container(
                           margin: const EdgeInsets.all(10),

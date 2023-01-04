@@ -6,9 +6,23 @@ class ProductOrder{
   late String mobile;
   late String discount;
   List <Item> items = [];
-
+  List products = <Map<String, dynamic>>[
+  ];
   ProductOrder();
 
+   getProducts() async {
+    for (Item item in items){
+      products.add({
+        'product_id':item.productID,
+        'height':item.height,
+        'width':item.width,
+        'length':item.length,
+        'qty':item.quantity,
+        'fab_id':item.fabID,
+      });
+    }
+    return products;
+}
   Map toMap() {
     var map = new Map<String, dynamic>();
     map["customer_name"]=name;

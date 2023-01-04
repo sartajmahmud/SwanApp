@@ -1,20 +1,20 @@
 class OrderHistory {
-  int id = 0;
+  String id = "0";
   String customer_name = '';
   String customer_address = '';
   String customer_mobile = '';
   String total_amount = '';
   String discount = '';
   String invoice_id = '';
-  int isPrinted = 0;
+  String isPrinted = "0";
   String description = '';
-  int sale_rate = 0;
+  String sale_rate = "0";
   String height = '';
   String width = '';
   String length = '';
   String unit = '';
-  int qty = 0;
-  int product_amount = 0;
+  String qty = "0";
+  String product_amount = "0";
   String order_id = '';
   String created_at = '';
   String updated_at = '';
@@ -22,7 +22,7 @@ class OrderHistory {
   OrderHistory();
 
   OrderHistory.fromJSON(Map<String, dynamic> jsonMap) {
-    jsonMap['id'] != null ? id = jsonMap['id'] : id = 0;
+    jsonMap['id'] != null ? id = jsonMap['id'].toString() : id = "0";
     jsonMap['customer_name'] != null
         ? customer_name = jsonMap['customer_name']
         : customer_name = '';
@@ -36,28 +36,28 @@ class OrderHistory {
         ? total_amount = jsonMap['total_amount']
         : total_amount = '';
     jsonMap['discount'] != null
-        ? discount = jsonMap['discount']
+        ? discount = jsonMap['discount'].toString()
         : discount = '';
     jsonMap['invoice_id'] != null
         ? invoice_id = jsonMap['invoice_id']
         : invoice_id = '';
     jsonMap['isPrinted'] != null
-        ? isPrinted = jsonMap['isPrinted']
-        : isPrinted = 0;
+        ? isPrinted = jsonMap['isPrinted'].toString()
+        : isPrinted = "0";
     jsonMap['description'] != null
         ? description = jsonMap['description']
         : description = '';
     jsonMap['sale_rate'] != null
-        ? sale_rate = jsonMap['sale_rate']
-        : sale_rate = 0;
+        ? sale_rate = jsonMap['sale_rate'].toString()
+        : sale_rate = "0";
     jsonMap['height'] != null ? height = jsonMap['height'] : height = '';
     jsonMap['width'] != null ? width = jsonMap['width'] : width = '';
     jsonMap['length'] != null ? length = jsonMap['length'] : length = '';
     jsonMap['unit'] != null ? unit = jsonMap['unit'] : unit = '';
-    jsonMap['qty'] != null ? qty = jsonMap['qty'] : qty = 0;
+    jsonMap['qty'] != null ? qty = jsonMap['qty'].toString() : qty = "0";
     jsonMap['product_amount'] != null
-        ? product_amount = jsonMap['product_amount']
-        : product_amount = 0;
+        ? product_amount = jsonMap['product_amount'].toString()
+        : product_amount = "0";
     jsonMap['order_id'] != null
         ? order_id = jsonMap['order_id']
         : order_id = '';
