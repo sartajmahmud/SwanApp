@@ -27,9 +27,10 @@ Future createOrder(ProductOrder po) async {
     'customer_name': po.name,
     'customer_address': po.address,
     'customer_mobile': po.mobile,
-    'discount': po.discount,
+    // 'discount': po.discount,
     'products': products,
   };
+  print(post);
   var bytes = utf8.encode(json.encode(post));
   print(
     bytes

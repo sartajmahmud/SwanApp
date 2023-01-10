@@ -5,6 +5,8 @@ class Item{
    double height = 0;
    double width = 0;
    double length = 0;
+  late int discount;
+
   late int quantity;
   late int? fabID = 0;
 
@@ -13,11 +15,14 @@ class Item{
   String toMap() {
     var map = new Map<String, dynamic>();
     map["product_id"]=productID;
+    map["discount"] = discount;
     map["height"] = height;
     map["width"] = width;
     map["length"] = length;
     map["qty"] = quantity;
     map["fab_id"] = fabID;
+
+
     return jsonEncode(map);
   }
 }

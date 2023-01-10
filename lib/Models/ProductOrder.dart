@@ -4,7 +4,7 @@ class ProductOrder{
   late String name;
   late String address;
   late String mobile;
-  late String discount;
+  // late String discount;
   List <Item> items = [];
   List products = <Map<String, dynamic>>[
   ];
@@ -17,6 +17,7 @@ class ProductOrder{
         'height':item.height,
         'width':item.width,
         'length':item.length,
+        'discount':item.discount,
         'qty':item.quantity,
         'fab_id':item.fabID,
       });
@@ -28,7 +29,7 @@ class ProductOrder{
     map["customer_name"]=name;
     map["customer_address"] = address;
     map["customer_mobile"] = mobile;
-    map["discount"] = discount;
+    // map["discount"] = discount;
     map["products"] = items.map((e) => e.toMap()).toList().toString();
     return map;
   }
@@ -36,7 +37,7 @@ class ProductOrder{
     print(name);
     print(address);
     print(mobile);
-    print(discount);
+    // print(discount);
     for(Item item in items){
       print(item.productID);
       print(item.height);

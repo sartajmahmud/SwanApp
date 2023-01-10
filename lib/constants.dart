@@ -1,1 +1,1 @@
-String serverUrl = 'posapp.swan-family.com';
+String serverUrl = 'pos.swan-family.com';

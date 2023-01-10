@@ -109,6 +109,21 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         ),
                       ),
                     ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      height: 45,
+                      child: TextField(
+                        onChanged: (String password) {
+                          widget._con.po.items[widget.serialNo].discount = int.parse(password);
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Discount',
+                          labelStyle: TextStyle(
+                              fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -231,6 +246,21 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   ),
                 ),
               ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                height: 45,
+                child: TextField(
+                  onChanged: (String password) {
+                    widget._con.po.items[widget.serialNo].discount = int.parse(password);
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'Discount',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -332,23 +362,44 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
             ],
           )
                   : _currentSelectedValue!.unit == 'pcs'
-                      ? Container(
-                          margin: const EdgeInsets.all(10),
-                          height: 45,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            onChanged: (String password) {
-                              widget._con.po.items[widget.serialNo].quantity = int.parse(password);
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'Quantiy',
-                              labelStyle: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'PlayfairDisplay'),
-                              border: OutlineInputBorder(),
+                      ? Column(
+                        children: [
+                          Container(
+                              margin: const EdgeInsets.all(10),
+                              height: 45,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                onChanged: (String password) {
+                                  widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                                  print(password);
+                                },
+                                decoration: const InputDecoration(
+                                  labelText: 'Quantiy',
+                                  labelStyle: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'PlayfairDisplay'),
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            height: 45,
+                            child: TextField(
+                              onChanged: (String password) {
+                                widget._con.po.items[widget.serialNo].discount = int.parse(password);
+                                print(password);
+                              },
+                              decoration: const InputDecoration(
+                                labelText: 'Discount',
+                                labelStyle: TextStyle(
+                                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
+                                border: OutlineInputBorder(),
+                              ),
                             ),
                           ),
-                        )
+                        ],
+                      )
                       : Container()
         ],
       ),

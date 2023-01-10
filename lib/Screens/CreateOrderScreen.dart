@@ -103,21 +103,21 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.all(10),
-            height: 45,
-            child: TextField(
-              onChanged: (String password) {
-                _con.po.discount = password;
-              },
-              decoration: const InputDecoration(
-                labelText: 'Discount',
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
+          // Container(
+          //   margin: const EdgeInsets.all(10),
+          //   height: 45,
+          //   child: TextField(
+          //     onChanged: (String password) {
+          //       _con.po.discount = password;
+          //     },
+          //     decoration: const InputDecoration(
+          //       labelText: 'Discount',
+          //       labelStyle: TextStyle(
+          //           fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
+          //       border: OutlineInputBorder(),
+          //     ),
+          //   ),
+          // ),
           // ProductDetailsField(),
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),

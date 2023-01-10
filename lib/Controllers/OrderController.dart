@@ -54,7 +54,7 @@ class OrderController extends ControllerMVC{
 
   submitOrder()async{
     // po.printData();
-    // print(po.toMap());
+    print(po.toMap());
     await createOrder(po);
 
   }
