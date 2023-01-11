@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class HomeHistoryButtonWidget extends StatefulWidget {
 
   String title = '';
-   HomeHistoryButtonWidget(this.title) ;
+  late IconData icon ;
+   HomeHistoryButtonWidget(this.title, this.icon) ;
 
   @override
   State<HomeHistoryButtonWidget> createState() => _HomeHistoryButtonWidgetState();
@@ -22,10 +23,20 @@ class _HomeHistoryButtonWidgetState extends State<HomeHistoryButtonWidget> {
         }
       },
       child: Container(
-        margin: const EdgeInsets.fromLTRB(5,15,5,15),
+        margin: const EdgeInsets.fromLTRB(7,25,5,15),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 1),
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15)),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5.0,
+              offset: Offset(
+                0.0,
+                0.0,
+              ),
+            ),
+          ],
         ),
         height: 130,
         child: Padding(
@@ -33,11 +44,12 @@ class _HomeHistoryButtonWidgetState extends State<HomeHistoryButtonWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(Icons.history,
+              Icon(widget.icon,
+                color: Colors.teal,
                 size: 55,),
               Text(widget.title,
                 style: TextStyle(
-                  fontSize: 19, fontWeight: FontWeight.w400,
+                  fontSize: 17, fontWeight: FontWeight.w400,
                 ),)
             ],
           ),

@@ -56,18 +56,27 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
             child: FormField<String>(
               builder: (FormFieldState<String> state) {
                 return InputDecorator(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Product Name',
                     labelStyle: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontFamily: 'PlayfairDisplay'),
-                    border: OutlineInputBorder(),
+                        fontFamily: 'PlayfairDisplay',
+                      color: Colors.black54
+                    ),
+                    focusColor: Colors.black,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13)
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(13),
+                    ),
                   ),
                   // isEmpty: _currentSelectedValue == '',
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<Product>(
+                      isExpanded: true,
                       value: _currentSelectedValue,
-                      icon: const Icon(Icons.keyboard_arrow_down),
+                      icon: const Icon(Icons.keyboard_arrow_down,color: Colors.black,),
                       onChanged: (Product? newValue) {
                         setState(() {
                           widget._con.po.items[widget.serialNo].productID = newValue?.id;
@@ -100,12 +109,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
 
                           // this.password = password;
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Quantiy',
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay'),
-                          border: OutlineInputBorder(),
+                              fontFamily: 'PlayfairDisplay',
+                          color: Colors.black54),
+                          focusColor: Colors.black,
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                         ),
                       ),
                     ),
@@ -116,11 +128,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         onChanged: (String password) {
                           widget._con.po.items[widget.serialNo].discount = int.parse(password);
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                          focusColor: Colors.black,
                           labelText: 'Discount',
                           labelStyle: TextStyle(
-                              fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                          border: OutlineInputBorder(),
+                              fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)
+                          ),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                         ),
                       ),
                     ),
@@ -237,12 +253,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
 
                     // this.password = password;
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Quantiy',
                     labelStyle: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontFamily: 'PlayfairDisplay'),
-                    border: OutlineInputBorder(),
+                        fontFamily: 'PlayfairDisplay',
+                        color: Colors.black54),
+                    focusColor: Colors.black,
+                    focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                   ),
                 ),
               ),
@@ -253,11 +272,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   onChanged: (String password) {
                     widget._con.po.items[widget.serialNo].discount = int.parse(password);
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                    focusColor: Colors.black,
                     labelText: 'Discount',
                     labelStyle: TextStyle(
-                        fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                    border: OutlineInputBorder(),
+                        fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13)
+                    ),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                   ),
                 ),
               ),
@@ -272,12 +295,19 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         onChanged: (String password) {
                           widget._con.po.items[widget.serialNo].height = double.parse(password);
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Height',
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay'),
-                          border: OutlineInputBorder(),
+                              fontFamily: 'PlayfairDisplay',
+                          color: Colors.black54),
+                          focusColor: Colors.black,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(13)
+                          ),
                         ),
                       ),
                     ),
@@ -291,12 +321,19 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         onChanged: (String password) {
                           widget._con.po.items[widget.serialNo].width = double.parse(password);
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Width',
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay'),
-                          border: OutlineInputBorder(),
+                              fontFamily: 'PlayfairDisplay',
+                          color: Colors.black54),
+                          focusColor: Colors.black,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)
+                          ),
                         ),
                       ),
                     ),
@@ -310,12 +347,19 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         onChanged: (String password) {
                           widget._con.po.items[widget.serialNo].length = double.parse(password);
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: 'Length',
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay'),
-                          border: OutlineInputBorder(),
+                              fontFamily: 'PlayfairDisplay',
+                          color: Colors.black54),
+                          focusColor: Colors.black,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)
+                          ),
                         ),
                       ),
                     ),
@@ -328,18 +372,26 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                 child: FormField<Fabric>(
                   builder: (FormFieldState<Fabric> state) {
                     return InputDecorator(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Fabric',
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontFamily: 'PlayfairDisplay'),
-                        border: OutlineInputBorder(),
+                            fontFamily: 'PlayfairDisplay',
+                        color: Colors.black54),
+                        focusColor: Colors.black,
+                        // focusedBorder: OutlineInputBorder(
+                        //     borderRadius: BorderRadius.circular(13)
+                        // ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(13)
+                        ),
                       ),
                       // isEmpty: _currentSelectedValue == '',
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<Fabric>(
+                          isExpanded: true,
                           value: _SelectedFabric,
-                          icon: const Icon(Icons.keyboard_arrow_down),
+                          icon: const Icon(Icons.keyboard_arrow_down,color: Colors.black,),
                           onChanged: (Fabric? newValue) {
                             setState(() {
                               widget._con.po.items[widget.serialNo].fabID = newValue?.id;
@@ -365,36 +417,43 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       ? Column(
                         children: [
                           Container(
-                              margin: const EdgeInsets.all(10),
-                              height: 45,
-                              child: TextField(
-                                keyboardType: TextInputType.number,
-                                onChanged: (String password) {
-                                  widget._con.po.items[widget.serialNo].quantity = int.parse(password);
-                                  print(password);
-                                },
-                                decoration: const InputDecoration(
-                                  labelText: 'Quantiy',
-                                  labelStyle: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'PlayfairDisplay'),
-                                  border: OutlineInputBorder(),
-                                ),
+                            margin: const EdgeInsets.all(10),
+                            height: 45,
+                            child: TextField(
+                              keyboardType: TextInputType.number,
+                              onChanged: (String password) {
+                                widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+
+                                // this.password = password;
+                              },
+                              decoration: InputDecoration(
+                                labelText: 'Quantiy',
+                                labelStyle: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'PlayfairDisplay',
+                                    color: Colors.black54),
+                                focusColor: Colors.black,
+                                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                               ),
                             ),
+                          ),
                           Container(
                             margin: const EdgeInsets.all(10),
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
                                 widget._con.po.items[widget.serialNo].discount = int.parse(password);
-                                print(password);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
+                                focusColor: Colors.black,
                                 labelText: 'Discount',
                                 labelStyle: TextStyle(
-                                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                                border: OutlineInputBorder(),
+                                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(13)
+                                ),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                               ),
                             ),
                           ),

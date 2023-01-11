@@ -52,7 +52,9 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: const Text('Create New Order'),
       ),
       body: ListView(
@@ -65,11 +67,17 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               onChanged: (String name) {
                 _con.po.name = name;
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                focusColor: Colors.black,
                 labelText: 'Customer Name',
                 labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                border: OutlineInputBorder(),
+                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
               ),
             ),
           ),
@@ -80,11 +88,17 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               onChanged: (String password) {
                 _con.po.address = password;
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                focusColor: Colors.black,
                 labelText: 'Customer Address',
                 labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                border: OutlineInputBorder(),
+                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
               ),
             ),
           ),
@@ -95,11 +109,17 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               onChanged: (String password) {
                 _con.po.mobile = password;
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                focusColor: Colors.black,
                 labelText: 'Customer Mobile',
                 labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay'),
-                border: OutlineInputBorder(),
+                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(13),
+                ),
               ),
             ),
           ),
@@ -130,11 +150,22 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               addProductDetailsField();
             },
             child: Container(
+
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
               width: 200,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1),
+                color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 5.0,
+                    offset: Offset(
+                      0.0,
+                      0.0,
+                    ),
+                  ),
+                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -171,8 +202,18 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                         vertical: 6, horizontal: 125),
                     width: 150,
                     decoration: const BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.green,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          offset: Offset(
+                            0.0,
+                            0.0,
+                          ),
+                        ),
+                      ],
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(10),

@@ -14,7 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,
         title: Center(child: Text('Dashboard')),
         actions: [
@@ -39,9 +41,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue, width: 1),
+                      color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
-
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          offset: Offset(
+                            0.0,
+                            0.0,
+                          ),
+                        ),
+                      ],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -60,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Expanded(
                             flex: 2,
                               child: Icon(Icons.add_box_rounded,
+                              color: Colors.green,
                               size: 35,))
                         ],
                       ),
@@ -71,10 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Expanded(
                       flex: 1,
-                        child: HomeHistoryButtonWidget('Order History')),
+                        child: HomeHistoryButtonWidget('Order History',Icons.shopping_cart_outlined)),
                     Expanded(
                       flex: 1,
-                        child: HomeHistoryButtonWidget('Chalaan History')),
+                        child: HomeHistoryButtonWidget('Chalaan History',Icons.inventory_outlined)),
                   ],
                 ),
 

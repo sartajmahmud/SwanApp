@@ -44,8 +44,8 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                       child: Container(
                         padding: EdgeInsets.fromLTRB(7, 80, 0, 7),
                         child: Image(
-                          height: 77,
-                          width: 77,
+                          height: 100,
+                          width: 100,
                           image: AssetImage("assets/logo.jpeg"),
                         ),
                       ),
@@ -58,16 +58,24 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             margin: EdgeInsets.all(10),
                             height: 45,
                             child: TextField(
+                              cursorColor: Colors.black54,
                               onChanged: (String email){
                                 this.email = email;
                               },
                               decoration: InputDecoration(
-                                labelText: 'Username',
+                                focusColor: Colors.black,
+                                labelText: 'E-mail',
                                 labelStyle: TextStyle(
+                                  color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'PlayfairDisplay'
                                 ),
-                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(13)
+                                ),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(13)
+                                ),
                               ),
                             ),
                           ),
@@ -75,16 +83,24 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             margin: EdgeInsets.all(10),
                             height: 45,
                             child: TextField(
+                              cursorColor: Colors.black54,
                               onChanged: (String password){
                                 this.password = password;
                               },
                               decoration: InputDecoration(
+                                focusColor: Colors.black,
                                 labelText: 'Password',
                                 labelStyle: TextStyle(
+                                  color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'PlayfairDisplay'
                                 ),
-                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(13)
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13)
+                                ),
                               ),
                             ),
                           ),
@@ -115,11 +131,10 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                         },
                         child: Container(
                           margin: EdgeInsets.all(15),
-                          width: MediaQuery.of(context).size.width*.4,
+                          width: MediaQuery.of(context).size.width*.5,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
-                              border: Border.all(width:2),
-                              color: Colors.black
+                              color: Colors.green
                           ),
                           child: Center(
                             child: Text(
