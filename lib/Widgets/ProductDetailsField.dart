@@ -77,7 +77,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       items: widget._con.products.map((Product value) {
                         return DropdownMenuItem<Product>(
                           value: value,
-                          child: Text(value.product_name),
+                          child: Text(value.product_name+''+value.size),
                         );
                       }).toList(),
                     ),
@@ -329,7 +329,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   builder: (FormFieldState<Fabric> state) {
                     return InputDecorator(
                       decoration: const InputDecoration(
-                        labelText: 'Fabric ID',
+                        labelText: 'Fabric',
                         labelStyle: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontFamily: 'PlayfairDisplay'),
@@ -350,7 +350,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           items: widget._con.fabrics.map((Fabric value) {
                             return DropdownMenuItem<Fabric>(
                               value: value,
-                              child: Text(value.fabric_name),
+                              child: Text(value.fabric_name+'-'+value.fabric_type+'('+value.fabric_dimension+')'),
                             );
                           }).toList(),
                         ),

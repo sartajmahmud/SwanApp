@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 1),
+                      border: Border.all(color: Colors.blue, width: 1),
                       borderRadius: BorderRadius.all(Radius.circular(15)),
 
                     ),
@@ -53,11 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Center(child: Text('Create Order',
                               style: TextStyle(
                                 fontSize: 25,
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal
+
                               ),))),
                           Expanded(
                             flex: 2,
-                              child: Icon(Icons.add_box_outlined,
+                              child: Icon(Icons.add_box_rounded,
                               size: 35,))
                         ],
                       ),
