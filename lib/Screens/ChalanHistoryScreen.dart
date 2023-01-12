@@ -30,6 +30,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text('Chalaan History'),
       ),
       body: Container(
