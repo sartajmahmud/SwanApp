@@ -77,7 +77,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       items: widget._con.products.map((Product value) {
                         return DropdownMenuItem<Product>(
                           value: value,
-                          child: Text(value.product_name+''+value.size),
+                          child: Text(value.product_name+'('+value.size+')'),
                         );
                       }).toList(),
                     ),
