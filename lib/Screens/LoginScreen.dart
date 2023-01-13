@@ -89,7 +89,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               },
                               minWidth: 220,
                               height: 30,
-                              color: Colors.blue,
+                              color: Colors.red,
                               shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0),
                               ),

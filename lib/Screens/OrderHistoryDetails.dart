@@ -31,7 +31,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         title: Text('Order Details'),
       ),
       body: Container(

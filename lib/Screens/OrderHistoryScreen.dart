@@ -32,7 +32,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Order History'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
