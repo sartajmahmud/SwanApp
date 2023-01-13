@@ -19,7 +19,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
   // TextEditingController quantity = new TextEditingController();
 
   late Product? _currentSelectedValue = widget._con.products[0];
+
   var _SelectedFabric;
+  var _SelectedProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         setState(() {
                           widget._con.po.items[widget.serialNo].productID = newValue?.id;
                           _currentSelectedValue = newValue;
+                          // _SelectedProduct = newValue;
                         });
                       },
                       items: widget._con.products.map((Product value) {
@@ -97,6 +100,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
           ),
           // customProducts.contains(_currentSelectedValue)
           _currentSelectedValue!.unit == 'cft'
+
               ? Column(
                   children: [
                     Container(
@@ -208,7 +212,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         builder: (FormFieldState<Fabric> state) {
                           return InputDecorator(
                             decoration: const InputDecoration(
-                              labelText: 'Fabric ID',
+                              labelText: 'Fabric',
                               labelStyle: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'PlayfairDisplay'),
@@ -229,7 +233,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                 items: widget._con.fabrics.map((Fabric value) {
                                   return DropdownMenuItem<Fabric>(
                                     value: value,
-                                    child: Text(value.fabric_name),
+                                    child: Text(value.fabric_name+'-'+value.fabric_type+'('+value.fabric_dimension+')'),
                                   );
                                 }).toList(),
                               ),

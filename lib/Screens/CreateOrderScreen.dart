@@ -195,7 +195,8 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               ? InkWell(
                   onTap: () {
                     _con.submitOrder();
-                    // Navigator.pushNamed(context, '/createOrder');
+                     Navigator.pushNamed(context, '/orderHistory');
+
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(

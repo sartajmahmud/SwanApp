@@ -102,7 +102,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
                     Icon(Icons.discount_outlined,color: Colors.green,),
                     Text(
                       // "Order ID : ${_con.orderHistory[index].customer_name}",
-                      "Discount Percentage : ${widget.oh.discount}%",
+                      "Discount Percentage : ${widget.oh.discount} BDT",
                       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                     ),
                   ],
@@ -115,7 +115,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
                     Icon(Icons.monetization_on_rounded,color: Colors.green,),
                     Text(
                       // "Order ID : ${_con.orderHistory[index].customer_name}",
-                      "Total Bill Amount : ${widget.oh.total_amount}",
+                      "Total Bill Amount : ${widget.oh.total_amount} BDT",
                       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                     ),
                   ],

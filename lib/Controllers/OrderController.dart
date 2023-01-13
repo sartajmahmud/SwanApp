@@ -40,7 +40,7 @@ class OrderController extends ControllerMVC{
   getOrderHistory() async {
     orderHistory = await getTodaysOrders();
     for(OrderHistory order in orderHistory){
-      print(order.customer_name);
+    //  print(order.customer_name);
     }
     setState(() { });
   }
