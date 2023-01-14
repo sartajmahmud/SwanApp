@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
@@ -20,6 +21,7 @@ class OrderController extends ControllerMVC{
   List<Order> orders = [];
 
   List<OrderHistory> orderHistory = [];
+  late Product? currentSelectedValue;
 
   List<Order> chalans = [];
   List<Fabric> fabrics = [];
@@ -28,6 +30,12 @@ class OrderController extends ControllerMVC{
     // for(Product product in products){
     //   print(product.product_name);
     // }
+  }
+
+  setInitProduct() async {
+    currentSelectedValue = products[0];
+    po.items[0].productID = products[0].id;
+
   }
 
   getChalanHistory() async {
@@ -52,10 +60,12 @@ class OrderController extends ControllerMVC{
     // }
   }
 
-  submitOrder()async{
+  submitOrder(BuildContext context)async{
     // po.printData();
     print(po.toMap());
-    await createOrder(po);
+    await createOrder(po).then((value) {
+      Navigator.pushNamed(context, '/orderHistory');
+    });
 
   }
 

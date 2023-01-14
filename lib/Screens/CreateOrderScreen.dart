@@ -193,9 +193,9 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
           ),
           dynamicList.length > 0
               ? InkWell(
-                  onTap: () {
-                    _con.submitOrder();
-                     Navigator.pushNamed(context, '/orderHistory');
+                  onTap: () async {
+                    await _con.submitOrder(context);
+
 
                   },
                   child: Container(

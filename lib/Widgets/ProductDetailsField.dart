@@ -18,10 +18,17 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
   // TextEditingController Product = new TextEditingController();
   // TextEditingController quantity = new TextEditingController();
 
-  late Product? _currentSelectedValue = widget._con.products[0];
+  // late Product? _currentSelectedValue = widget._con.products[0];
 
   var _SelectedFabric;
   var _SelectedProduct;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget._con.setInitProduct();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +84,12 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<Product>(
                       isExpanded: true,
-                      value: _currentSelectedValue,
+                      value: widget._con.currentSelectedValue,
                       icon: const Icon(Icons.keyboard_arrow_down,color: Colors.black,),
                       onChanged: (Product? newValue) {
                         setState(() {
                           widget._con.po.items[widget.serialNo].productID = newValue?.id;
-                          _currentSelectedValue = newValue;
+                          widget._con.currentSelectedValue = newValue;
                           // _SelectedProduct = newValue;
                         });
                       },
@@ -99,7 +106,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
             ),
           ),
           // customProducts.contains(_currentSelectedValue)
-          _currentSelectedValue!.unit == 'cft'
+          widget._con.currentSelectedValue!.unit == 'cft'
 
               ? Column(
                   children: [
@@ -244,7 +251,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                     ),
                   ],
                 )
-              : _currentSelectedValue!.unit == 'sft'
+              : widget._con.currentSelectedValue!.unit == 'sft'
                   ? Column(
             children: [
               Container(
@@ -417,7 +424,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
               ),
             ],
           )
-                  : _currentSelectedValue!.unit == 'pcs'
+                  : widget._con.currentSelectedValue!.unit == 'pcs'
                       ? Column(
                         children: [
                           Container(
