@@ -23,7 +23,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _con.getOrderHistory();
+     _con.getUniqueOrderData(int.parse(widget.oh.order_id));
   }
 
   @override
@@ -34,7 +34,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
         backgroundColor: Colors.red,
         title: Text('Order Details'),
       ),
-      body: Container(
+      body: _con.orderProducts.length < 1? CircularProgressIndicator():Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
 
@@ -95,6 +95,46 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
                   ],
                 ),
               ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: _con.orderProducts.length, //_con.orderHistory.length,
+                itemBuilder: (_, index) => Padding(
+                  padding:EdgeInsets.symmetric(vertical: 6),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.card_giftcard,color: Colors.green,),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "Product ${index+1} : ${_con.orderProducts[index].description}",
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                          ),
+
+                        ],
+                      ),
+                      //
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _con.orderProducts[index].dimension!= ''?Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "Dimension : ${_con.orderProducts[index].dimension} ${_con.orderProducts[index].unit}",
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                          ):Container(),
+                          _con.orderProducts[index].qty!= ''?Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "Quantity : ${_con.orderProducts[index].qty} pcs",
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                          ):Container(),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
               Padding(
                 padding:EdgeInsets.symmetric(vertical: 6),
                 child: Row(
@@ -102,7 +142,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
                     Icon(Icons.discount_outlined,color: Colors.green,),
                     Text(
                       // "Order ID : ${_con.orderHistory[index].customer_name}",
-                      "Discount Percentage : ${widget.oh.discount} BDT",
+                      "Discount Amount : ${widget.oh.discount} BDT",
                       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                     ),
                   ],

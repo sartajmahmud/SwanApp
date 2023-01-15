@@ -23,6 +23,9 @@ class OrderController extends ControllerMVC{
   List<OrderHistory> orderHistory = [];
   late Product? currentSelectedValue;
 
+  List<OrderHistory> orderProducts = [];
+
+
   List<Order> chalans = [];
   List<Fabric> fabrics = [];
   getProducts() async {
@@ -43,6 +46,12 @@ class OrderController extends ControllerMVC{
     // for(Order order in chalans){
     //   print(order.product_name);
     // }
+  }
+
+  getUniqueOrderData(int OrderId) async {
+    orderProducts = [];
+    orderProducts = await getuniqueOrderProducts(OrderId);
+    setState(() { });
   }
 
   getOrderHistory() async {

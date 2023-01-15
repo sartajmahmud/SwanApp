@@ -13,7 +13,8 @@ class OrderHistory {
   String width = '';
   String length = '';
   String unit = '';
-  String qty = "0";
+  String qty = "";
+  String dimension = '';
   String product_amount = "0";
   String order_id = '';
   String created_at = '';
@@ -54,7 +55,8 @@ class OrderHistory {
     jsonMap['width'] != null ? width = jsonMap['width'] : width = '';
     jsonMap['length'] != null ? length = jsonMap['length'] : length = '';
     jsonMap['unit'] != null ? unit = jsonMap['unit'] : unit = '';
-    jsonMap['qty'] != null ? qty = jsonMap['qty'].toString() : qty = "0";
+    jsonMap['qty'] != null ? qty = jsonMap['qty'].toString() : qty = "";
+    jsonMap['dimension'] != null ? dimension = jsonMap['dimension'].toString() : dimension = "";
     jsonMap['product_amount'] != null
         ? product_amount = jsonMap['product_amount'].toString()
         : product_amount = "0";
