@@ -48,7 +48,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             ),
                             TextField(
                               decoration: const InputDecoration(
-                                hintText: 'Enter your Email',
+                                hintText: 'Enter your Mobile No.',
                               ),
                               onChanged: (String email){
                                 this.email = email;
