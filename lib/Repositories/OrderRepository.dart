@@ -1,38 +1,43 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:swanapp/Models/OrderHistory.dart';
-import 'package:swanapp/Models/ProductOrder.dart';
+import '../Models/OrderHistory.dart';
+import '../Models/ProductOrder.dart';
 import '../Models/Order.dart';
 import '../constants.dart';
 import 'AuthRepository.dart';
 
-
 Future<List<OrderHistory>> getuniqueOrderProducts(int OrderId) async {
   // print(currentUser.value.token);
-  Uri url = Uri.http(serverUrl, 'api/order-history/$OrderId',);
+  Uri url = Uri.http(
+    serverUrl,
+    'api/order-history/$OrderId',
+  );
 
-
-  http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
+  http.Response response = await http.get(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"});
   print(response.body);
-  Map<String,dynamic> result = jsonDecode(response.body);
+  Map<String, dynamic> result = jsonDecode(response.body);
   List result2 = result['data'];
   print(result['data']);
   return result2.map((e) => OrderHistory.fromJSON(e)).toList();
-
 }
 
 Future<List<OrderHistory>> getTodaysOrders() async {
   // print(currentUser.value.token);
-  Uri url = Uri.http(serverUrl, 'api/orders',);
-
-
-  http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
+  Uri url = Uri.http(
+    serverUrl,
+    'api/get-orders',
+  );
+  DateTime _now = DateTime.now();
+  String time = "${_now.year}-${_now.month}-${_now.day}";
+  http.Response response = await http.post(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"},
+      body: {'date': time});
   print(response.body);
-  Map<String,dynamic> result = jsonDecode(response.body);
+  Map<String, dynamic> result = jsonDecode(response.body);
   List result2 = result['data'];
   print(result['data']);
   return result2.map((e) => OrderHistory.fromJSON(e)).toList();
-
 }
 
 Future createOrder(ProductOrder po) async {
@@ -42,16 +47,15 @@ Future createOrder(ProductOrder po) async {
     'customer_name': po.name,
     'customer_address': po.address,
     'customer_mobile': po.mobile,
+    'pos_area': currentUser.value.currentZone,
     // 'discount': po.discount,
     'products': products,
   };
   print(post);
   var bytes = utf8.encode(json.encode(post));
-  print(
-    bytes
-  );
+  print(bytes);
   // Map postData = po.toMap();
-   // postData.remove('products');
+  // postData.remove('products');
   // print("test  "+postData.toString());
   // String temp = po.toMap()['products'];
   // print(jsonEncode(temp));
@@ -74,54 +78,66 @@ Future createOrder(ProductOrder po) async {
   // post['data'] = jsonEncode(endodedbody.substring(0,endodedbody.length-1)+", \"products\":"+temp+'}');
   http.Response response = await http.post(url,
       // body: po.toMap(),
-      body:bytes,
-    headers: {"Authorization":"Bearer ${currentUser.value.token}",
-      "content-type": "application/json;encoding=utf-8",
-    }
-  );
+      body: bytes,
+      headers: {
+        "Authorization": "Bearer ${currentUser.value.token}",
+        "content-type": "application/json;encoding=utf-8",
+      });
   // Map result = jsonDecode(response.body);
   print(response.body);
-
-
 
   // result['message'] == "User login successfully." ? x = true : x = false;
   //
   // return x;
-
 }
 
 Future<List<Order>> getTodaysChalans() async {
   // print(currentUser.value.token);
-  Uri url = Uri.http(serverUrl, 'api/chalans',);
+  Uri url = Uri.http(
+    serverUrl,
+    'api/get-chalaan',
+  );
 
+  DateTime _now = DateTime.now();
+  String time = "${_now.year}-${_now.month}-${_now.day}";
 
-  http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
-  // print(response.body);
-  Map<String,dynamic> result = jsonDecode(response.body);
+  http.Response response = await http.post(url, headers: {
+    "Authorization": "Bearer ${currentUser.value.token}"
+  }, body: {
+    'date': time,
+    'mobile': currentUser.value.email,
+  });
+  print(response.body);
+  Map<String, dynamic> result = jsonDecode(response.body);
   List result2 = result['data'];
   // print(result['data']);
   return result2.map((e) => Order.fromJSON(e)).toList();
-
 }
 
- getChallanPDF(int ID)async {
-   Uri url = Uri.http(serverUrl, 'api/get-challan/$ID',);
+getChallanPDF(int ID) async {
+  Uri url = Uri.http(
+    serverUrl,
+    'api/get-challan/$ID',
+  );
 
-
-   http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
-   print(response.body);
-   // Map<String,dynamic> result = jsonDecode(response.body);
-   // List result2 = result['data'];
-   // // print(result['data']);
-   // return result2.map((e) => Order.fromJSON(e)).toList();
+  http.Response response = await http.get(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"});
+  print(response.body);
+  // Map<String,dynamic> result = jsonDecode(response.body);
+  // List result2 = result['data'];
+  // // print(result['data']);
+  // return result2.map((e) => Order.fromJSON(e)).toList();
 }
 
-getInvoicePDF(int ID)async {
-  Uri url = Uri.http(serverUrl, 'api/get-invoice/$ID',);
-
+getInvoicePDF(int ID) async {
+  Uri url = Uri.http(
+    serverUrl,
+    'api/get-invoice/$ID',
+  );
 
   // http.Response response = await http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
-  return http.get(url,headers: {"Authorization":"Bearer ${currentUser.value.token}"});
+  return http.get(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"});
   // print(response.body);
   // Map<String,dynamic> result = jsonDecode(response.body);
   // List result2 = result['data'];

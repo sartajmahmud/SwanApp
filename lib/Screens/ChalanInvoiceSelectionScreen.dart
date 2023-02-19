@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/OrderController.dart';
-import 'OrderHistoryDetails.dart';
+import 'DispatchScreen.dart';
 
-class ChalanHistoryScreen extends StatefulWidget {
-  const ChalanHistoryScreen({Key? key}) : super(key: key);
+class ChalanInvoiceSelectionScreen extends StatefulWidget {
+  const ChalanInvoiceSelectionScreen({Key? key}) : super(key: key);
 
   @override
-  State createState() => _ChalanHistoryScreenState();
+  State createState() => _ChalanInvoiceSelectionScreenState();
 }
 
-class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
+class _ChalanInvoiceSelectionScreenState
+    extends StateMVC<ChalanInvoiceSelectionScreen> {
   late OrderController _con;
 
-  _ChalanHistoryScreenState() : super(OrderController()) {
+  _ChalanInvoiceSelectionScreenState() : super(OrderController()) {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
   }
@@ -21,23 +22,30 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _con.getChalanHistory();
+    _con.getOrderHistory();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text('Select Invoice For Chalaan'),
         backgroundColor: Colors.red,
-        title: Text('Chalaan History'),
       ),
       body: Container(
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: _con.chalans.length > 0
-            ? ListView.builder(
+        child: _con.orderHistory.length < 1
+            ? Center(
+                child: Text(
+                'No Invoice Available',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ))
+            : ListView.builder(
                 shrinkWrap: true,
-                itemCount: _con.chalans.length, //_con.orderHistory.length,
+                itemCount: _con.orderHistory.length, //_con.orderHistory.length,
                 itemBuilder: (_, index) => InkWell(
                   onTap: () {
                     // Navigator.pushNamed(context, '/OrderDetails');
@@ -45,20 +53,30 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            OrderHistoryDetails(_con.orderHistory[index]),
+                            DispatchScreen(_con.orderHistory[index]),
                       ),
                     );
                   },
                   child: Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 8.0),
                       child: Container(
-                        height: 100,
+                        height: 120,
                         width: MediaQuery.of(context).size.width * .9,
                         decoration: BoxDecoration(
+                          color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          border:
-                              Border.all(color: Colors.pink.shade100, width: 2),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5.0,
+                              offset: Offset(
+                                0.0,
+                                0.0,
+                              ),
+                            ),
+                          ],
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -85,36 +103,47 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Chalaan ID : ${_con.orderHistory[index].id.toString()}",
+                                    "Order ID : ${_con.orderHistory[index].id.toString()}",
                                     // "Order ID : ",
                                     style: TextStyle(
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
                                   ),
                                   Text(
                                     "Customer Name : ${_con.orderHistory[index].customer_name}",
                                     // "Customer Name : ",
                                     style: TextStyle(
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
                                   ),
-                                  // Text(
-                                  //   "Total Amount : ${_con.orderHistory[index].total_amount}",
-                                  //   // "Total Amount : ",
-                                  //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                                  // ),
+                                  Text(
+                                    "Total Amount : ${_con.orderHistory[index].total_amount}",
+                                    // "Total Amount : ",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
+                                  ),
+                                  Text(
+                                    "Order Date : ${_con.orderHistory[index].created_at}",
+                                    // "Total Amount : ",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black),
+                                  ),
                                 ],
                               ),
                               // Padding(
                               //   padding: const EdgeInsets.symmetric(horizontal: 25),
                               //   child:
                               // ),
-                              IconButton(
-                                  onPressed: () {
-                                    _con.getInvoiceDoc(int.parse(
-                                        _con.orderHistory[index].order_id));
-                                  },
-                                  icon: Icon(Icons.print))
+                              // IconButton(
+                              //     onPressed: (){
+                              //       _con.getInvoiceDoc(int.parse(_con.orderHistory[index].order_id));
+                              //     }, icon: Icon(Icons.print,color: Colors.green,))
                             ],
                           ),
                         ),
@@ -122,12 +151,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                     ),
                   ),
                 ),
-              )
-            : Center(
-                child: Text(
-                'No Chalaan Available',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              )),
+              ),
       ),
     );
   }

@@ -6,6 +6,8 @@ class User{
   String password = '';
   // String phoneNumber = '';
   bool auth = false;
+  String currentZone = '';
+  List zones = [];
 
 
   User();

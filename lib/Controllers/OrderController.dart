@@ -3,18 +3,16 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:swanapp/Models/Fabric.dart';
-import 'package:swanapp/Models/OrderHistory.dart';
-import 'package:swanapp/Models/Product.dart';
-import 'package:swanapp/Models/ProductOrder.dart';
-import 'package:swanapp/Repositories/OrderRepository.dart';
-import 'package:swanapp/Repositories/ProductRepository.dart';
-
+import '../Models/Fabric.dart';
+import '../Models/OrderHistory.dart';
+import '../Models/Product.dart';
+import '../Models/ProductOrder.dart';
+import '../Repositories/OrderRepository.dart';
+import '../Repositories/ProductRepository.dart';
 import '../Models/Order.dart';
 import '../Repositories/FabricRepository.dart';
 
-class OrderController extends ControllerMVC{
-
+class OrderController extends ControllerMVC {
   ProductOrder po = ProductOrder();
   List<Product> products = [];
 
@@ -24,7 +22,6 @@ class OrderController extends ControllerMVC{
   late Product? currentSelectedValue;
 
   List<OrderHistory> orderProducts = [];
-
 
   List<Order> chalans = [];
   List<Fabric> fabrics = [];
@@ -38,7 +35,6 @@ class OrderController extends ControllerMVC{
   setInitProduct() async {
     currentSelectedValue = products[0];
     po.items[0].productID = products[0].id;
-
   }
 
   getChalanHistory() async {
@@ -51,15 +47,15 @@ class OrderController extends ControllerMVC{
   getUniqueOrderData(int OrderId) async {
     orderProducts = [];
     orderProducts = await getuniqueOrderProducts(OrderId);
-    setState(() { });
+    setState(() {});
   }
 
   getOrderHistory() async {
     orderHistory = await getTodaysOrders();
-    for(OrderHistory order in orderHistory){
-    //  print(order.customer_name);
+    for (OrderHistory order in orderHistory) {
+      //  print(order.customer_name);
     }
-    setState(() { });
+    setState(() {});
   }
 
   getFabrics() async {
@@ -69,13 +65,12 @@ class OrderController extends ControllerMVC{
     // }
   }
 
-  submitOrder(BuildContext context)async{
+  submitOrder(BuildContext context) async {
     // po.printData();
     print(po.toMap());
     await createOrder(po).then((value) {
       Navigator.pushNamed(context, '/orderHistory');
     });
-
   }
 
   getChallanDoc(int ID) async {
@@ -83,8 +78,9 @@ class OrderController extends ControllerMVC{
   }
 
   getInvoiceDoc(int ID) async {
-
-      var data = await getInvoicePDF(ID);
+    var data = await getInvoicePDF(ID);
     await Printing.layoutPdf(onLayout: (_) => data.bodyBytes);
   }
+
+  dispatch() async {}
 }

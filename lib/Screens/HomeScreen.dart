@@ -18,6 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.red,
         automaticallyImplyLeading: false,
+        leading: IconButton(onPressed: () async {
+          // logout();
+          // Navigator.pushReplacementNamed(context, '/login');
+          await getUserZones();
+          Navigator.pushNamed(context, '/zones');
+        }, icon: Icon(Icons.location_on)),
         title: Center(child: Text('Dashboard')),
         actions: [
           IconButton(onPressed: (){
@@ -89,7 +95,53 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: HomeHistoryButtonWidget('Chalaan History',Icons.inventory_outlined)),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0,8,0,8),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/selectChalaanInvoice');
+                    },
+                    child: Container(
 
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5.0,
+                            offset: Offset(
+                              0.0,
+                              0.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                flex: 8,
+                                child: Center(child: Text('Create Chalaan',
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.teal
+
+                                  ),))),
+                            Expanded(
+                                flex: 2,
+                                child: Icon(Icons.local_shipping_outlined,
+                                  color: Colors.green,
+                                  size: 35,))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

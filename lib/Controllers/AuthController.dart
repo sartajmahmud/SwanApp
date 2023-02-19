@@ -17,9 +17,10 @@ class AuthController extends ControllerMVC{
    getUser(BuildContext context) async {
     await getCurrentUser();
     if(currentUser.value.auth){
-      Navigator.pushNamed(context, '/home');
+      await getUserZones();
+      Navigator.pushReplacementNamed(context, '/zones');
     }else{
-      Navigator.pushNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/login');
 
     }
   }
