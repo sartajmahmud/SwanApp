@@ -83,6 +83,7 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                                 // widget._con.po.items[widget.serialNo].quantity = int.parse(password);
 
                                 // this.password = password;
+                                _con.dp.dispatchItems[index][1] = int.parse(password);
                               },
                               decoration: InputDecoration(
                                 labelText: 'QTY',

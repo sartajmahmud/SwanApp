@@ -85,14 +85,14 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Chalaan ID : ${_con.orderHistory[index].id.toString()}",
+                                    "Chalaan ID : ${_con.chalans[index].chalaan_id.toString()}",
                                     // "Order ID : ",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500),
                                   ),
                                   Text(
-                                    "Customer Name : ${_con.orderHistory[index].customer_name}",
+                                    "Customer Name : ${_con.chalans[index].customer_name}",
                                     // "Customer Name : ",
                                     style: TextStyle(
                                         fontSize: 15,
@@ -111,8 +111,8 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                               // ),
                               IconButton(
                                   onPressed: () {
-                                    _con.getInvoiceDoc(int.parse(
-                                        _con.orderHistory[index].order_id));
+                                    _con.getChallanDoc(
+                                        _con.chalans[index].chalaan_id);
                                   },
                                   icon: Icon(Icons.print))
                             ],

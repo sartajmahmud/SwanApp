@@ -3,6 +3,8 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:swanapp/Models/Chalaan.dart';
+import 'package:swanapp/Models/DispatchProduct.dart';
 import '../Models/Fabric.dart';
 import '../Models/OrderHistory.dart';
 import '../Models/Product.dart';
@@ -13,6 +15,9 @@ import '../Models/Order.dart';
 import '../Repositories/FabricRepository.dart';
 
 class OrderController extends ControllerMVC {
+
+  DispatchProduct dp = DispatchProduct();
+
   ProductOrder po = ProductOrder();
   List<Product> products = [];
 
@@ -23,7 +28,7 @@ class OrderController extends ControllerMVC {
 
   List<OrderHistory> orderProducts = [];
 
-  List<Order> chalans = [];
+  List<Chalaan> chalans = [];
   List<Fabric> fabrics = [];
   getProducts() async {
     products = await getAllProducts();
@@ -39,15 +44,20 @@ class OrderController extends ControllerMVC {
 
   getChalanHistory() async {
     chalans = await getTodaysChalans();
-    // for(Order order in chalans){
-    //   print(order.product_name);
+    // for(Chalaan order in chalans){
+    //   print(order.chalaan_id);
     // }
+    setState(() { });
   }
 
   getUniqueOrderData(int OrderId) async {
     orderProducts = [];
     orderProducts = await getuniqueOrderProducts(OrderId);
     setState(() {});
+    for (OrderHistory oh in orderProducts){
+      dp.dispatchItems.add([oh.id,0]);
+    }
+
   }
 
   getOrderHistory() async {
@@ -73,8 +83,10 @@ class OrderController extends ControllerMVC {
     });
   }
 
-  getChallanDoc(int ID) async {
-    await getChallanPDF(ID);
+  getChallanDoc(String ID) async {
+    var data = await getChallanPDF(ID);
+    await Printing.layoutPdf(onLayout: (_) => data.bodyBytes);
+
   }
 
   getInvoiceDoc(int ID) async {
@@ -82,5 +94,7 @@ class OrderController extends ControllerMVC {
     await Printing.layoutPdf(onLayout: (_) => data.bodyBytes);
   }
 
-  dispatch() async {}
+  dispatch() async {
+    await DispatchProducts(dp);
+  }
 }

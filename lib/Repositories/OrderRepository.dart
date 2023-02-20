@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:swanapp/Models/Chalaan.dart';
 import '../Models/OrderHistory.dart';
 import '../Models/ProductOrder.dart';
 import '../Models/Order.dart';
@@ -54,28 +55,8 @@ Future createOrder(ProductOrder po) async {
   print(post);
   var bytes = utf8.encode(json.encode(post));
   print(bytes);
-  // Map postData = po.toMap();
-  // postData.remove('products');
-  // print("test  "+postData.toString());
-  // String temp = po.toMap()['products'];
-  // print(jsonEncode(temp));
-  // for(int i = 0; i< temp.length; i++){
-  //   // temp[i] = jsonEncode(temp[i]);
-  //   print(temp[i]);
-  // }
-  // print(temp);
 
-  // String endodedbody = jsonEncode(postData);
-  // print(endodedbody.substring(0,endodedbody.length-1)+", \"products\":"+temp+'}');
-  // postData['products'] = temp;
-  // print(postData);
   Uri url = Uri.http(serverUrl, 'api/orders');
-  // print(currentUser.value.token);
-  // print(url);
-  // print(po.toMap());
-  // print(jsonEncode(endodedbody.substring(0,endodedbody.length-1)+", \"products\":"+temp+'}'));
-  // Map post = Map();
-  // post['data'] = jsonEncode(endodedbody.substring(0,endodedbody.length-1)+", \"products\":"+temp+'}');
   http.Response response = await http.post(url,
       // body: po.toMap(),
       body: bytes,
@@ -83,15 +64,10 @@ Future createOrder(ProductOrder po) async {
         "Authorization": "Bearer ${currentUser.value.token}",
         "content-type": "application/json;encoding=utf-8",
       });
-  // Map result = jsonDecode(response.body);
   print(response.body);
-
-  // result['message'] == "User login successfully." ? x = true : x = false;
-  //
-  // return x;
 }
 
-Future<List<Order>> getTodaysChalans() async {
+Future<List<Chalaan>> getTodaysChalans() async {
   // print(currentUser.value.token);
   Uri url = Uri.http(
     serverUrl,
@@ -111,18 +87,28 @@ Future<List<Order>> getTodaysChalans() async {
   Map<String, dynamic> result = jsonDecode(response.body);
   List result2 = result['data'];
   // print(result['data']);
-  return result2.map((e) => Order.fromJSON(e)).toList();
+  return result2.map((e) => Chalaan.fromJSON(e)).toList();
 }
 
-getChallanPDF(int ID) async {
+getChallanPDF(String ID) async {
   Uri url = Uri.http(
     serverUrl,
-    'api/get-challan/$ID',
+    'api/make-chalaan',
   );
 
-  http.Response response = await http.get(url,
-      headers: {"Authorization": "Bearer ${currentUser.value.token}"});
+
+  return http.post(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"},
+      body: {
+        'chalaan_id':ID
+      });
+  http.Response response = await http.post(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"},
+  body: {
+    'chalaan_id':ID
+  });
   print(response.body);
+  return response;
   // Map<String,dynamic> result = jsonDecode(response.body);
   // List result2 = result['data'];
   // // print(result['data']);
