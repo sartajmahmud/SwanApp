@@ -45,16 +45,26 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Product',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'QTY',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
+                      Expanded(
+                          flex: 8,
+                          child: Center(
+                              child: Text(
+                            'Product',
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal),
+                          ))),
+                      Expanded(
+                          flex: 8,
+                          child: Center(
+                              child: Text(
+                            'Qty',
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal),
+                          ))),
                     ],
                   ),
                   ListView.builder(
@@ -83,7 +93,8 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                                 // widget._con.po.items[widget.serialNo].quantity = int.parse(password);
 
                                 // this.password = password;
-                                _con.dp.dispatchItems[index][1] = int.parse(password);
+                                _con.dp.dispatchItems[index][1] =
+                                    int.parse(password);
                               },
                               decoration: InputDecoration(
                                 labelText: 'QTY',
