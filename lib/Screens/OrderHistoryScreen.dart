@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:swanapp/Controllers/OrderController.dart';
+import 'package:swanapp/Repositories/AuthRepository.dart';
 import 'package:swanapp/Screens/OrderHistoryDetails.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
-
   const OrderHistoryScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,7 +30,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Order History'),
+        title: Text('${currentUser.value.currentZone}  Orders'),
         backgroundColor: Colors.red,
       ),
       body: Container(
@@ -42,18 +41,23 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
           shrinkWrap: true,
           itemCount: _con.orderHistory.length, //_con.orderHistory.length,
           itemBuilder: (_, index) => InkWell(
-            onTap: (){
+            onTap: () {
               // Navigator.pushNamed(context, '/OrderDetails');
-              Navigator.push(context, MaterialPageRoute (
-                builder: (BuildContext context) => OrderHistoryDetails(_con.orderHistory[index]),
-              ),);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      OrderHistoryDetails(_con.orderHistory[index]),
+                ),
+              );
             },
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0),
                 child: Container(
                   height: 120,
-                  width: MediaQuery.of(context).size.width*.9,
+                  width: MediaQuery.of(context).size.width * .9,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -68,7 +72,6 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                       ),
                     ],
                   ),
-
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
@@ -93,19 +96,28 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Order ID : ${_con.orderHistory[index].id.toString()}",
+                              "Order ID : ${_con.orderHistory[index].invoice_id.toString()}",
                               // "Order ID : ",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500,color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
                             ),
                             Text(
                               "Customer Name : ${_con.orderHistory[index].customer_name}",
                               // "Customer Name : ",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500,color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
                             ),
                             Text(
                               "Total Amount : ${_con.orderHistory[index].total_amount}",
                               // "Total Amount : ",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500,color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
                             ),
                           ],
                         ),
@@ -114,9 +126,14 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                         //   child:
                         // ),
                         IconButton(
-                            onPressed: (){
-                              _con.getInvoiceDoc(int.parse(_con.orderHistory[index].order_id));
-                            }, icon: Icon(Icons.print,color: Colors.green,))
+                            onPressed: () {
+                              _con.getInvoiceDoc(
+                                  int.parse(_con.orderHistory[index].order_id));
+                            },
+                            icon: Icon(
+                              Icons.print,
+                              color: Colors.green,
+                            ))
                       ],
                     ),
                   ),

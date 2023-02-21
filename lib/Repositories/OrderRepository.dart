@@ -33,7 +33,7 @@ Future<List<OrderHistory>> getTodaysOrders() async {
   String time = "${_now.year}-${_now.month}-${_now.day}";
   http.Response response = await http.post(url,
       headers: {"Authorization": "Bearer ${currentUser.value.token}"},
-      body: {'date': time});
+      body: {'date': time, 'zone': currentUser.value.currentZone});
   print(response.body);
   Map<String, dynamic> result = jsonDecode(response.body);
   List result2 = result['data'];
@@ -81,7 +81,8 @@ Future<List<Chalaan>> getTodaysChalans() async {
     "Authorization": "Bearer ${currentUser.value.token}"
   }, body: {
     'date': time,
-    'mobile': currentUser.value.email,
+    // 'mobile': currentUser.value.email,
+    'zone': currentUser.value.currentZone,
   });
   print(response.body);
   Map<String, dynamic> result = jsonDecode(response.body);
@@ -96,17 +97,12 @@ getChallanPDF(String ID) async {
     'api/make-chalaan',
   );
 
-
   return http.post(url,
       headers: {"Authorization": "Bearer ${currentUser.value.token}"},
-      body: {
-        'chalaan_id':ID
-      });
+      body: {'chalaan_id': ID});
   http.Response response = await http.post(url,
       headers: {"Authorization": "Bearer ${currentUser.value.token}"},
-  body: {
-    'chalaan_id':ID
-  });
+      body: {'chalaan_id': ID});
   print(response.body);
   return response;
   // Map<String,dynamic> result = jsonDecode(response.body);

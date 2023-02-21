@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/OrderController.dart';
+import 'package:swanapp/Repositories/AuthRepository.dart';
 import 'OrderHistoryDetails.dart';
 
 class ChalanHistoryScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Chalaan History'),
+        title: Text('${currentUser.value.currentZone}  Chalaans'),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

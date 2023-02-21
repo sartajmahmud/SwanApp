@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushNamed(context, '/zones');
             },
             icon: Icon(Icons.location_on)),
-        title: Center(child: Text('${currentUser.value.name} Dashboard ')),
+        title: Center(child: Text('DashBoard')),
         actions: [
           IconButton(
               onPressed: () {
@@ -43,6 +43,23 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Container(
+                child: Image.asset('assets/logo.png'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                  child: Text(
+                '${currentUser.value.currentZone} Zone',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.indigo),
+              )),
+              const SizedBox(
+                height: 20,
+              ),
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/createOrder');

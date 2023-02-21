@@ -103,7 +103,8 @@ class _ChalanInvoiceSelectionScreenState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Order ID : ${_con.orderHistory[index].id.toString()}",
+                                    // "Order ID : ${_con.orderHistory[index].id.toString()}",
+                                    "Order ID : ${_con.orderHistory[index].invoice_id.toString()}",
                                     // "Order ID : ",
                                     style: TextStyle(
                                         fontSize: 15,

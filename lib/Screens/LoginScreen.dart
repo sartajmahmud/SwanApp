@@ -42,7 +42,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           height: 20,
                         ),
                         Container(
-                          child: Image.asset('assets/logo.jpeg'),
+                          child: Image.asset('assets/logo.png'),
                         ),
                         const SizedBox(
                           height: 20,
