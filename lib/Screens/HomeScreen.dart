@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                   child: Text(
-                '$zonename Zone',
+                '${currentUser.value.currentZone}  Zone',
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
