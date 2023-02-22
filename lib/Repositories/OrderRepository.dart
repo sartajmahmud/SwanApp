@@ -23,14 +23,14 @@ Future<List<OrderHistory>> getuniqueOrderProducts(int OrderId) async {
   return result2.map((e) => OrderHistory.fromJSON(e)).toList();
 }
 
-Future<List<OrderHistory>> getTodaysOrders() async {
+Future<List<OrderHistory>> getTodaysOrders(String date) async {
   // print(currentUser.value.token);
   Uri url = Uri.http(
     serverUrl,
     'api/get-orders',
   );
   DateTime _now = DateTime.now();
-  String time = "${_now.year}-${_now.month}-${_now.day}";
+  String time = date == '' ? "${_now.year}-${_now.month}-${_now.day}" : date;
   http.Response response = await http.post(url,
       headers: {"Authorization": "Bearer ${currentUser.value.token}"},
       body: {'date': time, 'zone': currentUser.value.currentZone});
@@ -67,7 +67,7 @@ Future createOrder(ProductOrder po) async {
   print(response.body);
 }
 
-Future<List<Chalaan>> getTodaysChalans() async {
+Future<List<Chalaan>> getTodaysChalans(String date) async {
   // print(currentUser.value.token);
   Uri url = Uri.http(
     serverUrl,
@@ -75,7 +75,8 @@ Future<List<Chalaan>> getTodaysChalans() async {
   );
 
   DateTime _now = DateTime.now();
-  String time = "${_now.year}-${_now.month}-${_now.day}";
+  // String time = "${_now.year}-${_now.month}-${_now.day}";
+  String time = date == '' ? "${_now.year}-${_now.month}-${_now.day}" : date;
 
   http.Response response = await http.post(url, headers: {
     "Authorization": "Bearer ${currentUser.value.token}"

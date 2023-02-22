@@ -35,7 +35,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
 
                 print(currentUser.value.currentZone);
                 if (flag) {
-                  Navigator.pop(context);
+                  Navigator.pop(context,true);
                 } else {
                   Navigator.pushReplacementNamed(context, '/home');
                 }

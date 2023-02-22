@@ -16,7 +16,6 @@ import '../Repositories/FabricRepository.dart';
 
 class OrderController extends ControllerMVC {
   DispatchProduct dp = DispatchProduct();
-
   ProductOrder po = ProductOrder();
   List<Product> products = [];
 
@@ -29,6 +28,12 @@ class OrderController extends ControllerMVC {
 
   List<Chalaan> chalans = [];
   List<Fabric> fabrics = [];
+
+  updateDataWithSelectedDate(String date) async {
+    await getChalanHistory(date);
+    await getOrderHistory(date);
+    setState(() { });
+  }
   getProducts() async {
     products = await getAllProducts();
     // for(Product product in products){
@@ -41,8 +46,8 @@ class OrderController extends ControllerMVC {
     po.items[0].productID = products[0].id;
   }
 
-  getChalanHistory() async {
-    chalans = await getTodaysChalans();
+  getChalanHistory(String date) async {
+    chalans = await getTodaysChalans(date);
     // for(Chalaan order in chalans){
     //   print(order.chalaan_id);
     // }
@@ -58,8 +63,8 @@ class OrderController extends ControllerMVC {
     }
   }
 
-  getOrderHistory() async {
-    orderHistory = await getTodaysOrders();
+  getOrderHistory(String date) async {
+    orderHistory = await getTodaysOrders(date);
     for (OrderHistory order in orderHistory) {
       //  print(order.customer_name);
     }

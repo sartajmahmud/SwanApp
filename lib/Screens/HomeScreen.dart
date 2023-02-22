@@ -21,7 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
               // logout();
               // Navigator.pushReplacementNamed(context, '/login');
               await getUserZones();
-              Navigator.pushNamed(context, '/zones');
+              var x = await Navigator.pushNamed(context, '/zones');
+              if (x == true){
+                setState(() {
+
+                });
+              }
             },
             icon: Icon(Icons.location_on)),
         title: Center(child: Text('DashBoard')),
