@@ -28,11 +28,13 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
     _con.getOrderHistory('');
   }
 
-  dateWidget(){
-    return
-    DatePickerDialog(initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime.now());
-
+  dateWidget() {
+    return DatePickerDialog(
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,110 +49,139 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            TextButton(onPressed: () async {
-              // return
-              // dateWidget();
+            MaterialButton(
+                onPressed: () async {
+                  // return
+                  // dateWidget();
 
-              var results = await showCalendarDatePicker2Dialog(
-                context: context,
-                config: CalendarDatePicker2WithActionButtonsConfig(),
-                dialogSize: const Size(325, 400),
-                borderRadius: BorderRadius.circular(15),
-              );
-              print( results.toString().split(' ')[0].substring(1));
-             await _con.updateDataWithSelectedDate(results.toString().split(' ')[0].substring(1));
-            }, child: Text('Select Date')),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: _con.orderHistory.length, //_con.orderHistory.length,
-              itemBuilder: (_, index) => InkWell(
-                onTap: () {
-                  // Navigator.pushNamed(context, '/OrderDetails');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          OrderHistoryDetails(_con.orderHistory[index]),
-                    ),
+                  var results = await showCalendarDatePicker2Dialog(
+                    context: context,
+                    config: CalendarDatePicker2WithActionButtonsConfig(),
+                    dialogSize: const Size(325, 400),
+                    borderRadius: BorderRadius.circular(15),
                   );
+                  print(results.toString().split(' ')[0].substring(1));
+                  await _con.updateDataWithSelectedDate(
+                      results.toString().split(' ')[0].substring(1));
                 },
-                child: Center(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 8.0),
-                    child: Container(
-                      height: 120,
-                      width: MediaQuery.of(context).size.width * .9,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 5.0,
-                            offset: Offset(
-                              0.0,
-                              0.0,
-                            ),
+                minWidth: 220,
+                height: 30,
+                color: Colors.blue,
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                ),
+                child: Text(
+                  'SELECT DATE',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+            _con.orderHistory.isNotEmpty
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:
+                        _con.orderHistory.length, //_con.orderHistory.length,
+                    itemBuilder: (_, index) => InkWell(
+                      onTap: () {
+                        // Navigator.pushNamed(context, '/OrderDetails');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                OrderHistoryDetails(_con.orderHistory[index]),
                           ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Order ID : ${_con.orderHistory[index].invoice_id.toString()}",
-                                  // "Order ID : ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black),
-                                ),
-                                Text(
-                                  "Customer Name : ${_con.orderHistory[index].customer_name}",
-                                  // "Customer Name : ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black),
-                                ),
-                                Text(
-                                  "Total Amount : ${_con.orderHistory[index].total_amount}",
-                                  // "Total Amount : ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black),
+                        );
+                      },
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 8.0),
+                          child: Container(
+                            height: 120,
+                            width: MediaQuery.of(context).size.width * .9,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 5.0,
+                                  offset: Offset(
+                                    0.0,
+                                    0.0,
+                                  ),
                                 ),
                               ],
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                            //   child:
-                            // ),
-                            IconButton(
-                                onPressed: () {
-                                  _con.getInvoiceDoc(
-                                      int.parse(_con.orderHistory[index].order_id));
-                                },
-                                icon: Icon(
-                                  Icons.print,
-                                  color: Colors.green,
-                                ))
-                          ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Order ID : ${_con.orderHistory[index].invoice_id.toString()}",
+                                        // "Order ID : ",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        "Customer Name : ${_con.orderHistory[index].customer_name}",
+                                        // "Customer Name : ",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        "Total Amount : ${_con.orderHistory[index].total_amount}",
+                                        // "Total Amount : ",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                  //   child:
+                                  // ),
+                                  IconButton(
+                                      onPressed: () {
+                                        _con.getInvoiceDoc(int.parse(
+                                            _con.orderHistory[index].order_id));
+                                      },
+                                      icon: Icon(
+                                        Icons.print,
+                                        color: Colors.green,
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : Center(
+                    child: Text(
+                    'No Orders Available Today',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  )),
           ],
         ),
       ),

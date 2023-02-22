@@ -152,26 +152,41 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                                 flex: 8,
                                 child: Center(
                                   child: TextField(
-
                                     keyboardType: TextInputType.number,
                                     onChanged: (String password) {
                                       // widget._con.po.items[widget.serialNo].quantity = int.parse(password);
 
                                       // this.password = password;
-                                      if(int.parse(password) <= int.parse(_con.orderProducts[index].qty_remains)){
+                                      if (int.parse(password) <=
+                                              int.parse(_con
+                                                  .orderProducts[index]
+                                                  .qty_remains) &&
+                                          int.parse(password) > 0) {
                                         _con.dp.dispatchItems[index][1] =
                                             int.parse(password);
-                                      }else{
+                                      } else if (int.parse(password) == 0) {
                                         var snackBar = SnackBar(
-                                          content: Text('QTY Can\'t be more than Qty Left \"${_con.orderProducts[index].qty_remains}\"',
-                                          style: TextStyle(
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.bold
-                                          ),),
+                                          content: Text(
+                                            'QTY Can\'t be "0"',
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         );
-                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      } else {
+                                        var snackBar = SnackBar(
+                                          content: Text(
+                                            'QTY Can\'t be more than Qty Remains \"${_con.orderProducts[index].qty_remains}\"',
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
                                       }
-
                                     },
                                     decoration: InputDecoration(
                                       labelText: 'QTY',

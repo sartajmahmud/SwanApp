@@ -38,19 +38,37 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            TextButton(onPressed: () async {
-              // return
-              // dateWidget();
+            MaterialButton(
+                onPressed: () async {
+                  // return
+                  // dateWidget();
 
-              var results = await showCalendarDatePicker2Dialog(
-                context: context,
-                config: CalendarDatePicker2WithActionButtonsConfig(),
-                dialogSize: const Size(325, 400),
-                borderRadius: BorderRadius.circular(15),
-              );
-              print( results.toString().split(' ')[0].substring(1));
-              await _con.updateDataWithSelectedDate(results.toString().split(' ')[0].substring(1));
-            }, child: Text('Select Date')),
+                  var results = await showCalendarDatePicker2Dialog(
+                    context: context,
+                    config: CalendarDatePicker2WithActionButtonsConfig(),
+                    dialogSize: const Size(325, 400),
+                    borderRadius: BorderRadius.circular(15),
+                  );
+                  print(results.toString().split(' ')[0].substring(1));
+                  await _con.updateDataWithSelectedDate(
+                      results.toString().split(' ')[0].substring(1));
+                },
+                minWidth: 220,
+                height: 30,
+                color: Colors.blue,
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                ),
+                child: Text(
+                  'Select Date',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
+            const SizedBox(
+              height: 20,
+            ),
             _con.chalans.isNotEmpty
                 ? ListView.builder(
                     shrinkWrap: true,
@@ -73,14 +91,16 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                             height: 100,
                             width: MediaQuery.of(context).size.width * .9,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                              border:
-                                  Border.all(color: Colors.pink.shade100, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              border: Border.all(
+                                  color: Colors.pink.shade100, width: 2),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   // Container(
                                   //   // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
@@ -99,7 +119,8 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                   Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Chalaan ID : ${_con.chalans[index].chalaan_id.toString()}",
@@ -142,7 +163,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                   )
                 : Center(
                     child: Text(
-                    'No Chalaan Available',
+                    'No Chalaan Available Today',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   )),
           ],

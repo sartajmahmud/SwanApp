@@ -40,19 +40,37 @@ class _ChalanInvoiceSelectionScreenState
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            TextButton(onPressed: () async {
-              // return
-              // dateWidget();
+            MaterialButton(
+                onPressed: () async {
+                  // return
+                  // dateWidget();
 
-              var results = await showCalendarDatePicker2Dialog(
-                context: context,
-                config: CalendarDatePicker2WithActionButtonsConfig(),
-                dialogSize: const Size(325, 400),
-                borderRadius: BorderRadius.circular(15),
-              );
-              print( results.toString().split(' ')[0].substring(1));
-              await _con.updateDataWithSelectedDate(results.toString().split(' ')[0].substring(1));
-            }, child: Text('Select Date')),
+                  var results = await showCalendarDatePicker2Dialog(
+                    context: context,
+                    config: CalendarDatePicker2WithActionButtonsConfig(),
+                    dialogSize: const Size(325, 400),
+                    borderRadius: BorderRadius.circular(15),
+                  );
+                  print(results.toString().split(' ')[0].substring(1));
+                  await _con.updateDataWithSelectedDate(
+                      results.toString().split(' ')[0].substring(1));
+                },
+                minWidth: 220,
+                height: 30,
+                color: Colors.blue,
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                ),
+                child: Text(
+                  'Select Date',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
+            const SizedBox(
+              height: 20,
+            ),
             _con.orderHistory.length < 1
                 ? Center(
                     child: Text(
@@ -61,7 +79,8 @@ class _ChalanInvoiceSelectionScreenState
                   ))
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: _con.orderHistory.length, //_con.orderHistory.length,
+                    itemCount:
+                        _con.orderHistory.length, //_con.orderHistory.length,
                     itemBuilder: (_, index) => InkWell(
                       onTap: () {
                         // Navigator.pushNamed(context, '/OrderDetails');
@@ -82,7 +101,8 @@ class _ChalanInvoiceSelectionScreenState
                             width: MediaQuery.of(context).size.width * .9,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
                               boxShadow: const [
                                 BoxShadow(
                                   color: Colors.grey,
@@ -97,7 +117,8 @@ class _ChalanInvoiceSelectionScreenState
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   // Container(
                                   //   // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
@@ -116,7 +137,8 @@ class _ChalanInvoiceSelectionScreenState
                                   Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         // "Order ID : ${_con.orderHistory[index].id.toString()}",
