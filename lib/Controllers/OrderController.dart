@@ -32,8 +32,9 @@ class OrderController extends ControllerMVC {
   updateDataWithSelectedDate(String date) async {
     await getChalanHistory(date);
     await getOrderHistory(date);
-    setState(() { });
+    setState(() {});
   }
+
   getProducts() async {
     products = await getAllProducts();
     // for(Product product in products){
@@ -57,6 +58,15 @@ class OrderController extends ControllerMVC {
   getUniqueOrderData(int OrderId) async {
     orderProducts = [];
     orderProducts = await getuniqueOrderProducts(OrderId);
+    setState(() {});
+    for (OrderHistory oh in orderProducts) {
+      dp.dispatchItems.add([oh.id, 0]);
+    }
+  }
+
+  getOrderData(int OrderId) async {
+    orderProducts = [];
+    orderProducts = await getOrderProducts(OrderId);
     setState(() {});
     for (OrderHistory oh in orderProducts) {
       dp.dispatchItems.add([oh.id, 0]);

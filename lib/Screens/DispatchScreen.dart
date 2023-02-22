@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Models/OrderHistory.dart';
 import '../Controllers/OrderController.dart';
+import 'package:swanapp/Repositories/AuthRepository.dart';
 
 class DispatchScreen extends StatefulWidget {
   OrderHistory oh;
@@ -30,14 +31,14 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Dispatch'),
+        title: Text('${currentUser.value.currentZone}  Dispatch'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: _con.orderProducts.length < 1
             ? Center(
                 child: Text(
-                'No Invoice Available',
+                'No Product Left For Dispatch',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ))
             : Container(
@@ -239,6 +240,9 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                       onTap: () async {
                         // await _con.submitOrder(context);
                         await _con.dispatch();
+
+                        Navigator.pushReplacementNamed(
+                            context, '/chalanHistory');
                       },
                       child: Container(
                         margin: const EdgeInsets.symmetric(
