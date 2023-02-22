@@ -15,7 +15,6 @@ import '../Models/Order.dart';
 import '../Repositories/FabricRepository.dart';
 
 class OrderController extends ControllerMVC {
-
   DispatchProduct dp = DispatchProduct();
 
   ProductOrder po = ProductOrder();
@@ -47,17 +46,16 @@ class OrderController extends ControllerMVC {
     // for(Chalaan order in chalans){
     //   print(order.chalaan_id);
     // }
-    setState(() { });
+    setState(() {});
   }
 
   getUniqueOrderData(int OrderId) async {
     orderProducts = [];
     orderProducts = await getuniqueOrderProducts(OrderId);
     setState(() {});
-    for (OrderHistory oh in orderProducts){
-      dp.dispatchItems.add([oh.id,0]);
+    for (OrderHistory oh in orderProducts) {
+      dp.dispatchItems.add([oh.id, 0]);
     }
-
   }
 
   getOrderHistory() async {
@@ -86,7 +84,6 @@ class OrderController extends ControllerMVC {
   getChallanDoc(String ID) async {
     var data = await getChallanPDF(ID);
     await Printing.layoutPdf(onLayout: (_) => data.bodyBytes);
-
   }
 
   getInvoiceDoc(int ID) async {

@@ -1,49 +1,52 @@
 import 'Item.dart';
 
-class ProductOrder{
+class ProductOrder {
   late String name;
   late String address;
   late String mobile;
   // late String discount;
-  List <Item> items = [];
-  List products = <Map<String, dynamic>>[
-  ];
+  List<Item> items = [];
+  List products = <Map<String, dynamic>>[];
   ProductOrder();
 
-   getProducts() async {
-    for (Item item in items){
+  getProducts() async {
+    for (Item item in items) {
       products.add({
-        'product_id':item.productID,
-        'height':item.height,
-        'width':item.width,
-        'length':item.length,
-        'discount':item.discount,
-        'qty':item.quantity,
-        'fab_id':item.fabID,
+        'product_id': item.productID,
+        'height': item.height,
+        'width': item.width,
+        'length': item.length,
+        'discount': item.discount,
+        'qty': item.quantity,
+        'qty_remains': item.qty_remains,
+        'fab_id': item.fabID,
       });
     }
     return products;
-}
+  }
+
   Map toMap() {
     var map = new Map<String, dynamic>();
-    map["customer_name"]=name;
+    map["customer_name"] = name;
     map["customer_address"] = address;
     map["customer_mobile"] = mobile;
     // map["discount"] = discount;
     map["products"] = items.map((e) => e.toMap()).toList().toString();
     return map;
   }
-  printData(){
+
+  printData() {
     print(name);
     print(address);
     print(mobile);
     // print(discount);
-    for(Item item in items){
+    for (Item item in items) {
       print(item.productID);
       print(item.height);
       print(item.width);
       print(item.length);
       print(item.quantity);
+      print(item.qty_remains);
       print(item.fabID);
     }
   }

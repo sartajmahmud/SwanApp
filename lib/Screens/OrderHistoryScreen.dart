@@ -3,24 +3,26 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:swanapp/Controllers/OrderController.dart';
 import 'package:swanapp/Repositories/AuthRepository.dart';
 import 'package:swanapp/Screens/OrderHistoryDetails.dart';
+import 'package:intl/intl.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({Key? key}) : super(key: key);
-
   @override
   State createState() => _OrderHistoryScreenState();
 }
 
 class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
+  TextEditingController dateInputController = TextEditingController();
   late OrderController _con;
-
   _OrderHistoryScreenState() : super(OrderController()) {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
   }
+
   @override
   void initState() {
     // TODO: implement initState
+    dateInputController.text = "";
     super.initState();
     _con.getOrderHistory();
   }
@@ -73,24 +75,10 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Container(
-                        //   // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                        //   decoration: BoxDecoration(
-                        //     border: Border.all(color: Colors.black, width: 1),
-                        //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        //   ),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Text(
-                        //       "id ${index}",
-                        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                        //     ),
-                        //   ),
-                        // ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,

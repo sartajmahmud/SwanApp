@@ -4,7 +4,6 @@ import 'package:swanapp/Widgets/HomeHistoryButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -51,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                   child: Text(
-                '${currentUser.value.currentZone} Zone',
+                '$zonename Zone',
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.indigo),
+                    color: Colors.black87),
               )),
               const SizedBox(
                 height: 20,

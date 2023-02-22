@@ -32,6 +32,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                     ? flag = false
                     : flag = true;
                 currentUser.value.currentZone = currentUser.value.zones[index];
+
                 print(currentUser.value.currentZone);
                 if (flag) {
                   Navigator.pop(context);
