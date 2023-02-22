@@ -152,13 +152,26 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                                 flex: 8,
                                 child: Center(
                                   child: TextField(
+
                                     keyboardType: TextInputType.number,
                                     onChanged: (String password) {
                                       // widget._con.po.items[widget.serialNo].quantity = int.parse(password);
 
                                       // this.password = password;
-                                      _con.dp.dispatchItems[index][1] =
-                                          int.parse(password);
+                                      if(int.parse(password) <= int.parse(_con.orderProducts[index].qty_remains)){
+                                        _con.dp.dispatchItems[index][1] =
+                                            int.parse(password);
+                                      }else{
+                                        var snackBar = SnackBar(
+                                          content: Text('QTY Can\'t be more than Qty Left \"${_con.orderProducts[index].qty_remains}\"',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold
+                                          ),),
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      }
+
                                     },
                                     decoration: InputDecoration(
                                       labelText: 'QTY',
