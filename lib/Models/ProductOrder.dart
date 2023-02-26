@@ -18,7 +18,6 @@ class ProductOrder {
         'length': item.length,
         'discount': item.discount,
         'qty': item.quantity,
-        'qty_remains': item.qty_remains,
         'fab_id': item.fabID,
       });
     }
@@ -46,7 +45,7 @@ class ProductOrder {
       print(item.width);
       print(item.length);
       print(item.quantity);
-      print(item.qty_remains);
+
       print(item.fabID);
     }
   }

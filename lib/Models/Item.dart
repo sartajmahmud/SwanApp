@@ -8,7 +8,7 @@ class Item {
   late int discount;
 
   late int quantity;
-  late int qty_remains;
+
   late int? fabID = 0;
 
   Item();
@@ -21,7 +21,7 @@ class Item {
     map["width"] = width;
     map["length"] = length;
     map["qty"] = quantity;
-    map["qty_remains"] = qty_remains;
+
     map["fab_id"] = fabID;
 
     return jsonEncode(map);

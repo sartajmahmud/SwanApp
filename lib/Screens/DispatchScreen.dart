@@ -61,46 +61,46 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                            flex: 8,
-                            child: Center(
-                                child: Text(
-                              'Product',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.teal),
-                            ))),
-                        Expanded(
-                            flex: 8,
-                            child: Center(
-                                child: Text(
-                              'Qty',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.teal),
-                            ))),
-                        Expanded(
-                            flex: 8,
-                            child: Center(
-                                child: Text(
-                              'Qty Left',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.teal),
-                            ))),
-                        Expanded(
-                            flex: 8,
-                            child: Center(
-                                child: Text(
-                              'Qty',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.teal),
-                            ))),
+                        // Expanded(
+                        //     flex: 8,
+                        //     child: Center(
+                        //         child: Text(
+                        //       'Product',
+                        //       style: TextStyle(
+                        //           fontSize: 15,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Colors.teal),
+                        //     ))),
+                        // Expanded(
+                        //     flex: 8,
+                        //     child: Center(
+                        //         child: Text(
+                        //       'Qty',
+                        //       style: TextStyle(
+                        //           fontSize: 15,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Colors.teal),
+                        //     ))),
+                        // Expanded(
+                        //     flex: 8,
+                        //     child: Center(
+                        //         child: Text(
+                        //       'Qty Left',
+                        //       style: TextStyle(
+                        //           fontSize: 15,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Colors.teal),
+                        //     ))),
+                        // Expanded(
+                        //     flex: 8,
+                        //     child: Center(
+                        //         child: Text(
+                        //       'Qty',
+                        //       style: TextStyle(
+                        //           fontSize: 15,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Colors.teal),
+                        //     ))),
                       ],
                     ),
                     ListView.builder(
@@ -109,40 +109,47 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                           _con.orderProducts.length, //_con.orderHistory.length,
                       itemBuilder: (_, index) => Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            ConstrainedBox(
+                              child: Container(color: Colors.red),
+                              constraints: BoxConstraints(
+                                minWidth: 5,
+                                maxWidth: 100,
+                              ),
+                            ),
                             Expanded(
-                                flex: 8,
-                                child: Center(
+                                flex: 25,
+                                child: Container(
                                     child: Text(
-                                  "${index + 1} : ${_con.orderProducts[index].description} ",
+                                  "${index + 1} . ${_con.orderProducts[index].description} . [Total :${_con.orderProducts[index].qty} . Left: ${_con.orderProducts[index].qty_remains}]",
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black87),
                                 ))),
-                            Expanded(
-                                flex: 8,
-                                child: Center(
-                                    child: Text(
-                                  "${_con.orderProducts[index].qty}",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87),
-                                ))),
-                            Expanded(
-                                flex: 8,
-                                child: Center(
-                                    child: Text(
-                                  "${_con.orderProducts[index].qty_remains}",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87),
-                                ))),
+                            // Expanded(
+                            //     flex: 8,
+                            //     child: Center(
+                            //         child: Text(
+                            //       "${_con.orderProducts[index].qty}",
+                            //       style: TextStyle(
+                            //           fontSize: 15,
+                            //           fontWeight: FontWeight.bold,
+                            //           color: Colors.black87),
+                            //     ))),
+                            // Expanded(
+                            //     flex: 8,
+                            //     child: Center(
+                            //         child: Text(
+                            //       "${_con.orderProducts[index].qty_remains}",
+                            //       style: TextStyle(
+                            //           fontSize: 15,
+                            //           fontWeight: FontWeight.bold,
+                            //           color: Colors.black87),
+                            //     ))),
                             // Text(
                             //   // "Order ID : ${_con.orderHistory[index].customer_name}",
                             //   "${index + 1} : ${_con.orderProducts[index].description}",
@@ -152,56 +159,98 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                             Expanded(
                                 flex: 8,
                                 child: Center(
-                                  child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    onChanged: (String password) {
-                                      // widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                                  child: SizedBox(
+                                    width: 80,
+                                    height: 50,
+                                    child: TextField(
+                                      keyboardType: TextInputType.number,
+                                      onChanged: (String password) {
+                                        // widget._con.po.items[widget.serialNo].quantity = int.parse(password);
 
-                                      // this.password = password;
-                                      if (int.parse(password) <=
-                                              int.parse(_con
-                                                  .orderProducts[index]
-                                                  .qty_remains) &&
-                                          int.parse(password) > 0) {
-                                        _con.dp.dispatchItems[index][1] =
-                                            int.parse(password);
-                                      } else if (int.parse(password) == 0) {
-                                        var snackBar = SnackBar(
-                                          content: Text(
-                                            'QTY Can\'t be "0"',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      } else {
-                                        var snackBar = SnackBar(
-                                          content: Text(
-                                            'QTY Can\'t be more than Qty Remains \"${_con.orderProducts[index].qty_remains}\"',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: 'QTY',
-                                      labelStyle: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'PlayfairDisplay',
-                                          color: Colors.black54),
-                                      focusColor: Colors.black,
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(13)),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(13)),
+                                        // this.password = password;
+                                        if (int.parse(password) <=
+                                            int.parse(_con
+                                                .orderProducts[index].qty)) {
+                                          _con.dp.dispatchItems[index][1] =
+                                              int.parse(password);
+                                          // } else if (int.parse(password) == 0) {
+                                          //   var snackBar = SnackBar(
+                                          //     content: Text(
+                                          //       'QTY Can\'t be "0"',
+                                          //       style: TextStyle(
+                                          //           color: Colors.red,
+                                          //           fontWeight: FontWeight.bold),
+                                          //     ),
+                                          //   );
+                                          //   ScaffoldMessenger.of(context)
+                                          //       .showSnackBar(snackBar);
+                                        } else {
+                                          var snackBar = SnackBar(
+                                            content: Text(
+                                              'QTY Can\'t be more than Total Qty \"${_con.orderProducts[index].qty}\"',
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                        if (int.parse(password) <=
+                                            int.parse(_con.orderProducts[index]
+                                                .qty_remains)) {
+                                          _con.dp.dispatchItems[index][1] =
+                                              int.parse(password);
+                                          // } else if (int.parse(password) == 0) {
+                                          //   var snackBar = SnackBar(
+                                          //     content: Text(
+                                          //       'QTY Can\'t be "0"',
+                                          //       style: TextStyle(
+                                          //           color: Colors.red,
+                                          //           fontWeight: FontWeight.bold),
+                                          //     ),
+                                          //   );
+                                          //   ScaffoldMessenger.of(context)
+                                          //       .showSnackBar(snackBar);
+                                        } else {
+                                          var snackBar = SnackBar(
+                                            content: Text(
+                                              'QTY Can\'t be more than Qty Remains \"${_con.orderProducts[index].qty_remains}\"',
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                        if (int.parse(password) == 0) {
+                                          var snackBar = SnackBar(
+                                            content: Text(
+                                              'QTY Can\'t be "0"',
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          );
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackBar);
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        labelText: 'QTY',
+                                        labelStyle: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'PlayfairDisplay',
+                                            color: Colors.black54),
+                                        focusColor: Colors.black,
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(13)),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(13)),
+                                      ),
                                     ),
                                   ),
                                 )),
