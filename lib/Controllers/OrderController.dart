@@ -4,6 +4,7 @@ import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:swanapp/Models/Chalaan.dart';
+import 'package:swanapp/Models/DispatchLocation.dart';
 import 'package:swanapp/Models/DispatchProduct.dart';
 import '../Models/Fabric.dart';
 import '../Models/OrderHistory.dart';
@@ -22,17 +23,28 @@ class OrderController extends ControllerMVC {
   List<Order> orders = [];
 
   List<OrderHistory> orderHistory = [];
+  List<OrderHistory> factoryOrderHistory = [];
   late Product? currentSelectedValue;
+  late DispatchLocation? currentSelectedLocation;
 
   List<OrderHistory> orderProducts = [];
 
   List<Chalaan> chalans = [];
   List<Fabric> fabrics = [];
+  List<DispatchLocation> dispatchLocations = [];
 
   updateDataWithSelectedDate(String date) async {
     await getChalanHistory(date);
     await getOrderHistory(date);
     setState(() {});
+  }
+
+  getDispatchLoc() async {
+    dispatchLocations = await getAllDispatchLocation();
+    for (DispatchLocation product in dispatchLocations) {
+      print(product.name);
+      print(product.mobile_no);
+    }
   }
 
   getProducts() async {
@@ -77,6 +89,14 @@ class OrderController extends ControllerMVC {
     orderHistory = await getTodaysOrders(date);
     for (OrderHistory order in orderHistory) {
       //  print(order.customer_name);
+    }
+    setState(() {});
+  }
+
+  getFactoryOrderHistory(String date) async {
+    factoryOrderHistory = await getTodaysFactoryOrders(date);
+    for (OrderHistory order in factoryOrderHistory) {
+      // print(order.total_amount);
     }
     setState(() {});
   }

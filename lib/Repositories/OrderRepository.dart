@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:swanapp/Models/Chalaan.dart';
+import '../Models/DispatchLocation.dart';
 import '../Models/OrderHistory.dart';
 import '../Models/ProductOrder.dart';
 import '../Models/Order.dart';
@@ -39,6 +40,22 @@ Future<List<OrderHistory>> getOrderProducts(int OrderId) async {
   return result2.map((e) => OrderHistory.fromJSON(e)).toList();
 }
 
+Future<List<DispatchLocation>> getAllDispatchLocation() async {
+  // print(currentUser.value.token);
+  Uri url = Uri.http(
+    serverUrl,
+    'api/dispatch-locations',
+  );
+
+  http.Response response = await http.get(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"});
+  print(response.body);
+  Map<String, dynamic> result = jsonDecode(response.body);
+  List result2 = result['data'];
+  // print(result['data']);
+  return result2.map((e) => DispatchLocation.fromJSON(e)).toList();
+}
+
 Future<List<OrderHistory>> getTodaysOrders(String date) async {
   // print(currentUser.value.token);
   Uri url = Uri.http(
@@ -50,6 +67,24 @@ Future<List<OrderHistory>> getTodaysOrders(String date) async {
   http.Response response = await http.post(url,
       headers: {"Authorization": "Bearer ${currentUser.value.token}"},
       body: {'date': time, 'zone': currentUser.value.currentZone});
+  print(response.body);
+  Map<String, dynamic> result = jsonDecode(response.body);
+  List result2 = result['data'];
+  print(result['data']);
+  return result2.map((e) => OrderHistory.fromJSON(e)).toList();
+}
+
+Future<List<OrderHistory>> getTodaysFactoryOrders(String date) async {
+  // print(currentUser.value.token);
+  Uri url = Uri.http(
+    serverUrl,
+    'api/get-factory-orders',
+  );
+  DateTime _now = DateTime.now();
+  String time = date == '' ? "${_now.year}-${_now.month}-${_now.day}" : date;
+  http.Response response = await http.post(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"},
+      body: {'date': time});
   print(response.body);
   Map<String, dynamic> result = jsonDecode(response.body);
   List result2 = result['data'];

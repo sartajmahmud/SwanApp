@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:swanapp/Models/DispatchLocation.dart';
 import '../Controllers/OrderController.dart';
 import '../Models/Item.dart';
 import '../Widgets/ProductDetailsField.dart';
@@ -25,6 +26,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     super.initState();
     _con.getProducts();
     _con.getFabrics();
+    _con.getDispatchLoc();
   }
 
   List<ProductDetailsField> dynamicList = [];
@@ -145,6 +147,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
           //   ),
           // ),
           // ProductDetailsField(),
+
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,

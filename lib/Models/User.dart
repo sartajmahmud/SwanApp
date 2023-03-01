@@ -1,5 +1,4 @@
-class User{
-
+class User {
   String token = '';
   String name = '';
   String email = '';
@@ -7,18 +6,19 @@ class User{
   // String phoneNumber = '';
   bool auth = false;
   String currentZone = '';
+  String address_type = '';
   List zones = [];
-
 
   User();
   User.fromJSON(Map<String, dynamic> jsonMap) {
-    jsonMap['token'] != null ? token  = jsonMap['token'] : token = '';
+    jsonMap['token'] != null ? token = jsonMap['token'] : token = '';
     jsonMap['name'] != null ? name = jsonMap['name'] : name = '';
     jsonMap['email'] != null ? email = jsonMap['email'] : email = '';
+    jsonMap['address_type'] != null
+        ? address_type = jsonMap['address_type']
+        : address_type = '';
     // phoneNumber = jsonMap['mobile'];
-
   }
-
 
   Map toMap() {
     var map = new Map<String, dynamic>();

@@ -15,7 +15,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
       appBar: AppBar(
         backgroundColor: Colors.red,
         // automaticallyImplyLeading: false,
-        title: Center(child: Text('Select Zone')),
+        title: Center(child: Text('Select Address')),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -35,7 +35,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
 
                 print(currentUser.value.currentZone);
                 if (flag) {
-                  Navigator.pop(context,true);
+                  Navigator.pop(context, true);
                 } else {
                   Navigator.pushReplacementNamed(context, '/home');
                 }

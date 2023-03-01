@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../Models/DispatchLocation.dart';
 import '../Models/Product.dart';
 import '../Controllers/OrderController.dart';
 import '../Models/Fabric.dart';
@@ -99,6 +100,55 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           value: value,
                           child:
                               Text(value.product_name + '(' + value.size + ')'),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            height: 60,
+            child: FormField<String>(
+              builder: (FormFieldState<String> state) {
+                return InputDecorator(
+                  decoration: InputDecoration(
+                    labelText: 'Location',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'PlayfairDisplay',
+                        color: Colors.black54),
+                    focusColor: Colors.black,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                  ),
+                  // isEmpty: _currentSelectedValue == '',
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<DispatchLocation>(
+                      isExpanded: true,
+                      value: widget._con.dispatchLocations[0],
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.black,
+                      ),
+                      onChanged: (DispatchLocation? newValue) {
+                        setState(() {
+                          widget._con.po.items[widget.serialNo]
+                              .dispatchLocation = newValue?.mobile_no;
+                          widget._con.currentSelectedLocation = newValue;
+                          // _SelectedProduct = newValue;
+                        });
+                      },
+                      items: widget._con.dispatchLocations
+                          .map((DispatchLocation value) {
+                        return DropdownMenuItem<DispatchLocation>(
+                          value: value,
+                          child: Text(value.name),
                         );
                       }).toList(),
                     ),

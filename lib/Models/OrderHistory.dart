@@ -15,6 +15,7 @@ class OrderHistory {
   String unit = '';
   String qty = "";
   String qty_remains = "qty_remains";
+  String dispatch_lcoation = "dispatch_lcoation";
   String dimension = '';
   String product_amount = "0";
   String order_id = '';
@@ -62,6 +63,9 @@ class OrderHistory {
     jsonMap['qty_remains'] != null
         ? qty_remains = jsonMap['qty_remains'].toString()
         : qty_remains = "";
+    jsonMap['dispatch_lcoation'] != null
+        ? dispatch_lcoation = jsonMap['dispatch_lcoation'].toString()
+        : dispatch_lcoation = "";
     jsonMap['dimension'] != null
         ? dimension = jsonMap['dimension'].toString()
         : dimension = "";

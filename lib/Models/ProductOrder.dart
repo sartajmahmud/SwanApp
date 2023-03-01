@@ -4,7 +4,7 @@ class ProductOrder {
   late String name;
   late String address;
   late String mobile;
-  // late String discount;
+  late String dispatchLocation;
   List<Item> items = [];
   List products = <Map<String, dynamic>>[];
   ProductOrder();
@@ -19,6 +19,7 @@ class ProductOrder {
         'discount': item.discount,
         'qty': item.quantity,
         'fab_id': item.fabID,
+        'dispatch_location': item.dispatchLocation,
       });
     }
     return products;
