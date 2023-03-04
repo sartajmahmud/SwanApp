@@ -106,13 +106,13 @@ class OrderController extends ControllerMVC {
     setState(() {});
   }
 
-  getFactoryOrderHistory(String date) async {
-    factoryOrderHistory = await getTodaysFactoryOrders(date);
-    for (OrderHistory order in factoryOrderHistory) {
-      // print(order.total_amount);
-    }
-    setState(() {});
-  }
+  // getFactoryOrderHistory(String date) async {
+  //   factoryOrderHistory = await getTodaysFactoryOrders(date);
+  //   for (OrderHistory order in factoryOrderHistory) {
+  //     // print(order.total_amount);
+  //   }
+  //   setState(() {});
+  // }
 
   getFabrics() async {
     fabrics = await getAllFabrics();
