@@ -41,6 +41,9 @@ dependencies:
   shared_preferences: ^2.0.15
   dropdown_formfield: ^0.1.4
   printing: ^5.9.3
+  intl: ^0.18.0
+  calendar_date_picker2: ^0.3.9
+  flutter_spinkit: ^5.1.0
 
 
 dev_dependencies:

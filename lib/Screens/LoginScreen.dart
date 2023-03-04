@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:swanapp/Controllers/AuthController.dart';
+import '../Controllers/AuthController.dart';
+import '../Repositories/AuthRepository.dart';
+import 'package:swanapp/loading.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,17 +21,21 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
 
   String email = '';
   String password = '';
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-                height: MediaQuery.of(context).size.height,
-                color: Colors.grey.shade100,
-                child: SafeArea(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 40, horizontal: 35),
+    return loading
+        ? Loading()
+        : Scaffold(
+            body: SingleChildScrollView(
+                child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    color: Colors.grey.shade100,
+                    child: SafeArea(
+                        child: Container(
+                      margin:
+                          EdgeInsets.symmetric(vertical: 40, horizontal: 35),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30)),
@@ -41,7 +47,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               height: 20,
                             ),
                             Container(
-                              child: Image.asset('assets/logo.jpeg'),
+                              child: Image.asset('assets/logo.png'),
                             ),
                             const SizedBox(
                               height: 20,
@@ -50,7 +56,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               decoration: const InputDecoration(
                                 hintText: 'Enter your Mobile No.',
                               ),
-                              onChanged: (String email){
+                              onChanged: (String email) {
                                 this.email = email;
                               },
                             ),
@@ -71,9 +77,13 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             ),
                             MaterialButton(
                               onPressed: () async {
-                                bool response = await _con.login(email, password);
+                                setState(() => loading = true);
+                                bool response =
+                                    await _con.login(email, password);
                                 if (response) {
-                                  Navigator.pushNamed(context, '/home');
+                                  await getUserZones();
+                                  Navigator.pushReplacementNamed(
+                                      context, '/zones');
                                 } else {
                                   SnackBar snackBar = SnackBar(
                                     content: const Text('Unauthorised'),
@@ -99,11 +109,9 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                     color: Colors.white, fontSize: 15),
                               ),
                             ),
-
                           ],
                         ),
                       ),
                     )))));
   }
 }
-

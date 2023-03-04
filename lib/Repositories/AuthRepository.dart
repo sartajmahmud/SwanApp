@@ -1,23 +1,20 @@
-
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../Models/User.dart';
 import '../constants.dart';
 
+ValueNotifier<User> currentUser = new ValueNotifier(User());
 
-ValueNotifier <User> currentUser = new ValueNotifier(User());
-
-
-void setCurrentUser(jsonString) async {
+void setCurrentUser(jsonString, email) async {
   print("this is current user ");
   try {
     if (json.decode(jsonString)['data'] != null) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('current_user', json.encode(json.decode(jsonString)['data']));
+      Map x = json.decode(jsonString)['data'];
+      x['email'] = email;
+      await prefs.setString('current_user', json.encode(x));
     }
   } catch (e) {
     print("this is current user catch");
@@ -26,12 +23,12 @@ void setCurrentUser(jsonString) async {
   }
 }
 
-
 Future<User> getCurrentUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //prefs.clear();
   if (prefs.containsKey('current_user')) {
-    currentUser.value = User.fromJSON(json.decode(await prefs.get('current_user').toString()));
+    currentUser.value =
+        User.fromJSON(json.decode(await prefs.get('current_user').toString()));
     currentUser.value.auth = true;
   } else {
     currentUser.value.auth = false;
@@ -41,30 +38,46 @@ Future<User> getCurrentUser() async {
   return currentUser.value;
 }
 
-Future <bool> userLogin(User user) async {
+Future<List> getUserZones() async {
+  // print(currentUser.value.email);
+  // print(currentUser.value.token);
+  Uri url = Uri.https(
+    serverUrl,
+    'api/get-area/${currentUser.value.email}',
+  );
 
+  http.Response response = await http.post(url,
+      headers: {"Authorization": "Bearer ${currentUser.value.token}"});
+  // print(response.body);
+  Map<String, dynamic> result = jsonDecode(response.body);
+  List result2 = result['data'];
+  // print(result['data']);
+  currentUser.value.zones = result2.map((e) => e['name']).toList();
+  // print("curuser == ${currentUser.value.zones}");
+  return result2.map((e) => e['name']).toList();
+  // return result2.map((e) => OrderHistory.fromJSON(e)).toList();
+}
+
+Future<bool> userLogin(User user) async {
   Uri url = Uri.http(serverUrl, 'api/login');
 
   bool x = false;
 
-  http.Response response = await http.post(url,
-      body: user.toMap()
-  );
+  http.Response response = await http.post(url, body: user.toMap());
   Map result = jsonDecode(response.body);
-  print(result);
+  // print(result);
 
   if (response.statusCode == 200) {
     // print(User.fromJSON(result['data']).name);
-    setCurrentUser(response.body);
+    setCurrentUser(response.body, user.email);
 
     currentUser.value = User.fromJSON(result['data']);
+    currentUser.value.email = user.email;
   }
 
   result['message'] == "User login successfully." ? x = true : x = false;
 
   return x;
-
-
 }
 
 Future<void> logout() async {
@@ -72,4 +85,3 @@ Future<void> logout() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.remove('current_user');
 }
-

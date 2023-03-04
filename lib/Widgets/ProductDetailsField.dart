@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:swanapp/Models/Product.dart';
-
+import '../Models/DispatchLocation.dart';
+import '../Models/Product.dart';
 import '../Controllers/OrderController.dart';
 import '../Models/Fabric.dart';
 
@@ -70,12 +70,10 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                     labelStyle: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontFamily: 'PlayfairDisplay',
-                      color: Colors.black54
-                    ),
+                        color: Colors.black54),
                     focusColor: Colors.black,
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(13)
-                    ),
+                        borderRadius: BorderRadius.circular(13)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(13),
                     ),
@@ -85,10 +83,14 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                     child: DropdownButton<Product>(
                       isExpanded: true,
                       value: widget._con.currentSelectedValue,
-                      icon: const Icon(Icons.keyboard_arrow_down,color: Colors.black,),
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.black,
+                      ),
                       onChanged: (Product? newValue) {
                         setState(() {
-                          widget._con.po.items[widget.serialNo].productID = newValue?.id;
+                          widget._con.po.items[widget.serialNo].productID =
+                              newValue?.id;
                           widget._con.currentSelectedValue = newValue;
                           // _SelectedProduct = newValue;
                         });
@@ -96,7 +98,57 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       items: widget._con.products.map((Product value) {
                         return DropdownMenuItem<Product>(
                           value: value,
-                          child: Text(value.product_name+'('+value.size+')'),
+                          child:
+                              Text(value.product_name + '(' + value.size + ')'),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            height: 60,
+            child: FormField<String>(
+              builder: (FormFieldState<String> state) {
+                return InputDecorator(
+                  decoration: InputDecoration(
+                    labelText: 'Location',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'PlayfairDisplay',
+                        color: Colors.black54),
+                    focusColor: Colors.black,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(13)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(13),
+                    ),
+                  ),
+                  // isEmpty: _currentSelectedValue == '',
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<DispatchLocation>(
+                      isExpanded: true,
+                      value: widget._con.dispatchLocations[0],
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.black,
+                      ),
+                      onChanged: (DispatchLocation? newValue) {
+                        setState(() {
+                          widget._con.po.items[widget.serialNo]
+                              .dispatchLocation = newValue?.mobile_no;
+                          widget._con.currentSelectedLocation = newValue;
+                          // _SelectedProduct = newValue;
+                        });
+                      },
+                      items: widget._con.dispatchLocations
+                          .map((DispatchLocation value) {
+                        return DropdownMenuItem<DispatchLocation>(
+                          value: value,
+                          child: Text(value.name),
                         );
                       }).toList(),
                     ),
@@ -107,7 +159,6 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
           ),
           // customProducts.contains(_currentSelectedValue)
           widget._con.currentSelectedValue!.unit == 'cft'
-
               ? Column(
                   children: [
                     Container(
@@ -116,19 +167,22 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       child: TextField(
                         keyboardType: TextInputType.number,
                         onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                          widget._con.po.items[widget.serialNo].quantity =
+                              int.parse(password);
 
                           // this.password = password;
                         },
                         decoration: InputDecoration(
-                          labelText: 'Quantiy',
+                          labelText: 'Quantity',
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontFamily: 'PlayfairDisplay',
-                          color: Colors.black54),
+                              color: Colors.black54),
                           focusColor: Colors.black,
-                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)),
                         ),
                       ),
                     ),
@@ -137,17 +191,20 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       height: 45,
                       child: TextField(
                         onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].discount = int.parse(password);
+                          widget._con.po.items[widget.serialNo].discount =
+                              int.parse(password);
                         },
                         decoration: InputDecoration(
                           focusColor: Colors.black,
                           labelText: 'Discount',
                           labelStyle: TextStyle(
-                              fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'PlayfairDisplay',
+                              color: Colors.black54),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(13)
-                          ),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+                              borderRadius: BorderRadius.circular(13)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(13)),
                         ),
                       ),
                     ),
@@ -160,7 +217,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
-                                widget._con.po.items[widget.serialNo].height = double.parse(password);
+                                widget._con.po.items[widget.serialNo].height =
+                                    double.parse(password);
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Height',
@@ -179,7 +237,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
-                                widget._con.po.items[widget.serialNo].width = double.parse(password);
+                                widget._con.po.items[widget.serialNo].width =
+                                    double.parse(password);
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Width',
@@ -198,7 +257,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             height: 45,
                             child: TextField(
                               onChanged: (String password) {
-                                widget._con.po.items[widget.serialNo].length = double.parse(password);
+                                widget._con.po.items[widget.serialNo].length =
+                                    double.parse(password);
                               },
                               decoration: const InputDecoration(
                                 labelText: 'Length',
@@ -232,7 +292,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                 icon: const Icon(Icons.keyboard_arrow_down),
                                 onChanged: (Fabric? newValue) {
                                   setState(() {
-                                    widget._con.po.items[widget.serialNo].fabID = newValue?.id;
+                                    widget._con.po.items[widget.serialNo]
+                                        .fabID = newValue?.id;
 
                                     _SelectedFabric = newValue;
                                   });
@@ -240,7 +301,12 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                 items: widget._con.fabrics.map((Fabric value) {
                                   return DropdownMenuItem<Fabric>(
                                     value: value,
-                                    child: Text(value.fabric_name+'-'+value.fabric_type+'('+value.fabric_dimension+')'),
+                                    child: Text(value.fabric_name +
+                                        '-' +
+                                        value.fabric_type +
+                                        '(' +
+                                        value.fabric_dimension +
+                                        ')'),
                                   );
                                 }).toList(),
                               ),
@@ -253,223 +319,247 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                 )
               : widget._con.currentSelectedValue!.unit == 'sft'
                   ? Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(10),
-                height: 45,
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  onChanged: (String password) {
-                    widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 45,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (String password) {
+                              widget._con.po.items[widget.serialNo].quantity =
+                                  int.parse(password);
 
-                    // this.password = password;
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Quantiy',
-                    labelStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'PlayfairDisplay',
-                        color: Colors.black54),
-                    focusColor: Colors.black,
-                    focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                height: 45,
-                child: TextField(
-                  onChanged: (String password) {
-                    widget._con.po.items[widget.serialNo].discount = int.parse(password);
-                  },
-                  decoration: InputDecoration(
-                    focusColor: Colors.black,
-                    labelText: 'Discount',
-                    labelStyle: TextStyle(
-                        fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(13)
-                    ),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      height: 45,
-                      child: TextField(
-                        onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].height = double.parse(password);
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Height',
-                          labelStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay',
-                          color: Colors.black54),
-                          focusColor: Colors.black,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(13)
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(13)
+                              // this.password = password;
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Quantiy',
+                              labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'PlayfairDisplay',
+                                  color: Colors.black54),
+                              focusColor: Colors.black,
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13)),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      height: 45,
-                      child: TextField(
-                        onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].width = double.parse(password);
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Width',
-                          labelStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay',
-                          color: Colors.black54),
-                          focusColor: Colors.black,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(13)
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(13)
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 45,
+                          child: TextField(
+                            onChanged: (String password) {
+                              widget._con.po.items[widget.serialNo].discount =
+                                  int.parse(password);
+                            },
+                            decoration: InputDecoration(
+                              focusColor: Colors.black,
+                              labelText: 'Discount',
+                              labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'PlayfairDisplay',
+                                  color: Colors.black54),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13)),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      height: 45,
-                      child: TextField(
-                        onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].length = double.parse(password);
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Length',
-                          labelStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'PlayfairDisplay',
-                          color: Colors.black54),
-                          focusColor: Colors.black,
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(13)
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(13)
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                height: 45,
+                                child: TextField(
+                                  onChanged: (String password) {
+                                    widget._con.po.items[widget.serialNo]
+                                        .height = double.parse(password);
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'Height',
+                                    labelStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'PlayfairDisplay',
+                                        color: Colors.black54),
+                                    focusColor: Colors.black,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                height: 45,
+                                child: TextField(
+                                  onChanged: (String password) {
+                                    widget._con.po.items[widget.serialNo]
+                                        .width = double.parse(password);
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'Width',
+                                    labelStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'PlayfairDisplay',
+                                        color: Colors.black54),
+                                    focusColor: Colors.black,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                height: 45,
+                                child: TextField(
+                                  onChanged: (String password) {
+                                    widget._con.po.items[widget.serialNo]
+                                        .length = double.parse(password);
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'Length',
+                                    labelStyle: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'PlayfairDisplay',
+                                        color: Colors.black54),
+                                    focusColor: Colors.black,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                height: 55,
-                child: FormField<Fabric>(
-                  builder: (FormFieldState<Fabric> state) {
-                    return InputDecorator(
-                      decoration: InputDecoration(
-                        labelText: 'Fabric',
-                        labelStyle: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'PlayfairDisplay',
-                        color: Colors.black54),
-                        focusColor: Colors.black,
-                        // focusedBorder: OutlineInputBorder(
-                        //     borderRadius: BorderRadius.circular(13)
-                        // ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(13)
-                        ),
-                      ),
-                      // isEmpty: _currentSelectedValue == '',
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<Fabric>(
-                          isExpanded: true,
-                          value: _SelectedFabric,
-                          icon: const Icon(Icons.keyboard_arrow_down,color: Colors.black,),
-                          onChanged: (Fabric? newValue) {
-                            setState(() {
-                              widget._con.po.items[widget.serialNo].fabID = newValue?.id;
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          height: 55,
+                          child: FormField<Fabric>(
+                            builder: (FormFieldState<Fabric> state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  labelText: 'Fabric',
+                                  labelStyle: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'PlayfairDisplay',
+                                      color: Colors.black54),
+                                  focusColor: Colors.black,
+                                  // focusedBorder: OutlineInputBorder(
+                                  //     borderRadius: BorderRadius.circular(13)
+                                  // ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(13)),
+                                ),
+                                // isEmpty: _currentSelectedValue == '',
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<Fabric>(
+                                    isExpanded: true,
+                                    value: _SelectedFabric,
+                                    icon: const Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: Colors.black,
+                                    ),
+                                    onChanged: (Fabric? newValue) {
+                                      setState(() {
+                                        widget._con.po.items[widget.serialNo]
+                                            .fabID = newValue?.id;
 
-                              _SelectedFabric = newValue;
-                            });
-                          },
-                          items: widget._con.fabrics.map((Fabric value) {
-                            return DropdownMenuItem<Fabric>(
-                              value: value,
-                              child: Text(value.fabric_name+'-'+value.fabric_type+'('+value.fabric_dimension+')'),
-                            );
-                          }).toList(),
+                                        _SelectedFabric = newValue;
+                                      });
+                                    },
+                                    items:
+                                        widget._con.fabrics.map((Fabric value) {
+                                      return DropdownMenuItem<Fabric>(
+                                        value: value,
+                                        child: Text(value.fabric_name +
+                                            '-' +
+                                            value.fabric_type +
+                                            '(' +
+                                            value.fabric_dimension +
+                                            ')'),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          )
+                      ],
+                    )
                   : widget._con.currentSelectedValue!.unit == 'pcs'
                       ? Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            height: 45,
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              onChanged: (String password) {
-                                widget._con.po.items[widget.serialNo].quantity = int.parse(password);
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.all(10),
+                              height: 45,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                onChanged: (String password) {
+                                  widget._con.po.items[widget.serialNo]
+                                      .quantity = int.parse(password);
 
-                                // this.password = password;
-                              },
-                              decoration: InputDecoration(
-                                labelText: 'Quantiy',
-                                labelStyle: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'PlayfairDisplay',
-                                    color: Colors.black54),
-                                focusColor: Colors.black,
-                                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(10),
-                            height: 45,
-                            child: TextField(
-                              onChanged: (String password) {
-                                widget._con.po.items[widget.serialNo].discount = int.parse(password);
-                              },
-                              decoration: InputDecoration(
-                                focusColor: Colors.black,
-                                labelText: 'Discount',
-                                labelStyle: TextStyle(
-                                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(13)
+                                  // this.password = password;
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'Quantiy',
+                                  labelStyle: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'PlayfairDisplay',
+                                      color: Colors.black54),
+                                  focusColor: Colors.black,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(13)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(13)),
                                 ),
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
                               ),
                             ),
-                          ),
-                        ],
-                      )
+                            Container(
+                              margin: const EdgeInsets.all(10),
+                              height: 45,
+                              child: TextField(
+                                onChanged: (String password) {
+                                  widget._con.po.items[widget.serialNo]
+                                      .discount = int.parse(password);
+                                },
+                                decoration: InputDecoration(
+                                  focusColor: Colors.black,
+                                  labelText: 'Discount',
+                                  labelStyle: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'PlayfairDisplay',
+                                      color: Colors.black54),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(13)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(13)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       : Container()
         ],
       ),

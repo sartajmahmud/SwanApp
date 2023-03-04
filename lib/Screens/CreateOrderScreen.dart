@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:swanapp/Controllers/OrderController.dart';
-import 'package:swanapp/Models/Item.dart';
+import 'package:swanapp/Models/DispatchLocation.dart';
+import '../Controllers/OrderController.dart';
+import '../Models/Item.dart';
 import '../Widgets/ProductDetailsField.dart';
 
 class CreateOrderScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     super.initState();
     _con.getProducts();
     _con.getFabrics();
+    _con.getDispatchLoc();
   }
 
   List<ProductDetailsField> dynamicList = [];
@@ -71,7 +73,9 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                 focusColor: Colors.black,
                 labelText: 'Customer Name',
                 labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'PlayfairDisplay',
+                    color: Colors.black54),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -92,7 +96,9 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                 focusColor: Colors.black,
                 labelText: 'Customer Address',
                 labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'PlayfairDisplay',
+                    color: Colors.black54),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -113,7 +119,9 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                 focusColor: Colors.black,
                 labelText: 'Customer Mobile',
                 labelStyle: TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'PlayfairDisplay',color: Colors.black54),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'PlayfairDisplay',
+                    color: Colors.black54),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -139,6 +147,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
           //   ),
           // ),
           // ProductDetailsField(),
+
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -150,7 +159,6 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               addProductDetailsField();
             },
             child: Container(
-
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
               width: 200,
               decoration: BoxDecoration(
@@ -195,8 +203,6 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               ? InkWell(
                   onTap: () async {
                     await _con.submitOrder(context);
-
-
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(

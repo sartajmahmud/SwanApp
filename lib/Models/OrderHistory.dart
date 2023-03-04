@@ -14,11 +14,14 @@ class OrderHistory {
   String length = '';
   String unit = '';
   String qty = "";
+  String qty_remains = "qty_remains";
+  String dispatch_lcoation = "dispatch_lcoation";
   String dimension = '';
   String product_amount = "0";
   String order_id = '';
   String created_at = '';
   String updated_at = '';
+  String date = '';
 
   OrderHistory();
 
@@ -51,12 +54,21 @@ class OrderHistory {
     jsonMap['sale_rate'] != null
         ? sale_rate = jsonMap['sale_rate'].toString()
         : sale_rate = "0";
+    jsonMap['date'] != null ? date = jsonMap['date'] : date = '';
     jsonMap['height'] != null ? height = jsonMap['height'] : height = '';
     jsonMap['width'] != null ? width = jsonMap['width'] : width = '';
     jsonMap['length'] != null ? length = jsonMap['length'] : length = '';
     jsonMap['unit'] != null ? unit = jsonMap['unit'] : unit = '';
     jsonMap['qty'] != null ? qty = jsonMap['qty'].toString() : qty = "";
-    jsonMap['dimension'] != null ? dimension = jsonMap['dimension'].toString() : dimension = "";
+    jsonMap['qty_remains'] != null
+        ? qty_remains = jsonMap['qty_remains'].toString()
+        : qty_remains = "";
+    jsonMap['dispatch_lcoation'] != null
+        ? dispatch_lcoation = jsonMap['dispatch_lcoation'].toString()
+        : dispatch_lcoation = "";
+    jsonMap['dimension'] != null
+        ? dimension = jsonMap['dimension'].toString()
+        : dimension = "";
     jsonMap['product_amount'] != null
         ? product_amount = jsonMap['product_amount'].toString()
         : product_amount = "0";
