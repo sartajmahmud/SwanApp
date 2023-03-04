@@ -123,11 +123,11 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  if (currentUser.value.address_type == '0')
-                    Expanded(
-                        flex: 1,
-                        child: HomeHistoryButtonWidget(
-                            'Order History', Icons.shopping_cart_outlined)),
+                  // if (currentUser.value.address_type == '0')
+                  Expanded(
+                      flex: 1,
+                      child: HomeHistoryButtonWidget(
+                          'Order History', Icons.shopping_cart_outlined)),
                   if (currentUser.value.address_type == '1')
                     Expanded(
                         flex: 1,

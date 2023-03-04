@@ -50,7 +50,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                     borderRadius: BorderRadius.circular(15),
                   );
                   print(results.toString().split(' ')[0].substring(1));
-                  await _con.updateDataWithSelectedDate(
+                  await _con.updateChalaanDataWithSelectedDate(
                       results.toString().split(' ')[0].substring(1));
                 },
                 minWidth: 220,
@@ -74,16 +74,16 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                     shrinkWrap: true,
                     itemCount: _con.chalans.length, //_con.orderHistory.length,
                     itemBuilder: (_, index) => InkWell(
-                      onTap: () {
-                        // Navigator.pushNamed(context, '/OrderDetails');
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                OrderHistoryDetails(_con.orderHistory[index]),
-                          ),
-                        );
-                      },
+                      // onTap: () {
+                      //   // Navigator.pushNamed(context, '/OrderDetails');
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (BuildContext context) =>
+                      //           OrderHistoryDetails(_con.orderHistory[index]),
+                      //     ),
+                      //   );
+                      // },
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

@@ -61,7 +61,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                     borderRadius: BorderRadius.circular(15),
                   );
                   print(results.toString().split(' ')[0].substring(1));
-                  await _con.updateDataWithSelectedDate(
+                  await _con.updateOrderDataWithSelectedDate(
                       results.toString().split(' ')[0].substring(1));
                 },
                 minWidth: 220,
@@ -131,7 +131,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Order ID : ${_con.orderHistory[index].invoice_id.toString()}",
+                                        "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
                                         // "Order ID : ",
                                         style: TextStyle(
                                             fontSize: 15,

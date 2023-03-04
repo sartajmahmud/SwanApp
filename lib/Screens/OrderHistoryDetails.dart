@@ -54,7 +54,7 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
                           ),
                           Text(
                             // "Order ID : ${_con.orderHistory[index].id.toString()}",
-                            "Order ID : ${widget.oh.id}",
+                            "Invoice ID : ${widget.oh.invoice_id}",
                             style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w500),
                           ),

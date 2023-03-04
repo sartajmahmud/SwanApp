@@ -23,7 +23,7 @@ class _ChalanInvoiceSelectionScreenState
   void initState() {
     // TODO: implement initState
     super.initState();
-    _con.getFactoryOrderHistory('');
+    _con.getOrderHistory('');
   }
 
   @override
@@ -52,7 +52,7 @@ class _ChalanInvoiceSelectionScreenState
                     borderRadius: BorderRadius.circular(15),
                   );
                   print(results.toString().split(' ')[0].substring(1));
-                  await _con.updateDataWithSelectedDate(
+                  await _con.updateOrderDataWithSelectedDate(
                       results.toString().split(' ')[0].substring(1));
                 },
                 minWidth: 220,
@@ -71,7 +71,7 @@ class _ChalanInvoiceSelectionScreenState
             const SizedBox(
               height: 20,
             ),
-            _con.factoryOrderHistory.length < 1
+            _con.orderHistory.length < 1
                 ? Center(
                     child: Text(
                     'No Invoice Available',
@@ -79,8 +79,8 @@ class _ChalanInvoiceSelectionScreenState
                   ))
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: _con
-                        .factoryOrderHistory.length, //_con.orderHistory.length,
+                    itemCount:
+                        _con.orderHistory.length, //_con.orderHistory.length,
                     itemBuilder: (_, index) => InkWell(
                       onTap: () {
                         // Navigator.pushNamed(context, '/OrderDetails');
@@ -88,7 +88,7 @@ class _ChalanInvoiceSelectionScreenState
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                DispatchScreen(_con.factoryOrderHistory[index]),
+                                DispatchScreen(_con.orderHistory[index]),
                           ),
                         );
                       },
@@ -142,7 +142,7 @@ class _ChalanInvoiceSelectionScreenState
                                     children: [
                                       Text(
                                         // "Order ID : ${_con.orderHistory[index].id.toString()}",
-                                        "Invoice ID : ${_con.factoryOrderHistory[index].invoice_id.toString()}",
+                                        "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
                                         // "Order ID : ",
                                         style: TextStyle(
                                             fontSize: 15,
@@ -150,7 +150,7 @@ class _ChalanInvoiceSelectionScreenState
                                             color: Colors.black),
                                       ),
                                       Text(
-                                        "Customer Name : ${_con.factoryOrderHistory[index].customer_name}",
+                                        "Customer Name : ${_con.orderHistory[index].customer_name}",
                                         // "Customer Name : ",
                                         style: TextStyle(
                                             fontSize: 15,
@@ -158,21 +158,21 @@ class _ChalanInvoiceSelectionScreenState
                                             color: Colors.black),
                                       ),
                                       Text(
-                                        "Total Amount : ${_con.factoryOrderHistory[index].total_amount}",
+                                        "Total Amount : ${_con.orderHistory[index].total_amount}",
                                         // "Total Amount : ",
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black),
                                       ),
-                                      Text(
-                                        "Order Date : ${_con.factoryOrderHistory[index].created_at}",
-                                        // "Total Amount : ",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black),
-                                      ),
+                                      // Text(
+                                      //   "Order Date : ${_con.factoryOrderHistory[index].created_at}",
+                                      //   // "Total Amount : ",
+                                      //   style: TextStyle(
+                                      //       fontSize: 15,
+                                      //       fontWeight: FontWeight.w500,
+                                      //       color: Colors.black),
+                                      // ),
                                     ],
                                   ),
                                   // Padding(

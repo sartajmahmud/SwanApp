@@ -33,8 +33,13 @@ class OrderController extends ControllerMVC {
   List<Fabric> fabrics = [];
   List<DispatchLocation> dispatchLocations = [];
 
-  updateDataWithSelectedDate(String date) async {
+  updateChalaanDataWithSelectedDate(String date) async {
     await getChalanHistory(date);
+    // await getOrderHistory(date);
+    setState(() {});
+  }
+
+  updateOrderDataWithSelectedDate(String date) async {
     await getOrderHistory(date);
     setState(() {});
   }
@@ -59,14 +64,6 @@ class OrderController extends ControllerMVC {
     po.items[0].productID = products[0].id;
   }
 
-  getChalanHistory(String date) async {
-    chalans = await getTodaysChalans(date);
-    // for(Chalaan order in chalans){
-    //   print(order.chalaan_id);
-    // }
-    setState(() {});
-  }
-
   getUniqueOrderData(int OrderId) async {
     orderProducts = [];
     orderProducts = await getuniqueOrderProducts(OrderId);
@@ -86,6 +83,22 @@ class OrderController extends ControllerMVC {
   }
 
   getOrderHistory(String date) async {
+    orderHistory = await getTodaysOrders(date);
+    // for (OrderHistory order in orderHistory) {
+    //   //  print(order.customer_name);
+    // }
+    setState(() {});
+  }
+
+  getChalanHistory(String date) async {
+    chalans = await getTodaysChalans(date);
+    // for(Chalaan order in chalans){
+    //   print(order.chalaan_id);
+    // }
+    setState(() {});
+  }
+
+  getPreviousOrderHistory(String date) async {
     orderHistory = await getTodaysOrders(date);
     for (OrderHistory order in orderHistory) {
       //  print(order.customer_name);
