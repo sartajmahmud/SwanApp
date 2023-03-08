@@ -13,16 +13,16 @@ void main() {
     debugShowCheckedModeBanner: false,
     routes: {
       '/': (context) => const SplashScreen(),
-      '/login' : (context) => const LoginScreen(),
-      '/home' : (context) => const HomeScreen(),
-      '/chalanHistory' : (context) => const ChalanHistoryScreen(),
-      '/orderHistory' : (context) => const OrderHistoryScreen(),
-      '/createOrder' : (context) => const CreateOrderScreen(),
-      '/zones' : (context) => const ZoneSelectionScreen(),
-      '/selectChalaanInvoice' : (context) => const ChalanInvoiceSelectionScreen(),
+      '/login': (context) => const LoginScreen(),
+      '/home': (context) => const HomeScreen(),
+      '/chalanHistory': (context) => const ChalanHistoryScreen(),
+      '/orderHistory': (context) => const OrderHistoryScreen(),
+      '/createOrder': (context) => const CreateOrderScreen(),
+      '/zones': (context) => const ZoneSelectionScreen(),
+      '/selectChalaanInvoice': (context) =>
+          const ChalanInvoiceSelectionScreen(),
       // '/OrderDetails' : (context) => const OrderHistoryDetails(),
     },
     initialRoute: '/',
   ));
 }
-
