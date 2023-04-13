@@ -33,6 +33,8 @@ class OrderController extends ControllerMVC {
   List<Fabric> fabrics = [];
   List<DispatchLocation> dispatchLocations = [];
 
+  bool loading = false;
+
   updateChalaanDataWithSelectedDate(String date) async {
     await getChalanHistory(date);
     // await getOrderHistory(date);
@@ -58,6 +60,12 @@ class OrderController extends ControllerMVC {
     //   print(product.product_name);
     // }
   }
+  // setInitDispatchLocation() async {
+  //   currentSelectedLocation = dispatchLocations[0];
+  //   print(dispatchLocations);
+  //   print("007");
+  //   // po.items[0].productID = products[0].id;
+  // }
 
   setInitProduct() async {
     currentSelectedValue = products[0];
@@ -83,19 +91,23 @@ class OrderController extends ControllerMVC {
   }
 
   getOrderHistory(String date) async {
+    setState(() {loading=true;});
     orderHistory = await getTodaysOrders(date);
     // for (OrderHistory order in orderHistory) {
     //   //  print(order.customer_name);
     // }
-    setState(() {});
+    setState(() {loading=false;});
   }
 
   getChalanHistory(String date) async {
+    setState(() {loading=true;});
+    print("chalan");
     chalans = await getTodaysChalans(date);
+    print("chalan");
     // for(Chalaan order in chalans){
     //   print(order.chalaan_id);
     // }
-    setState(() {});
+    setState(() {loading=false;});
   }
 
   getPreviousOrderHistory(String date) async {
@@ -125,7 +137,7 @@ class OrderController extends ControllerMVC {
     // po.printData();
     print(po.toMap());
     await createOrder(po).then((value) {
-      Navigator.pushNamed(context, '/orderHistory');
+      Navigator.popAndPushNamed(context, '/orderHistory');
     });
   }
 

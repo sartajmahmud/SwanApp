@@ -19,7 +19,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
   }
-
+  bool loading = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -46,9 +46,14 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
       fabric_id = [];
       dynamicList = [];
     }
-    setState(() {});
+    setState(() {
+      loading = true;
+    });
     _con.po.items.add(Item());
     dynamicList.add(new ProductDetailsField(dynamicList.length, _con));
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -158,46 +163,57 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             onTap: () {
               addProductDetailsField();
             },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                    offset: Offset(
-                      0.0,
-                      0.0,
+            child: loading
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Center(
+                          child: CircularProgressIndicator(
+                              color: Colors.red, strokeWidth: 3)),
+                    ],
+                  )
+                : Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 90),
+                    width: 200,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          offset: Offset(
+                            0.0,
+                            0.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          Expanded(
+                              flex: 7,
+                              child: Center(
+                                  child: Text(
+                                'Add Product',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w500),
+                              ))),
+                          Expanded(
+                              flex: 2,
+                              child: Icon(
+                                Icons.add_box_outlined,
+                                size: 20,
+                              ))
+                        ],
+                      ),
                     ),
                   ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    Expanded(
-                        flex: 7,
-                        child: Center(
-                            child: Text(
-                          'Add Product',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ))),
-                    Expanded(
-                        flex: 2,
-                        child: Icon(
-                          Icons.add_box_outlined,
-                          size: 20,
-                        ))
-                  ],
-                ),
-              ),
-            ),
           ),
           dynamicList.length > 0
               ? InkWell(

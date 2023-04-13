@@ -28,6 +28,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
     // TODO: implement initState
     super.initState();
     widget._con.setInitProduct();
+    // widget._con.setInitDispatchLocation();
   }
 
   @override
@@ -127,11 +128,14 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       borderRadius: BorderRadius.circular(13),
                     ),
                   ),
-                  // isEmpty: _currentSelectedValue == '',
+                  // isEmpty: widget._con.currentSelectedLocation == '',
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<DispatchLocation>(
                       isExpanded: true,
                       value: widget._con.dispatchLocations[0],
+                      // value: widget._con.po.items[widget.se  rialNo].dispatchLocation,
+                      // value: widget._con.currentSelectedLocation,
+                      // value: null,
                       icon: const Icon(
                         Icons.keyboard_arrow_down,
                         color: Colors.black,

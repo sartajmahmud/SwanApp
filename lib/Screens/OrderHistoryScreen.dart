@@ -20,7 +20,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
   }
-  bool loading = false;
+  // bool loading = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -39,13 +39,14 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return _con.loading
         ? Loading()
         : Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
               title: Text('${currentUser.value.currentZone}  Orders'),
               backgroundColor: Colors.red,
+              // lead
             ),
             body: Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
