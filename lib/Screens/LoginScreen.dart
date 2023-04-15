@@ -55,7 +55,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               child: Image.asset('assets/logo.png'),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 25,
                             ),
                             TextField(
                               decoration: const InputDecoration(
@@ -66,7 +66,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               },
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             TextField(
                               obscureText: true,
@@ -78,7 +78,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                               },
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             MaterialButton(
                               onPressed: () async {
@@ -105,7 +105,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 }
                               },
                               minWidth: 220,
-                              height: 30,
+                              height: 35,
                               color: Colors.red,
                               shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0),

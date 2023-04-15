@@ -32,10 +32,10 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Order Details'),
+        title: const Text('Order Details'),
       ),
       body: _con.orderProducts.length < 1
-          ? CircularProgressIndicator()
+          ? const CircularProgressIndicator()
           : Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -45,154 +45,225 @@ class _OrderHistoryDetailsState extends StateMVC<OrderHistoryDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.only(top:10,bottom:25),
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.numbers,
-                            color: Colors.green,
+                          const Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(
+                              Icons.numbers,
+                              color: Colors.green,
+                            ),
+                          ),
+                          const Text(
+                            // "Order ID : ${_con.orderHistory[index].id.toString()}",
+                            "Invoice ID : ",
+                            style: TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600),
                           ),
                           Text(
                             // "Order ID : ${_con.orderHistory[index].id.toString()}",
-                            "Invoice ID : ${widget.oh.invoice_id}",
-                            style: TextStyle(
+                            "${widget.oh.invoice_id}",
+                            style: const TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.perm_identity,
-                            color: Colors.green,
-                          ),
-                          Text(
-                            // "Order ID : ${_con.orderHistory[index].customer_name}",
-                            "Customer Name : ${widget.oh.customer_name}",
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            color: Colors.green,
-                          ),
-                          Text(
-                            // "Order ID : ${_con.orderHistory[index].customer_name}",
-                            "Customer Address : ${widget.oh.customer_address}",
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.phone,
-                            color: Colors.green,
-                          ),
-                          Text(
-                            // "Order ID : ${_con.orderHistory[index].customer_name}",
-                            "Customer Mobile : ${widget.oh.customer_mobile}",
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount:
-                          _con.orderProducts.length, //_con.orderHistory.length,
-                      itemBuilder: (_, index) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.card_giftcard,
-                                  color: Colors.green,
-                                ),
-                                Text(
-                                  // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                  "Product ${index + 1} : ${_con.orderProducts[index].description}",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: const Icon(
+                              Icons.perm_identity,
+                              color: Colors.green,
                             ),
-                            //
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "Customer Name : ",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "${widget.oh.customer_name}",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right:10),
+                            child: const Icon(
+                              Icons.location_on_outlined,
+                              color: Colors.green,
+                            ),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "Customer Address : ",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "${widget.oh.customer_address}",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right:10),
+                            child: const Icon(
+                              Icons.phone,
+                              color: Colors.green,
+                            ),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "Customer Mobile : ",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "${widget.oh.customer_mobile}",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical:25),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount:
+                            _con.orderProducts.length, //_con.orderHistory.length,
+                        itemBuilder: (_, index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 6),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: const Icon(
+                                      Icons.card_giftcard,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  Text(
+                                    // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                    "Product ${index + 1} : ",
+                                    style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                    "${_con.orderProducts[index].description}",
+                                    style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                              //
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                _con.orderProducts[index].dimension != ''
-                                    ? Text(
-                                        // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                        "Dimension : ${_con.orderProducts[index].dimension} ${_con.orderProducts[index].unit}",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500),
-                                      )
-                                    : Container(),
-                                _con.orderProducts[index].qty != ''
-                                    ? Text(
-                                        // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                        "Quantity : ${_con.orderProducts[index].qty} pcs",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500),
-                                      )
-                                    : Container(),
-                              ],
-                            )
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(left: 32.5),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    _con.orderProducts[index].dimension != ''
+                                        ? Text(
+                                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                            "Dimension : ${_con.orderProducts[index].dimension} ${_con.orderProducts[index].unit}",
+                                            style: const TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w400),
+                                          )
+                                        : Container(),
+                                    _con.orderProducts[index].qty != ''
+                                        ? Text(
+                                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                            "Quantity : ${_con.orderProducts[index].qty} pcs",
+                                            style: const TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w400),
+                                          )
+                                        : Container(),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.discount_outlined,
-                            color: Colors.green,
+                          Padding(
+                            padding:  EdgeInsets.only(right: 10),
+                            child:  Icon(
+                              Icons.discount_outlined,
+                              color: Colors.green,
+                            ),
                           ),
                           Text(
                             // "Order ID : ${_con.orderHistory[index].customer_name}",
-                            "Discount Amount : ${widget.oh.discount} BDT",
-                            style: TextStyle(
+                            "Discount Amount : ",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "${widget.oh.discount} BDT",
+                            style: const TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.monetization_on_rounded,
-                            color: Colors.green,
+                          Padding(
+                            padding:  EdgeInsets.only(right: 10),
+                            child:  Icon(
+                              Icons.monetization_on_rounded,
+                              color: Colors.green,
+                            ),
                           ),
                           Text(
                             // "Order ID : ${_con.orderHistory[index].customer_name}",
-                            "Total Bill Amount : ${widget.oh.total_amount} BDT",
-                            style: TextStyle(
+                            "Total Bill Amount : ",
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                            "${widget.oh.total_amount} BDT",
+                            style: const TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w500),
                           ),
                         ],

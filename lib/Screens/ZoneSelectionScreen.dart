@@ -24,7 +24,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
           shrinkWrap: true,
           itemCount: currentUser.value.zones.length, //_con.orderHistory.length,
           itemBuilder: (_, index) => Padding(
-            padding: EdgeInsets.symmetric(vertical: 6),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: InkWell(
               onTap: () {
                 bool flag = true;
@@ -41,7 +41,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                 }
               },
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10.0, 2, 10, 2),
+                padding: const EdgeInsets.fromLTRB(15, 2, 15,2),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -58,12 +58,12 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                            flex: 8,
+                            flex: 9,
                             child: Center(
                                 child: Text(
                               currentUser.value.zones[index],
@@ -73,7 +73,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                                   color: Colors.teal),
                             ))),
                         Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Icon(
                               Icons.location_on_outlined,
                               color: Colors.green,
