@@ -5,6 +5,7 @@ import 'package:swanapp/Controllers/OrderController.dart';
 import 'package:swanapp/Repositories/AuthRepository.dart';
 import 'package:swanapp/Screens/OrderHistoryDetails.dart';
 import 'package:intl/intl.dart';
+import 'package:swanapp/Screens/OrderHistoryDetails2.dart';
 import 'package:swanapp/loading.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
@@ -97,7 +98,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      OrderHistoryDetails(
+                                      OrderHistoryDetails2(
                                           _con.orderHistory[index]),
                                 ),
                               );
