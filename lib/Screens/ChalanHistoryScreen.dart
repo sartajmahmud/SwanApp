@@ -20,7 +20,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
   }
-  bool loading = false;
+  // bool loading = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -31,7 +31,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return _con.loading
         ? Loading()
         : Scaffold(
             appBar: AppBar(
