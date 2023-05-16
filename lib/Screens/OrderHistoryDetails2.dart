@@ -45,6 +45,12 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: const Text('Order Details'),
+        actions: [
+          IconButton(onPressed:() async {
+            await _con.getOrderData(int.parse(widget.oh.order_id));
+            setState(() {});
+          }, icon: Icon(Icons.refresh))
+        ],
       ),
       body: _con.orderProducts.length < 1
           ? const CircularProgressIndicator()

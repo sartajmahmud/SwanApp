@@ -47,6 +47,12 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
             appBar: AppBar(
               title: Text('${currentUser.value.currentZone}  Orders'),
               backgroundColor: Colors.red,
+              actions: [
+                 IconButton(onPressed:() async {
+                 await _con.getOrderHistory('');
+                 setState(() {});
+                 }, icon: Icon(Icons.refresh))
+              ],
               // lead
             ),
             body: Container(

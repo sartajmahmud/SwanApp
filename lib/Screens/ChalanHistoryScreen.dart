@@ -37,6 +37,12 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
             appBar: AppBar(
               backgroundColor: Colors.red,
               title: Text('${currentUser.value.currentZone}  Chalaans'),
+              actions: [
+                IconButton(onPressed:() async {
+                  await _con.getChalanHistory('');
+                  setState(() {});
+                }, icon: Icon(Icons.refresh))
+              ],
             ),
             body: Container(
               height: MediaQuery.of(context).size.height,
