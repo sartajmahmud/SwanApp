@@ -38,10 +38,12 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
               backgroundColor: Colors.red,
               title: Text('${currentUser.value.currentZone}  Chalaans'),
               actions: [
-                IconButton(onPressed:() async {
-                  await _con.getChalanHistory('');
-                  setState(() {});
-                }, icon: Icon(Icons.refresh))
+                IconButton(
+                    onPressed: () async {
+                      await _con.getChalanHistory('');
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.refresh))
               ],
             ),
             body: Container(
@@ -176,7 +178,7 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                         )
                       : Center(
                           child: Text(
-                          'No Chalaan Available Today',
+                          'No Chalaans Available',
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         )),
