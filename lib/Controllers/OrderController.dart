@@ -71,6 +71,10 @@ class OrderController extends ControllerMVC {
     currentSelectedValue = products[0];
     po.items[0].productID = products[0].id;
   }
+  setInitLocation() async {
+    currentSelectedLocation = dispatchLocations[0];
+    po.items[0].dispatchLocation = dispatchLocations[0].mobile_no;
+  }
 
   getUniqueOrderData(int OrderId) async {
     orderProducts = [];

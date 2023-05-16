@@ -28,7 +28,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
     // TODO: implement initState
     super.initState();
     widget._con.setInitProduct();
-    // widget._con.setInitDispatchLocation();
+    widget._con.setInitLocation();
   }
 
   @override
@@ -116,7 +116,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
               builder: (FormFieldState<String> state) {
                 return InputDecorator(
                   decoration: InputDecoration(
-                    labelText: 'Location',
+                    labelText: 'Factory Location',
                     labelStyle: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontFamily: 'PlayfairDisplay',

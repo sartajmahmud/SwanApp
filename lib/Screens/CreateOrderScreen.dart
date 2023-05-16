@@ -40,7 +40,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     if (product_name.isNotEmpty) {
       product_name = [];
       product_quantity = [];
-      product_quantity = [];
+      product_length = [];
       product_height = [];
       product_width = [];
       fabric_id = [];
