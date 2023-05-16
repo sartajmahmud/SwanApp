@@ -100,34 +100,83 @@ class _HomeScreenState extends State<HomeScreen> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 200),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
+                decoration: BoxDecoration(
+                  color: Colors.white70,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 20.0,
+                      offset: Offset(
+                        0.0,
+                        0.0,
+                      ),
+                    ),
+                  ],
+                ),
                 child: Image.asset('assets/logo.png'),
               ),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               if (currentUser.value.address_type == '0')
                 Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 20.0,
+                          offset: Offset(
+                            0.0,
+                            0.0,
+                          ),
+                        ),
+                      ],
+                    ),
                     child: Text(
-                  '${currentUser.value.currentZone} Zone ',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87),
-                )),
+                      textAlign: TextAlign.center,
+                      '${currentUser.value.currentZone} Zone ',
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black87),
+                    )),
               if (currentUser.value.address_type == '1')
                 Container(
+                    height: 30,
+                    width: MediaQuery.of(context).size.width * .5,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 20.0,
+                          offset: Offset(
+                            0.0,
+                            0.0,
+                          ),
+                        ),
+                      ],
+                    ),
                     child: Text(
-                  '${currentUser.value.currentZone} Factory',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87),
-                )),
+                      textAlign: TextAlign.center,
+                      '${currentUser.value.currentZone} Factory',
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black87),
+                    )),
               const SizedBox(
                 height: 20,
               ),
@@ -138,12 +187,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.amber,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
-                          blurRadius: 5.0,
+                          blurRadius: 20.0,
                           offset: Offset(
                             0.0,
                             0.0,
@@ -164,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.teal),
+                                    color: Colors.black87),
                               ))),
                           Expanded(
                               flex: 2,
@@ -202,12 +251,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.amber,
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.grey,
-                            blurRadius: 5.0,
+                            blurRadius: 20.0,
                             offset: Offset(
                               0.0,
                               0.0,
@@ -221,19 +270,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
-                                flex: 8,
+                                flex: 18,
                                 child: Center(
-                                    child: Text(
-                                  'Create Chalaan',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.teal),
-                                ))),
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    'Create Chalaan',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black87),
+                                  ),
+                                )),
                             Expanded(
                                 flex: 2,
                                 child: Icon(
-                                  Icons.local_shipping_outlined,
+                                  Icons.inventory_rounded,
                                   color: Colors.green,
                                   size: 35,
                                 ))

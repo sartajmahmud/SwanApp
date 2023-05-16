@@ -43,15 +43,23 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
     return _con.loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.redAccent,
             appBar: AppBar(
-              title: Text('${currentUser.value.currentZone}  Orders'),
+              title: Text(
+                '${currentUser.value.currentZone} Order List',
+                style: TextStyle(
+                    color: Colors.greenAccent,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
               backgroundColor: Colors.red,
               actions: [
-                 IconButton(onPressed:() async {
-                 await _con.getOrderHistory('');
-                 setState(() {});
-                 }, icon: Icon(Icons.refresh))
+                IconButton(
+                    onPressed: () async {
+                      await _con.getOrderHistory('');
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.refresh))
               ],
               // lead
             ),
@@ -78,12 +86,12 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                       },
                       minWidth: 220,
                       height: 30,
-                      color: Colors.blue,
+                      color: Colors.amber[900],
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),
                       ),
                       child: Text(
-                        'SELECT DATE',
+                        'Search By Date',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -114,16 +122,20 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 8.0),
                                 child: Container(
-                                  height: 120,
+                                  height: 100,
                                   width: MediaQuery.of(context).size.width * .9,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Colors.amber,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)),
+                                    // border: Border.all(
+                                    //     color: Colors.indigo.shade300,
+                                    //     width: 2),
+
                                     boxShadow: const [
                                       BoxShadow(
                                         color: Colors.grey,
-                                        blurRadius: 5.0,
+                                        blurRadius: 20.0,
                                         offset: Offset(
                                           0.0,
                                           0.0,
@@ -170,19 +182,39 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                           ],
                                         ),
                                         // Padding(
-                                        //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                                        //   child:
+                                        //   padding: const EdgeInsets.symmetric(
+                                        //       horizontal: 25),
                                         // ),
-                                        IconButton(
-                                            onPressed: () {
-                                              _con.getInvoiceDoc(int.parse(_con
-                                                  .orderHistory[index]
-                                                  .order_id));
-                                            },
-                                            icon: Icon(
-                                              Icons.print,
-                                              color: Colors.green,
-                                            ))
+                                        ElevatedButton.icon(
+                                          onPressed: () {
+                                            _con.getInvoiceDoc(int.parse(_con
+                                                .orderHistory[index].order_id));
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.0,
+                                                  vertical: 10.0),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0)),
+                                              primary: Colors.indigo[300]),
+                                          icon: Icon(Icons
+                                              .print_rounded), //icon data for elevated button
+                                          label: Text(
+                                              "Print Invoice"), //label text
+                                        ),
+                                        // IconButton(
+                                        //     onPressed: () {
+                                        //       _con.getInvoiceDoc(int.parse(_con
+                                        //           .orderHistory[index]
+                                        //           .order_id));
+                                        //     },
+                                        //     icon: Icon(
+                                        //       Icons.print,
+                                        //       color: Colors.black87,
+                                        //       size: 30,
+                                        //     ))
                                       ],
                                     ),
                                   ),
@@ -193,7 +225,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                         )
                       : Center(
                           child: Text(
-                          'No Orders Available Today',
+                          'No Orders Available',
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         )),

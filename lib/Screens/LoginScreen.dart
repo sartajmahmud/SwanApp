@@ -39,23 +39,38 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     color: Colors.grey.shade100,
                     child: SafeArea(
                         child: Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 40, horizontal: 35),
+                      margin: EdgeInsets.all(50),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30)),
                       child: Padding(
-                        padding: EdgeInsets.all(5),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 250, horizontal: 20),
                         child: Column(
                           children: [
                             const SizedBox(
                               height: 20,
                             ),
                             Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white70,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 20.0,
+                                    offset: Offset(
+                                      0.0,
+                                      0.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               child: Image.asset('assets/logo.png'),
                             ),
                             const SizedBox(
-                              height: 25,
+                              height: 100,
                             ),
                             TextField(
                               decoration: const InputDecoration(

@@ -1,36 +1,35 @@
-
 import 'package:flutter/material.dart';
 
 class HomeHistoryButtonWidget extends StatefulWidget {
-
   String title = '';
-  late IconData icon ;
-   HomeHistoryButtonWidget(this.title, this.icon) ;
+  late IconData icon;
+  HomeHistoryButtonWidget(this.title, this.icon);
 
   @override
-  State<HomeHistoryButtonWidget> createState() => _HomeHistoryButtonWidgetState();
+  State<HomeHistoryButtonWidget> createState() =>
+      _HomeHistoryButtonWidgetState();
 }
 
 class _HomeHistoryButtonWidgetState extends State<HomeHistoryButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        if(widget.title == 'Order History'){
+      onTap: () {
+        if (widget.title == 'Order History') {
           Navigator.pushNamed(context, '/orderHistory');
-        }else{
+        } else {
           Navigator.pushNamed(context, '/chalanHistory');
         }
       },
       child: Container(
-        margin: const EdgeInsets.fromLTRB(7,25,5,15),
+        margin: const EdgeInsets.fromLTRB(7, 25, 5, 15),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.amber,
           borderRadius: BorderRadius.all(Radius.circular(15)),
           boxShadow: const [
             BoxShadow(
               color: Colors.grey,
-              blurRadius: 5.0,
+              blurRadius: 20.0,
               offset: Offset(
                 0.0,
                 0.0,
@@ -44,13 +43,18 @@ class _HomeHistoryButtonWidgetState extends State<HomeHistoryButtonWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(widget.icon,
+              Icon(
+                widget.icon,
                 color: Colors.teal,
-                size: 55,),
-              Text(widget.title,
+                size: 55,
+              ),
+              Text(
+                widget.title,
                 style: TextStyle(
-                  fontSize: 17, fontWeight: FontWeight.w400,
-                ),)
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
             ],
           ),
         ),

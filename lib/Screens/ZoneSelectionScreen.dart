@@ -9,28 +9,32 @@ class ZoneSelectionScreen extends StatefulWidget {
 }
 
 class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
-
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
         await getUserZones();
-        setState(() {
-
-        });
+        setState(() {});
       },
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
           // automaticallyImplyLeading: false,
-          title: Center(child: Text('Select Address')),
+          title: Text(
+            'Select Area',
+            style: TextStyle(
+                color: Colors.greenAccent,
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
+          ),
         ),
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: currentUser.value.zones.length, //_con.orderHistory.length,
+            itemCount:
+                currentUser.value.zones.length, //_con.orderHistory.length,
             itemBuilder: (_, index) => Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: InkWell(
@@ -39,7 +43,8 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                   currentUser.value.currentZone == ''
                       ? flag = false
                       : flag = true;
-                  currentUser.value.currentZone = currentUser.value.zones[index];
+                  currentUser.value.currentZone =
+                      currentUser.value.zones[index];
 
                   print(currentUser.value.currentZone);
                   if (flag) {
@@ -49,15 +54,15 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                   }
                 },
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 2, 15,2),
+                  padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.amber,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
-                          blurRadius: 5.0,
+                          blurRadius: 20.0,
                           offset: Offset(
                             0.0,
                             0.0,
@@ -78,7 +83,7 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.teal),
+                                    color: Colors.black87),
                               ))),
                           Expanded(
                               flex: 1,

@@ -34,9 +34,16 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
     return _con.loading
         ? Loading()
         : Scaffold(
+            // backgroundColor: Colors.redAccent,
             appBar: AppBar(
               backgroundColor: Colors.red,
-              title: Text('${currentUser.value.currentZone}  Chalaans'),
+              title: Text(
+                '${currentUser.value.currentZone} Chalaan List',
+                style: TextStyle(
+                    color: Colors.greenAccent,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
               actions: [
                 IconButton(
                     onPressed: () async {
@@ -69,12 +76,12 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                       },
                       minWidth: 220,
                       height: 30,
-                      color: Colors.blue,
+                      color: Colors.amber[900],
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),
                       ),
                       child: Text(
-                        'Select Date',
+                        'Search By Date',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -106,10 +113,21 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                   height: 100,
                                   width: MediaQuery.of(context).size.width * .9,
                                   decoration: BoxDecoration(
+                                    color: Colors.amber,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)),
-                                    border: Border.all(
-                                        color: Colors.pink.shade100, width: 2),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 20.0,
+                                        offset: Offset(
+                                          0.0,
+                                          0.0,
+                                        ),
+                                      ),
+                                    ],
+                                    // border: Border.all(
+                                    //     color: Colors.pink.shade100, width: 2),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),
@@ -117,20 +135,6 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // Container(
-                                        //   // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                                        //   decoration: BoxDecoration(
-                                        //     border: Border.all(color: Colors.black, width: 1),
-                                        //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                        //   ),
-                                        //   child: Padding(
-                                        //     padding: const EdgeInsets.all(8.0),
-                                        //     child: Text(
-                                        //       "id ${index}",
-                                        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -162,12 +166,31 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                         //   padding: const EdgeInsets.symmetric(horizontal: 25),
                                         //   child:
                                         // ),
-                                        IconButton(
-                                            onPressed: () {
-                                              _con.getChallanDoc(_con
-                                                  .chalans[index].chalaan_id);
-                                            },
-                                            icon: Icon(Icons.print))
+                                        ElevatedButton.icon(
+                                          onPressed: () {
+                                            _con.getChallanDoc(
+                                                _con.chalans[index].chalaan_id);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.0,
+                                                  vertical: 10.0),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0)),
+                                              primary: Colors.indigo[300]),
+                                          icon: Icon(Icons
+                                              .print_rounded), //icon data for elevated button
+                                          label: Text(
+                                              "Print Chalaan"), //label text
+                                        ),
+                                        // IconButton(
+                                        //     onPressed: () {
+                                        //       _con.getChallanDoc(_con
+                                        //           .chalans[index].chalaan_id);
+                                        //     },
+                                        //     icon: Icon(Icons.print))
                                       ],
                                     ),
                                   ),

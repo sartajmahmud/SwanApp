@@ -4,6 +4,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/OrderController.dart';
 import '../loading.dart';
 import 'DispatchScreen.dart';
+import 'DispatchScreen2.dart';
 
 class ChalanInvoiceSelectionScreen extends StatefulWidget {
   const ChalanInvoiceSelectionScreen({Key? key}) : super(key: key);
@@ -32,9 +33,15 @@ class _ChalanInvoiceSelectionScreenState
     return _con.loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.white,
+            // backgroundColor: Colors.redAccent,
             appBar: AppBar(
-              title: Text('Select Invoice For Chalaan'),
+              title: Text(
+                'Select Invoice For Chalaan',
+                style: TextStyle(
+                    color: Colors.greenAccent,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
               backgroundColor: Colors.red,
             ),
             body: Container(
@@ -60,12 +67,12 @@ class _ChalanInvoiceSelectionScreenState
                       },
                       minWidth: 220,
                       height: 30,
-                      color: Colors.blue,
+                      color: Colors.amber[900],
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),
                       ),
                       child: Text(
-                        'Select Date',
+                        'Sarch By Date',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -98,19 +105,20 @@ class _ChalanInvoiceSelectionScreenState
                             },
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   height: 120,
                                   width: MediaQuery.of(context).size.width * .9,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Colors.amber,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)),
+                                    // border: Border.all(
+                                    //     color: Colors.pink.shade100, width: 2),
                                     boxShadow: const [
                                       BoxShadow(
                                         color: Colors.grey,
-                                        blurRadius: 5.0,
+                                        blurRadius: 20.0,
                                         offset: Offset(
                                           0.0,
                                           0.0,
@@ -119,7 +127,7 @@ class _ChalanInvoiceSelectionScreenState
                                     ],
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -169,6 +177,7 @@ class _ChalanInvoiceSelectionScreenState
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black),
                                             ),
+
                                             // Text(
                                             //   "Order Date : ${_con.factoryOrderHistory[index].created_at}",
                                             //   // "Total Amount : ",
@@ -178,6 +187,33 @@ class _ChalanInvoiceSelectionScreenState
                                             //       color: Colors.black),
                                             // ),
                                           ],
+                                        ),
+                                        ElevatedButton.icon(
+                                          onPressed: () {
+                                            // Navigator.pushNamed(context, '/OrderDetails');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    DispatchScreen(_con
+                                                        .orderHistory[index]),
+                                              ),
+                                            );
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.0,
+                                                  vertical: 10.0),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0)),
+                                              primary: Colors.indigo[300]),
+                                          icon: Icon(Icons
+                                              .delivery_dining_rounded), //icon data for elevated button
+                                          label: Text(
+                                              "Dispatch Order"), //label text
                                         ),
                                         // Padding(
                                         //   padding: const EdgeInsets.symmetric(horizontal: 25),
