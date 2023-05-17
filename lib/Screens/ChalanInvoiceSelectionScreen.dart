@@ -44,7 +44,7 @@ class _ChalanInvoiceSelectionScreenState
               backgroundColor: Colors.red,
             ),
             body: Container(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              padding: EdgeInsets.all(5),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -107,7 +107,7 @@ class _ChalanInvoiceSelectionScreenState
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   height: 120,
-                                  width: MediaQuery.of(context).size.width * .9,
+                                  // width: MediaQuery.of(context).size.width * .9,
                                   decoration: BoxDecoration(
                                     color: Colors.amber,
                                     borderRadius:

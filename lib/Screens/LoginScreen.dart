@@ -39,7 +39,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                     color: Colors.grey.shade100,
                     child: SafeArea(
                         child: Container(
-                      margin: EdgeInsets.all(50),
+                      // margin: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30)),

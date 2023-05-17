@@ -45,7 +45,7 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
               ),
             ),
             body: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(5.0),
                 child: _con.orderProducts.length >= 1
                     ? Container(
                         height: MediaQuery.of(context).size.height,
@@ -65,7 +65,7 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                                       // height: MediaQuery.of(context).size.height*0.13,
                                       width: MediaQuery.of(context).size.width,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -153,7 +153,7 @@ class _DispatchScreenState extends StateMVC<DispatchScreen> {
                                     shadowColor: Colors.black,
                                     color: Colors.amberAccent,
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width,
+                                      // width: MediaQuery.of(context).size.width,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,

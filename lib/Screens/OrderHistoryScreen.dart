@@ -65,7 +65,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
               // lead
             ),
             body: Container(
-              padding: EdgeInsets.all(50),
+              padding: EdgeInsets.all(5),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(
