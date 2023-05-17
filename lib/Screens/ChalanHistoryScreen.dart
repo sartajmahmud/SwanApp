@@ -54,44 +54,67 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
               ],
             ),
             body: Container(
+              padding: EdgeInsets.all(50),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  MaterialButton(
-                      onPressed: () async {
-                        // return
-                        // dateWidget();
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      // return
+                      // dateWidget();
 
-                        var results = await showCalendarDatePicker2Dialog(
-                          context: context,
-                          config: CalendarDatePicker2WithActionButtonsConfig(),
-                          dialogSize: const Size(325, 400),
-                          borderRadius: BorderRadius.circular(15),
-                        );
-                        print(results.toString().split(' ')[0].substring(1));
+                      var results = await showCalendarDatePicker2Dialog(
+                        context: context,
+                        config: CalendarDatePicker2WithActionButtonsConfig(),
+                        dialogSize: const Size(325, 400),
+                        borderRadius: BorderRadius.circular(15),
+                      );
+                      print(results.toString().split(' ')[0].substring(1));
 
-                        await _con.updateChalaanDataWithSelectedDate(
-                            results.toString().split(' ')[0].substring(1));
-                      },
-                      minWidth: 220,
-                      height: 30,
-                      color: Colors.amber[900],
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
-                      child: Text(
-                        'Search By Date',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
+                      await _con.updateChalaanDataWithSelectedDate(
+                          results.toString().split(' ')[0].substring(1));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0)),
+                        primary: Colors.amber[700]),
+                    icon: Icon(
+                        Icons.search_outlined), //icon data for elevated button
+                    label: Text(
+                      "Search Chalaans By Date",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87),
+                    ), //label text
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  _con.chalans.isNotEmpty
-                      ? ListView.builder(
+                  _con.chalans.isEmpty
+                      ? Center(
+                          child: Column(
+                            children: <Widget>[
+                              //Image.asset
+                              Image.asset(
+                                'assets/notfound.png',
+                                height: 200,
+                                width: 200,
+                              ),
+                              Text(
+                                'No Chalaans Found',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black87),
+                              ) // Image.asset
+                            ], //<Widget>[]
+                          ), //Column
+                        ) //Cen
+                      : ListView.builder(
                           shrinkWrap: true,
                           itemCount:
                               _con.chalans.length, //_con.orderHistory.length,
@@ -199,12 +222,6 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                             ),
                           ),
                         )
-                      : Center(
-                          child: Text(
-                          'No Chalaans Available',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        )),
                 ],
               ),
             ),

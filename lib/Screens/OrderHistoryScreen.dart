@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:swanapp/Controllers/OrderController.dart';
 import 'package:swanapp/Repositories/AuthRepository.dart';
+import 'package:swanapp/Screens/HomeScreen.dart';
 import 'package:swanapp/Screens/OrderHistoryDetails.dart';
 import 'package:intl/intl.dart';
 import 'package:swanapp/Screens/OrderHistoryDetails2.dart';
@@ -64,44 +65,64 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
               // lead
             ),
             body: Container(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              padding: EdgeInsets.all(50),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  MaterialButton(
-                      onPressed: () async {
-                        // return
-                        // dateWidget();
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      var results = await showCalendarDatePicker2Dialog(
+                        context: context,
+                        config: CalendarDatePicker2WithActionButtonsConfig(),
+                        dialogSize: const Size(325, 400),
+                        borderRadius: BorderRadius.circular(15),
+                      );
+                      print(results.toString().split(' ')[0].substring(1));
+                      await _con.updateOrderDataWithSelectedDate(
+                          results.toString().split(' ')[0].substring(1));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0)),
+                        primary: Colors.amber[700]),
+                    icon: Icon(
+                        Icons.search_outlined), //icon data for elevated button
+                    label: Text(
+                      "Search Orders By Date",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87),
+                    ), //label text
+                  ),
 
-                        var results = await showCalendarDatePicker2Dialog(
-                          context: context,
-                          config: CalendarDatePicker2WithActionButtonsConfig(),
-                          dialogSize: const Size(325, 400),
-                          borderRadius: BorderRadius.circular(15),
-                        );
-                        print(results.toString().split(' ')[0].substring(1));
-                        await _con.updateOrderDataWithSelectedDate(
-                            results.toString().split(' ')[0].substring(1));
-                      },
-                      minWidth: 220,
-                      height: 30,
-                      color: Colors.amber[900],
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
-                      child: Text(
-                        'Search By Date',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
                   const SizedBox(
                     height: 20,
                   ),
-                  _con.orderHistory.isNotEmpty
-                      ? ListView.builder(
+                  _con.orderHistory.isEmpty
+                      ? Center(
+                          child: Column(
+                            children: <Widget>[
+                              //Image.asset
+                              Image.asset(
+                                'assets/notfound.png',
+                                height: 200,
+                                width: 200,
+                              ),
+                              Text(
+                                'No Orders Found',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black87),
+                              ) // Image.asset
+                            ], //<Widget>[]
+                          ), //Column
+                        ) //Cen
+                      : ListView.builder(
                           shrinkWrap: true,
                           itemCount: _con
                               .orderHistory.length, //_con.orderHistory.length,
@@ -204,17 +225,6 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                           label: Text(
                                               "Print Invoice"), //label text
                                         ),
-                                        // IconButton(
-                                        //     onPressed: () {
-                                        //       _con.getInvoiceDoc(int.parse(_con
-                                        //           .orderHistory[index]
-                                        //           .order_id));
-                                        //     },
-                                        //     icon: Icon(
-                                        //       Icons.print,
-                                        //       color: Colors.black87,
-                                        //       size: 30,
-                                        //     ))
                                       ],
                                     ),
                                   ),
@@ -223,12 +233,26 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                             ),
                           ),
                         )
-                      : Center(
-                          child: Text(
-                          'No Orders Available',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        )),
+
+                  // MaterialButton(
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const HomeScreen()),
+                  //     );
+                  //   },
+                  //   minWidth: 220,
+                  //   height: 35,
+                  //   color: Colors.red,
+                  //   shape: new RoundedRectangleBorder(
+                  //     borderRadius: new BorderRadius.circular(30.0),
+                  //   ),
+                  //   child: Text(
+                  //     "Home",
+                  //     style: const TextStyle(color: Colors.white, fontSize: 15),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -7,17 +7,17 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:async';
 import 'dart:io';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class NoOrdersScreen extends StatefulWidget {
+  const NoOrdersScreen({Key? key}) : super(key: key);
 
   @override
-  State createState() => _LoginScreenState();
+  State createState() => _NoOrdersScreenState();
 }
 
-class _LoginScreenState extends StateMVC<LoginScreen> {
+class _NoOrdersScreenState extends StateMVC<NoOrdersScreen> {
   late AuthController _con;
 
-  _LoginScreenState() : super(AuthController()) {
+  _NoOrdersScreenState() : super(AuthController()) {
     /// Acquire a reference to the passed Controller.
     _con = controller as AuthController;
   }
@@ -73,26 +73,6 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                             const SizedBox(
                               height: 100,
                             ),
-                            TextField(
-                              decoration: const InputDecoration(
-                                hintText: 'Enter your Mobile No.*',
-                              ),
-                              onChanged: (String email) {
-                                this.email = email;
-                              },
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            TextField(
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                hintText: 'Enter your password*',
-                              ),
-                              onChanged: (value) {
-                                password = value;
-                              },
-                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -104,7 +84,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 if (response) {
                                   await getUserZones();
                                   Navigator.pushReplacementNamed(
-                                      context, '/zones');
+                                      context, '/home');
                                 } else {
                                   // setState(() => loading = false);
 
@@ -127,7 +107,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 borderRadius: new BorderRadius.circular(30.0),
                               ),
                               child: Text(
-                                "LOG IN",
+                                "Home",
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 15),
                               ),
