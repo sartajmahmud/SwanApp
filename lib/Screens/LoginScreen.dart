@@ -45,11 +45,12 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           borderRadius: BorderRadius.circular(30)),
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(vertical: 250, horizontal: 20),
+                            // EdgeInsets.symmetric(vertical: 250, horizontal: 20),
+                            EdgeInsets.all(100),
                         child: Column(
                           children: [
                             const SizedBox(
-                              height: 20,
+                              height: 50,
                             ),
                             Container(
                               decoration: BoxDecoration(

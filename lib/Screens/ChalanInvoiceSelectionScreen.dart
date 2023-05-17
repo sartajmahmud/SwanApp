@@ -4,7 +4,6 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/OrderController.dart';
 import '../loading.dart';
 import 'DispatchScreen.dart';
-import 'DispatchScreen2.dart';
 
 class ChalanInvoiceSelectionScreen extends StatefulWidget {
   const ChalanInvoiceSelectionScreen({Key? key}) : super(key: key);
