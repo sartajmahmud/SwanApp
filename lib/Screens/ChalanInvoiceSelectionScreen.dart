@@ -4,6 +4,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/OrderController.dart';
 import '../loading.dart';
 import 'DispatchScreen.dart';
+import 'DispatchScreen2.dart';
 
 class ChalanInvoiceSelectionScreen extends StatefulWidget {
   const ChalanInvoiceSelectionScreen({Key? key}) : super(key: key);
@@ -82,11 +83,24 @@ class _ChalanInvoiceSelectionScreenState
                   ),
                   _con.orderHistory.length < 1
                       ? Center(
-                          child: Text(
-                          'No Invoice Available',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ))
+                          child: Column(
+                            children: <Widget>[
+                              //Image.asset
+                              Image.asset(
+                                'assets/notfound.png',
+                                height: 200,
+                                width: 200,
+                              ),
+                              Text(
+                                'No Invoices Found',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black87),
+                              ) // Image.asset
+                            ], //<Widget>[]
+                          ), //Column
+                        ) //Cen
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: _con
@@ -98,7 +112,7 @@ class _ChalanInvoiceSelectionScreenState
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      DispatchScreen(_con.orderHistory[index]),
+                                      DispatchScreen2(_con.orderHistory[index]),
                                 ),
                               );
                             },
