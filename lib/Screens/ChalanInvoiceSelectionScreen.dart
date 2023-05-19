@@ -145,20 +145,6 @@ class _ChalanInvoiceSelectionScreenState
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // Container(
-                                        //   // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                                        //   decoration: BoxDecoration(
-                                        //     border: Border.all(color: Colors.black, width: 1),
-                                        //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                        //   ),
-                                        //   child: Padding(
-                                        //     padding: const EdgeInsets.all(8.0),
-                                        //     child: Text(
-                                        //       "id ${index}",
-                                        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,

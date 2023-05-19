@@ -13,13 +13,11 @@ class DispatchScreen2 extends StatefulWidget {
   State createState() => _DispatchScreen2State();
 }
 
-List<dynamic> data = [
-  {"Name": "John", "Age": 28, "Role": "Senior Supervisor"},
-  {"Name": "Jane", "Age": 32, "Role": "Regional Administrator"}
-];
-
 class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
   late OrderController _con;
+  Color getColor(Set<MaterialState> states) {
+    return Colors.grey.shade300;
+  }
 
   _DispatchScreen2State() : super(OrderController()) {
     /// Acquire a reference to the passed Controller.
@@ -51,7 +49,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
               actions: [
                 IconButton(
                     onPressed: () async {
-                      _con.getOrderData(int.parse(widget.oh.order_id));
+                      _con.getUniqueOrderData(int.parse(widget.oh.order_id));
                       setState(() {});
                     },
                     icon: Icon(Icons.refresh))
@@ -59,7 +57,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
             ),
             body: Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: _con.orderProducts.length < 1
+                child: _con.orderProducts.isEmpty
                     ? Center(
                         child: Column(
                           children: <Widget>[
@@ -70,7 +68,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                               width: 200,
                             ),
                             Text(
-                              'No Products Found',
+                              'No Products Left For dispatch',
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
@@ -78,7 +76,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                             ) // Image.asset
                           ], //<Widget>[]
                         ), //Column
-                      ) //Cen
+                      )
                     : Container(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
@@ -202,16 +200,16 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                   fontWeight: FontWeight.w500),
                                             ),
                                             DataTable(
-                                              // border: TableBorder.all(
-                                              //     width: 0,
-                                              //     style: BorderStyle.solid),
+                                              border: TableBorder.all(
+                                                  width: 0,
+                                                  style: BorderStyle.solid,
+                                                  color: Colors.grey.shade400),
                                               columns: const <DataColumn>[
                                                 DataColumn(
                                                   label: Text('Product'),
                                                 ),
                                                 DataColumn(
                                                   label: Text('Ordered'),
-                                                  numeric: true,
                                                 ),
                                                 DataColumn(
                                                   label: Text('Delivered'),
@@ -227,6 +225,10 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                     _con.orderProducts[index];
 
                                                 return DataRow(
+                                                  color: index % 1 == 0
+                                                      ? MaterialStateProperty
+                                                          .resolveWith(getColor)
+                                                      : null,
                                                   cells: [
                                                     DataCell(
                                                       Text(item.description),
@@ -333,18 +335,19 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                               color: Colors
                                                                   .black54),
                                                           focusColor:
-                                                              Colors.black,
+                                                              Colors.redAccent,
                                                           focusedBorder:
                                                               OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              13)),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        50),
+                                                          ),
                                                           border: OutlineInputBorder(
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          13)),
+                                                                          5)),
                                                         ),
                                                       ),
                                                     ),
@@ -369,7 +372,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.green,
+                                          color: Colors.indigo[300],
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15)),
                                           boxShadow: const [
@@ -401,7 +404,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           color:
-                                                              Colors.black87),
+                                                              Colors.white70),
                                                     ),
                                                   )),
                                             ],
@@ -413,7 +416,9 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                 ],
                               ),
                             )),
-                      )),
+                      )
+                //Cen
+                ),
           );
   }
 }

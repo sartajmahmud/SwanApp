@@ -24,6 +24,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
     // TODO: implement initState
     super.initState();
     _con.getOrderData(int.parse(widget.oh.order_id));
+    _con.getOrderHistory('');
     // subtotal+=int.parse(_con.orderProducts[index].product_amount);
   }
 
@@ -77,30 +78,52 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                       Card(
                         elevation: 10,
                         shadowColor: Colors.black,
-                        color: Colors.amber,
+                        // color: Colors.amber,
                         child: Container(
                           // height: MediaQuery.of(context).size.height*0.13,
                           width: MediaQuery.of(context).size.width,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  // "Order ID : ${_con.orderHistory[index].id.toString()}",
-                                  "Invoice ID #${widget.oh.invoice_id}",
-                                  style: TextStyle(
-                                      color: Colors.teal,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      // "Order ID : ${_con.orderHistory[index].id.toString()}",
+                                      "Invoice ID #${widget.oh.invoice_id}",
+                                      style: TextStyle(
+                                          color: Colors.teal,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                      "Placed on ${widget.oh.created_at}",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xff525252)
+                                              .withOpacity(.90),
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                  "Placed on ${widget.oh.created_at}",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xff525252).withOpacity(.90),
-                                      fontWeight: FontWeight.w400),
+                                ElevatedButton.icon(
+                                  onPressed: () {
+                                    // _con.getInvoiceDoc(int.parse(_con
+                                    //     .orderHistory[index].order_id));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 10.0),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50.0)),
+                                      primary: Colors.indigo[300]),
+                                  icon: Icon(Icons
+                                      .check_circle), //icon data for elevated button
+                                  label: Text("View Chalaans"), //label text
                                 ),
                               ],
                             ),
@@ -110,7 +133,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                       Card(
                         elevation: 10,
                         shadowColor: Colors.black,
-                        color: Colors.amberAccent,
+                        // color: Colors.amberAccent,
                         child: Container(
                           // height: MediaQuery.of(context).size.height*0.13,
                           width: MediaQuery.of(context).size.width,
@@ -162,7 +185,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                       Card(
                         elevation: 10,
                         shadowColor: Colors.black,
-                        color: Colors.amberAccent,
+                        // color: Colors.amberAccent,
                         child: Container(
                           // height: MediaQuery.of(context).size.height*0.13,
                           width: MediaQuery.of(context).size.width,
@@ -195,13 +218,20 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                                 color: Colors.green,
                                               ),
                                             ),
+                                            // Text(
+                                            //   // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                            //   "Product ${index + 1} : ",
+                                            //   style: TextStyle(
+                                            //       fontSize: 17,
+                                            //       color: Color(0xff525252)
+                                            //           .withOpacity(.75),
+                                            //       fontWeight: FontWeight.w500),
+                                            // ),
                                             Text(
                                               // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                              "Product ${index + 1} : ",
-                                              style: TextStyle(
+                                              "${_con.orderProducts[index].description}",
+                                              style: const TextStyle(
                                                   fontSize: 17,
-                                                  color: Color(0xff525252)
-                                                      .withOpacity(.75),
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ],
@@ -250,13 +280,13 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                            "${_con.orderProducts[index].description}",
-                                            style: const TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w500),
-                                          ),
+                                          // Text(
+                                          //   // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                          //   "${_con.orderProducts[index].description}",
+                                          //   style: const TextStyle(
+                                          //       fontSize: 17,
+                                          //       fontWeight: FontWeight.w500),
+                                          // ),
                                           Text(
                                             // "Order ID : ${_con.orderHistory[index].customer_name}",
                                             "BDT ${_con.orderProducts[index].product_amount}",
@@ -335,7 +365,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                       Card(
                         elevation: 20,
                         shadowColor: Colors.black,
-                        color: Colors.amberAccent,
+                        // color: Colors.amberAccent,
                         child: Container(
                           // height: MediaQuery.of(context).size.height*0.13,
                           width: MediaQuery.of(context).size.width,
