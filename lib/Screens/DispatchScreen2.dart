@@ -16,7 +16,7 @@ class DispatchScreen2 extends StatefulWidget {
 class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
   late OrderController _con;
   Color getColor(Set<MaterialState> states) {
-    return Colors.grey.shade300;
+    return Colors.pink.shade50;
   }
 
   _DispatchScreen2State() : super(OrderController()) {
@@ -231,13 +231,23 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                       : null,
                                                   cells: [
                                                     DataCell(
-                                                      Text(item.description),
+                                                      Text(item.description,
+                                                          style: TextStyle(
+                                                              fontSize: 15)),
                                                     ),
                                                     DataCell(
-                                                      Text(item.qty),
+                                                      Text(
+                                                        item.qty,
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
                                                     ),
                                                     DataCell(
-                                                      Text(item.qty_remains),
+                                                      Text(
+                                                        item.qty_remains,
+                                                        style: TextStyle(
+                                                            fontSize: 15),
+                                                      ),
                                                     ),
                                                     DataCell(
                                                       TextField(
@@ -325,15 +335,17 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                         },
                                                         decoration:
                                                             InputDecoration(
-                                                          labelText: '',
-                                                          labelStyle: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontFamily:
-                                                                  'PlayfairDisplay',
-                                                              color: Colors
-                                                                  .black54),
+                                                          icon: Icon(Icons
+                                                              .production_quantity_limits_outlined),
+                                                          // labelText: '',
+                                                          // labelStyle: TextStyle(
+                                                          //     fontWeight:
+                                                          //         FontWeight
+                                                          //             .w500,
+                                                          //     fontFamily:
+                                                          //         'PlayfairDisplay',
+                                                          //     color: Colors
+                                                          //         .black54),
                                                           focusColor:
                                                               Colors.redAccent,
                                                           focusedBorder:
@@ -343,12 +355,14 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                                                                     .circular(
                                                                         50),
                                                           ),
-                                                          border: OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5)),
+                                                          // border: OutlineInputBorder(
+                                                          //     borderRadius:
+                                                          //         BorderRadius
+                                                          //             .circular(
+                                                          //                 5)),
                                                         ),
+                                                        style: TextStyle(
+                                                            fontSize: 20),
                                                       ),
                                                     ),
                                                   ],

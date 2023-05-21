@@ -6,6 +6,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:swanapp/Models/Chalaan.dart';
 import 'package:swanapp/Models/DispatchLocation.dart';
 import 'package:swanapp/Models/DispatchProduct.dart';
+import 'package:swanapp/Models/OrderChalaan.dart';
 import '../Models/Fabric.dart';
 import '../Models/OrderHistory.dart';
 import '../Models/Product.dart';
@@ -30,6 +31,7 @@ class OrderController extends ControllerMVC {
   List<OrderHistory> orderProducts = [];
 
   List<Chalaan> chalans = [];
+  List<OrderChalaan> orderchalans = [];
   List<Fabric> fabrics = [];
   List<DispatchLocation> dispatchLocations = [];
 
@@ -71,6 +73,7 @@ class OrderController extends ControllerMVC {
     currentSelectedValue = products[0];
     po.items[0].productID = products[0].id;
   }
+
   setInitLocation() async {
     currentSelectedLocation = dispatchLocations[0];
     po.items[0].dispatchLocation = dispatchLocations[0].mobile_no;
@@ -95,23 +98,44 @@ class OrderController extends ControllerMVC {
   }
 
   getOrderHistory(String date) async {
-    setState(() {loading=true;});
+    setState(() {
+      loading = true;
+    });
     orderHistory = await getTodaysOrders(date);
     // for (OrderHistory order in orderHistory) {
     //   //  print(order.customer_name);
     // }
-    setState(() {loading=false;});
+    setState(() {
+      loading = false;
+    });
   }
 
   getChalanHistory(String date) async {
-    setState(() {loading=true;});
+    setState(() {
+      loading = true;
+    });
     print("chalan");
     chalans = await getTodaysChalans(date);
     print("chalan");
     // for(Chalaan order in chalans){
     //   print(order.chalaan_id);
     // }
-    setState(() {loading=false;});
+    setState(() {
+      loading = false;
+    });
+  }
+
+  getOrderChalan(String ID) async {
+    setState(() {
+      loading = true;
+    });
+    orderchalans = await getOrderChalans(ID);
+    // for (OrderChalaan order in orderchalans) {
+    //   print(order.chalaan_id);
+    // }
+    setState(() {
+      loading = false;
+    });
   }
 
   getPreviousOrderHistory(String date) async {

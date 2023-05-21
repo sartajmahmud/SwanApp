@@ -101,128 +101,137 @@ class _ChalanInvoiceSelectionScreenState
                             ], //<Widget>[]
                           ), //Column
                         ) //Cen
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: _con
-                              .orderHistory.length, //_con.orderHistory.length,
-                          itemBuilder: (_, index) => InkWell(
-                            onTap: () {
-                              // Navigator.pushNamed(context, '/OrderDetails');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      DispatchScreen2(_con.orderHistory[index]),
-                                ),
-                              );
-                            },
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 120,
-                                  // width: MediaQuery.of(context).size.width * .9,
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    // border: Border.all(
-                                    //     color: Colors.pink.shade100, width: 2),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 20.0,
-                                        offset: Offset(
-                                          0.0,
-                                          0.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                      : Expanded(
+                          child: Scrollbar(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: _con.orderHistory
+                                  .length, //_con.orderHistory.length,
+                              itemBuilder: (_, index) => InkWell(
+                                onTap: () {
+                                  // Navigator.pushNamed(context, '/OrderDetails');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          DispatchScreen2(
+                                              _con.orderHistory[index]),
+                                    ),
+                                  );
+                                },
+                                child: Center(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
+                                    child: Container(
+                                      height: 120,
+                                      // width: MediaQuery.of(context).size.width * .9,
+                                      decoration: BoxDecoration(
+                                        color: Colors.amber,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        // border: Border.all(
+                                        //     color: Colors.pink.shade100, width: 2),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 20.0,
+                                            offset: Offset(
+                                              0.0,
+                                              0.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              // "Order ID : ${_con.orderHistory[index].id.toString()}",
-                                              "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
-                                              // "Order ID : ",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black),
-                                            ),
-                                            Text(
-                                              "Customer Name : ${_con.orderHistory[index].customer_name}",
-                                              // "Customer Name : ",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black),
-                                            ),
-                                            Text(
-                                              "Total Amount : ${_con.orderHistory[index].total_amount}",
-                                              // "Total Amount : ",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black),
-                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  // "Order ID : ${_con.orderHistory[index].id.toString()}",
+                                                  "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
+                                                  // "Order ID : ",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black),
+                                                ),
+                                                Text(
+                                                  "Customer Name : ${_con.orderHistory[index].customer_name}",
+                                                  // "Customer Name : ",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black),
+                                                ),
+                                                Text(
+                                                  "Total Amount : ${_con.orderHistory[index].total_amount}",
+                                                  // "Total Amount : ",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black),
+                                                ),
 
-                                            // Text(
-                                            //   "Order Date : ${_con.factoryOrderHistory[index].created_at}",
-                                            //   // "Total Amount : ",
-                                            //   style: TextStyle(
-                                            //       fontSize: 15,
-                                            //       fontWeight: FontWeight.w500,
-                                            //       color: Colors.black),
+                                                // Text(
+                                                //   "Order Date : ${_con.factoryOrderHistory[index].created_at}",
+                                                //   // "Total Amount : ",
+                                                //   style: TextStyle(
+                                                //       fontSize: 15,
+                                                //       fontWeight: FontWeight.w500,
+                                                //       color: Colors.black),
+                                                // ),
+                                              ],
+                                            ),
+                                            ElevatedButton.icon(
+                                              onPressed: () {
+                                                // Navigator.pushNamed(context, '/OrderDetails');
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        DispatchScreen2(
+                                                            _con.orderHistory[
+                                                                index]),
+                                                  ),
+                                                );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 10.0),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0)),
+                                                  primary: Colors.indigo[300]),
+                                              icon: Icon(Icons
+                                                  .delivery_dining_rounded), //icon data for elevated button
+                                              label: Text(
+                                                  "Dispatch Order"), //label text
+                                            ),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                            //   child:
                                             // ),
+                                            // IconButton(
+                                            //     onPressed: (){
+                                            //       _con.getInvoiceDoc(int.parse(_con.orderHistory[index].order_id));
+                                            //     }, icon: Icon(Icons.print,color: Colors.green,))
                                           ],
                                         ),
-                                        ElevatedButton.icon(
-                                          onPressed: () {
-                                            // Navigator.pushNamed(context, '/OrderDetails');
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (BuildContext
-                                                        context) =>
-                                                    DispatchScreen(_con
-                                                        .orderHistory[index]),
-                                              ),
-                                            );
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10.0,
-                                                  vertical: 10.0),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0)),
-                                              primary: Colors.indigo[300]),
-                                          icon: Icon(Icons
-                                              .delivery_dining_rounded), //icon data for elevated button
-                                          label: Text(
-                                              "Dispatch Order"), //label text
-                                        ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                                        //   child:
-                                        // ),
-                                        // IconButton(
-                                        //     onPressed: (){
-                                        //       _con.getInvoiceDoc(int.parse(_con.orderHistory[index].order_id));
-                                        //     }, icon: Icon(Icons.print,color: Colors.green,))
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),

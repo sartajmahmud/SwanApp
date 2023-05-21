@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:swanapp/Models/OrderHistory.dart';
+import 'package:swanapp/Screens/OrderChalaanHitory.dart';
 
 import '../Controllers/OrderController.dart';
 
@@ -58,6 +59,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
           IconButton(
               onPressed: () async {
                 await _con.getOrderData(int.parse(widget.oh.order_id));
+
                 setState(() {});
               },
               icon: Icon(Icons.refresh))
@@ -91,7 +93,6 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      // "Order ID : ${_con.orderHistory[index].id.toString()}",
                                       "Invoice ID #${widget.oh.invoice_id}",
                                       style: TextStyle(
                                           color: Colors.teal,
@@ -111,8 +112,15 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                 ),
                                 ElevatedButton.icon(
                                   onPressed: () {
-                                    // _con.getInvoiceDoc(int.parse(_con
-                                    //     .orderHistory[index].order_id));
+                                    // _con.getOrderChalan(widget.oh.invoice_id);
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (BuildContext context) =>
+                                    //         OrderChalaanHistory(
+                                    //             widget.oh.invoice_id),
+                                    //   ),
+                                    // );
                                   },
                                   style: ElevatedButton.styleFrom(
                                       padding: EdgeInsets.symmetric(
@@ -236,40 +244,65 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                             ),
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.local_shipping,
-                                              color: Colors.indigo,
-                                              size: 15,
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                              "Delivered: ${int.parse(_con.orderProducts[index].qty) - int.parse(_con.orderProducts[index].qty_remains)}",
-                                              style: const TextStyle(
-                                                  color:
-                                                      Colors.deepOrangeAccent,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            SizedBox(width: 10),
-                                            const Icon(
-                                              Icons.waving_hand,
-                                              color: Colors.indigo,
-                                              size: 15,
-                                            ),
-                                            Text(
-                                              // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                              "Remains: ${_con.orderProducts[index].qty_remains}",
-                                              style: const TextStyle(
-                                                  color:
-                                                      Colors.deepOrangeAccent,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ],
-                                        ),
+                                        if (_con.orderProducts[index]
+                                            .qty_remains.isNotEmpty)
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.local_shipping,
+                                                color: Colors.indigo,
+                                                size: 15,
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                "Delivered: ${int.parse(_con.orderProducts[index].qty) - int.parse(_con.orderProducts[index].qty_remains)}",
+                                                style: const TextStyle(
+                                                    color:
+                                                        Colors.deepOrangeAccent,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              SizedBox(width: 10),
+                                              const Icon(
+                                                Icons.waving_hand,
+                                                color: Colors.indigo,
+                                                size: 15,
+                                              ),
+                                              Text(
+                                                // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                                "Pending: ${_con.orderProducts[index].qty_remains}",
+                                                style: const TextStyle(
+                                                    color:
+                                                        Colors.deepOrangeAccent,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          )
+                                        else
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.local_shipping,
+                                                color: Colors.indigo,
+                                                size: 15,
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                                // "Delivered: ${int.parse(_con.orderProducts[index].qty) - int.parse(_con.orderProducts[index].qty_remains)}",
+                                                // "Oredered: ${_con.orderProducts[index].qty}",
+                                                "Delivery Pending",
+                                                style: const TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          )
                                       ],
                                     ),
                                     //
