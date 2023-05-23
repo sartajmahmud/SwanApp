@@ -46,12 +46,11 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
         : Scaffold(
             // backgroundColor: Colors.redAccent,
             appBar: AppBar(
-              title: Text(
-                '${currentUser.value.currentZone} Order List',
-                style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+              title: Center(
+                child: Text(
+                  '${currentUser.value.currentZone} Order List',
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                ),
               ),
               backgroundColor: Colors.red,
               actions: [
@@ -149,7 +148,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                       width: MediaQuery.of(context).size.width *
                                           .9,
                                       decoration: BoxDecoration(
-                                        color: Colors.amber,
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                         // border: Border.all(
@@ -159,7 +158,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                         boxShadow: const [
                                           BoxShadow(
                                             color: Colors.grey,
-                                            blurRadius: 20.0,
+                                            blurRadius: 5.0,
                                             offset: Offset(
                                               0.0,
                                               0.0,

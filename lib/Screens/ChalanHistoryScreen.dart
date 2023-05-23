@@ -37,12 +37,14 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
             // backgroundColor: Colors.redAccent,
             appBar: AppBar(
               backgroundColor: Colors.red,
-              title: Text(
-                '${currentUser.value.currentZone} Chalaan List',
-                style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+              title: Center(
+                child: Text(
+                  '${currentUser.value.currentZone} Chalaan List',
+                  style: TextStyle(
+                      // color: Colors.greenAccent,
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               actions: [
                 IconButton(
@@ -117,7 +119,6 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                       : Expanded(
                           child: Scrollbar(
                             child: ListView.builder(
-                              // physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: _con
                                   .chalans.length, //_con.orderHistory.length,
@@ -139,13 +140,13 @@ class _ChalanHistoryScreenState extends StateMVC<ChalanHistoryScreen> {
                                       height: 100,
                                       // width: MediaQuery.of(context).size.width * .9,
                                       decoration: BoxDecoration(
-                                        color: Colors.amber,
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                         boxShadow: const [
                                           BoxShadow(
                                             color: Colors.grey,
-                                            blurRadius: 20.0,
+                                            blurRadius: 5.0,
                                             offset: Offset(
                                               0.0,
                                               0.0,

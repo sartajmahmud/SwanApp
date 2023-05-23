@@ -16,12 +16,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Map _source = {ConnectivityResult.none: false};
   final NetworkConnectivity _networkConnectivity = NetworkConnectivity.instance;
   String string = '';
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
     _networkConnectivity.initialise();
     _networkConnectivity.myStream.listen((source) {
       _source = source;
@@ -86,7 +83,11 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             icon: Icon(Icons.location_on)),
-        title: Center(child: Text('DashBoard')),
+        title: Center(
+            child: Text(
+          'DashBoard',
+          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+        )),
         actions: [
           IconButton(
               onPressed: () {
@@ -105,10 +106,12 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                decoration: BoxDecoration(
+                width: 250,
+                height: 250,
+                decoration: const BoxDecoration(
                   color: Colors.white70,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
                       color: Colors.grey,
                       blurRadius: 20.0,
@@ -127,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (currentUser.value.address_type == '0')
                 Container(
                     height: 30,
+                    width: 300,
                     decoration: BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -153,7 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
               if (currentUser.value.address_type == '1')
                 Container(
                     height: 30,
-                    width: MediaQuery.of(context).size.width * .5,
+                    width: 300,
+                    // width: MediaQuery.of(context).size.width * .5,
                     decoration: BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -180,120 +185,120 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              if (currentUser.value.address_type == '0')
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/createOrder');
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 20.0,
-                          offset: Offset(
-                            0.0,
-                            0.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                              flex: 8,
-                              child: Center(
-                                  child: Text(
-                                'Create Order',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87),
-                              ))),
-                          Expanded(
-                              flex: 2,
-                              child: Icon(
-                                Icons.add_box_rounded,
-                                color: Colors.green,
-                                size: 35,
-                              ))
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // if (currentUser.value.address_type == '0')
-                  Expanded(
-                      flex: 1,
-                      child: HomeHistoryButtonWidget(
-                          'Order History', Icons.shopping_cart_outlined)),
-                  if (currentUser.value.address_type == '1')
-                    Expanded(
-                        flex: 1,
-                        child: HomeHistoryButtonWidget(
-                            'Chalaan History', Icons.inventory_outlined)),
-                ],
-              ),
-              if (currentUser.value.address_type == '1')
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/selectChalaanInvoice');
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 20.0,
-                            offset: Offset(
-                              0.0,
-                              0.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                                flex: 18,
-                                child: Center(
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    'Create Chalaan',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black87),
-                                  ),
-                                )),
-                            Expanded(
-                                flex: 2,
-                                child: Icon(
-                                  Icons.inventory_rounded,
-                                  color: Colors.green,
-                                  size: 35,
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              // if (currentUser.value.address_type == '0')
+              //   InkWell(
+              //     onTap: () {
+              //       Navigator.pushNamed(context, '/createOrder');
+              //     },
+              //     child: Container(
+              //       decoration: BoxDecoration(
+              //         color: Colors.amber,
+              //         borderRadius: BorderRadius.all(Radius.circular(15)),
+              //         boxShadow: const [
+              //           BoxShadow(
+              //             color: Colors.grey,
+              //             blurRadius: 20.0,
+              //             offset: Offset(
+              //               0.0,
+              //               0.0,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(8.0),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //           children: [
+              //             Expanded(
+              //                 flex: 8,
+              //                 child: Center(
+              //                     child: Text(
+              //                   'Create Order',
+              //                   style: TextStyle(
+              //                       fontSize: 25,
+              //                       fontWeight: FontWeight.bold,
+              //                       color: Colors.black87),
+              //                 ))),
+              //             Expanded(
+              //                 flex: 2,
+              //                 child: Icon(
+              //                   Icons.add_box_rounded,
+              //                   color: Colors.green,
+              //                   size: 35,
+              //                 ))
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     // if (currentUser.value.address_type == '0')
+              //     Expanded(
+              //         flex: 1,
+              //         child: HomeHistoryButtonWidget(
+              //             'Order History', Icons.shopping_cart_outlined)),
+              //     if (currentUser.value.address_type == '1')
+              //       Expanded(
+              //           flex: 1,
+              //           child: HomeHistoryButtonWidget(
+              //               'Chalaan History', Icons.inventory_outlined)),
+              //   ],
+              // ),
+              // if (currentUser.value.address_type == '1')
+              //   Padding(
+              //     padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+              //     child: InkWell(
+              //       onTap: () {
+              //         Navigator.pushNamed(context, '/selectChalaanInvoice');
+              //       },
+              //       child: Container(
+              //         decoration: BoxDecoration(
+              //           color: Colors.amber,
+              //           borderRadius: BorderRadius.all(Radius.circular(15)),
+              //           boxShadow: const [
+              //             BoxShadow(
+              //               color: Colors.grey,
+              //               blurRadius: 20.0,
+              //               offset: Offset(
+              //                 0.0,
+              //                 0.0,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         child: Padding(
+              //           padding: const EdgeInsets.all(10.0),
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //             children: [
+              //               Expanded(
+              //                   flex: 18,
+              //                   child: Center(
+              //                     child: Text(
+              //                       textAlign: TextAlign.center,
+              //                       'Create Chalaan',
+              //                       style: TextStyle(
+              //                           fontSize: 20,
+              //                           fontWeight: FontWeight.w500,
+              //                           color: Colors.black87),
+              //                     ),
+              //                   )),
+              //               Expanded(
+              //                   flex: 2,
+              //                   child: Icon(
+              //                     Icons.inventory_rounded,
+              //                     color: Colors.green,
+              //                     size: 35,
+              //                   ))
+              //             ],
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
             ],
           ),
         ),

@@ -8,31 +8,90 @@ import 'OrderHistoryDetails.dart';
 import 'package:swanapp/Models/OrderHistory.dart';
 import 'package:swanapp/Models/OrderChalaan.dart';
 
+// class OrderChalaanHistory extends StatelessWidget {
+//   final String invoice_id;
+//   OrderChalaanHistory({required this.invoice_id});
+//   // receive data from the FirstScreen as a parameter
+//   // OrderChalaanHistory({required Key key, required this.invoice_id})
+//   //     : super(key: key);
+//   // OrderChalaanHistory({Key key, required this.invoice_id}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Second screen')),
+//       body: Center(
+//         child: Text(
+//           invoice_id,
+//           style: TextStyle(fontSize: 24),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 class OrderChalaanHistory extends StatefulWidget {
-  // const OrderChalaanHistory({Key? key}) : super(key: key);
-  final OrderChalaan och;
-  OrderChalaanHistory(this.och);
+  const OrderChalaanHistory({Key? key, required this.invoice_id})
+      : super(key: key);
+
+  final String? invoice_id;
 
   @override
   State createState() => _OrderChalaanHistoryState();
 }
 
+// class _OrderChalaanHistoryState extends State<OrderChalaanHistory> {
+//   @override
+//   Widget build(BuildContext context) {
+//     // Use the Todo to create the UI.
+//     return Scaffold(
+//       appBar: AppBar(),
+//       body: Center(
+//         child: Column(
+//           children: [
+//             SizedBox(
+//               height: 50,
+//             ),
+//             // Step 4 <-- SEE HERE
+//             Text(
+//               '${widget.invoice_id}',
+//               style: TextStyle(fontSize: 54),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
   late OrderController _con;
 
   _OrderChalaanHistoryState() : super(OrderController()) {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
+    print("Invoice IS ${widget.invoice_id}");
   }
+
   // bool loading = false;
+  //  String subtotal = '';
+  //
+  // String calcSubtotal() {
+  //   subtotal = widget.invoice_id;
+  //   // subtotal+=int.parse(_con.orderProducts[index].product_amount);
+  //   // for (int index = 0; index >= _con.orderProducts.length; index++) {
+  //   //   subtotal += int.parse(_con.orderProducts[index].product_amount);
+  //   // }
+  //   print(subtotal);
+  //   return subtotal;
+  // }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _con.getOrderData(int.parse(widget.oh.order_id));
-    //  _con.getOrderHistory('');
-    _con.getOrderChalan(widget.och.chalaan_id);
-    // print(_con.getOrderChalan(widget.oh.chalaan_id));
+    if (widget.invoice_id != null) {
+      _con.getOrderChalan(widget.invoice_id.toString());
+    }
   }
 
   @override
@@ -47,22 +106,26 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
                 '${currentUser.value.currentZone} Chalaan List',
                 style: TextStyle(
                     color: Colors.greenAccent,
-                    fontSize: 18,
+                    fontSize: 35,
                     fontWeight: FontWeight.bold),
               ),
-              actions: [
-                IconButton(
-                    onPressed: () async {
-                      await _con.getChalanHistory('');
-                      setState(() {});
-                    },
-                    icon: Icon(Icons.refresh))
-              ],
+              // actions: [
+              //   IconButton(
+              //       onPressed: () async {
+              //         await _con.getChalanHistory('');
+              //         setState(() {});
+              //       },
+              //       icon: Icon(Icons.refresh))
+              // ],
             ),
             body: Container(
               padding: EdgeInsets.all(10),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
+              // child: Text(
+              //   widget.invoice_id,
+              //   style: TextStyle(fontSize: 24),
+              // ),
               child: Column(
                 children: [
                   // ElevatedButton.icon(

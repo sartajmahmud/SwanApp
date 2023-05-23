@@ -4,6 +4,7 @@ import 'package:swanapp/Models/OrderHistory.dart';
 import 'package:swanapp/Screens/OrderChalaanHitory.dart';
 
 import '../Controllers/OrderController.dart';
+import 'package:swanapp/loading.dart';
 
 class OrderHistoryDetails2 extends StatefulWidget {
   late OrderHistory oh;
@@ -22,11 +23,9 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _con.getOrderData(int.parse(widget.oh.order_id));
     _con.getOrderHistory('');
-    // subtotal+=int.parse(_con.orderProducts[index].product_amount);
   }
 
   double subtotal = 0;
@@ -34,11 +33,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
   double calcSubtotal() {
     subtotal =
         double.parse(widget.oh.discount) + double.parse(widget.oh.total_amount);
-    // subtotal+=int.parse(_con.orderProducts[index].product_amount);
-    // for (int index = 0; index >= _con.orderProducts.length; index++) {
-    //   subtotal += int.parse(_con.orderProducts[index].product_amount);
-    // }
-    print(subtotal);
+    print("INVOICE ID SELECTED IS: ${widget.oh.invoice_id}");
     return subtotal;
   }
 
@@ -48,12 +43,11 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text(
-          'ORDER DETAILS',
-          style: TextStyle(
-              color: Colors.greenAccent,
-              fontSize: 18,
-              fontWeight: FontWeight.bold),
+        title: Center(
+          child: const Text(
+            'ORDER DETAILS',
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+          ),
         ),
         actions: [
           IconButton(
@@ -66,7 +60,7 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
         ],
       ),
       body: _con.orderProducts.length < 1
-          ? const CircularProgressIndicator()
+          ? Loading()
           : Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -113,14 +107,16 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                 ElevatedButton.icon(
                                   onPressed: () {
                                     // _con.getOrderChalan(widget.oh.invoice_id);
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (BuildContext context) =>
-                                    //         OrderChalaanHistory(
-                                    //             widget.oh.invoice_id),
-                                    //   ),
-                                    // );
+                                    print('Data Retrieved Success');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            OrderChalaanHistory(
+                                          invoice_id: widget.oh.invoice_id,
+                                        ),
+                                      ),
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                       padding: EdgeInsets.symmetric(

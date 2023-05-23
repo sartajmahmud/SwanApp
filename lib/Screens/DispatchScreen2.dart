@@ -43,7 +43,7 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                 '${currentUser.value.currentZone} Dispatch Section',
                 style: TextStyle(
                     color: Colors.greenAccent,
-                    fontSize: 18,
+                    fontSize: 35,
                     fontWeight: FontWeight.bold),
               ),
               actions: [
@@ -57,27 +57,8 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
             ),
             body: Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: _con.orderProducts.isEmpty
-                    ? Center(
-                        child: Column(
-                          children: <Widget>[
-                            //Image.asset
-                            Image.asset(
-                              'assets/notfound.png',
-                              height: 200,
-                              width: 200,
-                            ),
-                            Text(
-                              'No Products Left For dispatch',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black87),
-                            ) // Image.asset
-                          ], //<Widget>[]
-                        ), //Column
-                      )
-                    : Container(
+                child: _con.orderProducts.isNotEmpty
+                    ? Container(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child: Padding(
@@ -431,6 +412,26 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
                               ),
                             )),
                       )
+                    : Center(
+                        child: Column(
+                          children: <Widget>[
+                            //Image.asset
+                            Image.asset(
+                              'assets/notfound.png',
+                              height: 200,
+                              width: 200,
+                            ),
+                            Text(
+                              'No Products Left For dispatch',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black87),
+                            ) // Image.asset
+                          ], //<Widget>[]
+                        ), //Column
+                      )
+
                 //Cen
                 ),
           );

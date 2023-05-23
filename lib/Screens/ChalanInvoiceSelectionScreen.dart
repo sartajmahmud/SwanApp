@@ -35,12 +35,14 @@ class _ChalanInvoiceSelectionScreenState
         : Scaffold(
             // backgroundColor: Colors.redAccent,
             appBar: AppBar(
-              title: Text(
-                'Select Invoice For Chalaan',
-                style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+              title: Center(
+                child: Text(
+                  'Invoices For Chalaan',
+                  style: TextStyle(
+                      // color: Colors.greenAccent,
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               backgroundColor: Colors.red,
             ),
@@ -50,34 +52,34 @@ class _ChalanInvoiceSelectionScreenState
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  MaterialButton(
-                      onPressed: () async {
-                        // return
-                        // dateWidget();
-
-                        var results = await showCalendarDatePicker2Dialog(
-                          context: context,
-                          config: CalendarDatePicker2WithActionButtonsConfig(),
-                          dialogSize: const Size(325, 400),
-                          borderRadius: BorderRadius.circular(15),
-                        );
-                        print(results.toString().split(' ')[0].substring(1));
-                        await _con.updateOrderDataWithSelectedDate(
-                            results.toString().split(' ')[0].substring(1));
-                      },
-                      minWidth: 220,
-                      height: 30,
-                      color: Colors.amber[900],
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
-                      child: Text(
-                        'Sarch By Date',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      var results = await showCalendarDatePicker2Dialog(
+                        context: context,
+                        config: CalendarDatePicker2WithActionButtonsConfig(),
+                        dialogSize: const Size(325, 400),
+                        borderRadius: BorderRadius.circular(15),
+                      );
+                      print(results.toString().split(' ')[0].substring(1));
+                      await _con.updateOrderDataWithSelectedDate(
+                          results.toString().split(' ')[0].substring(1));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0)),
+                        primary: Colors.amber[700]),
+                    icon: Icon(
+                        Icons.search_outlined), //icon data for elevated button
+                    label: Text(
+                      "Search Orders By Date",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87),
+                    ), //label text
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -97,7 +99,8 @@ class _ChalanInvoiceSelectionScreenState
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black87),
-                              ) // Image.asset
+                              ),
+                              // Image.asset
                             ], //<Widget>[]
                           ), //Column
                         ) //Cen
@@ -125,16 +128,16 @@ class _ChalanInvoiceSelectionScreenState
                                     child: Container(
                                       height: 120,
                                       // width: MediaQuery.of(context).size.width * .9,
-                                      decoration: BoxDecoration(
-                                        color: Colors.amber,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                         // border: Border.all(
                                         //     color: Colors.pink.shade100, width: 2),
-                                        boxShadow: const [
+                                        boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey,
-                                            blurRadius: 20.0,
+                                            blurRadius: 5.0,
                                             offset: Offset(
                                               0.0,
                                               0.0,

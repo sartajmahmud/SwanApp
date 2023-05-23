@@ -20,12 +20,11 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
         appBar: AppBar(
           backgroundColor: Colors.red,
           // automaticallyImplyLeading: false,
-          title: Text(
-            'Select Area',
-            style: TextStyle(
-                color: Colors.greenAccent,
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
+          title: Center(
+            child: Text(
+              'Select Area',
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         body: Container(
@@ -50,7 +49,11 @@ class _ZoneSelectionScreenState extends State<ZoneSelectionScreen> {
                   if (flag) {
                     Navigator.pop(context, true);
                   } else {
-                    Navigator.pushReplacementNamed(context, '/home');
+                    if (currentUser.value.address_type == '1')
+                      Navigator.pushReplacementNamed(
+                          context, '/FactoryBottombar');
+                    if (currentUser.value.address_type == '0')
+                      Navigator.pushReplacementNamed(context, '/ZoneBottombar');
                   }
                 },
                 child: Padding(

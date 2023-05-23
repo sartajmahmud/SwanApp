@@ -45,6 +45,7 @@ dependencies:
   calendar_date_picker2: ^0.3.9
   flutter_spinkit: ^5.1.0
   connectivity_plus: ^2.3.0
+  fluentui_icons:  ^1.0.0
 
 
 dev_dependencies:
