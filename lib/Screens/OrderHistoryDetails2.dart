@@ -105,15 +105,17 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                   ],
                                 ),
                                 ElevatedButton.icon(
-                                  onPressed: () {
-                                    // _con.getOrderChalan(widget.oh.invoice_id);
-                                    print('Data Retrieved Success');
+                                  onPressed: () async {
+                                    await _con
+                                        .getOrderChalan(widget.oh.invoice_id);
+                                    // print('Data Retrieved Success');
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (BuildContext context) =>
                                             OrderChalaanHistory(
-                                          invoice_id: widget.oh.invoice_id,
+                                          // invoice_id: widget.oh.invoice_id,
+                                          con: _con,
                                         ),
                                       ),
                                     );

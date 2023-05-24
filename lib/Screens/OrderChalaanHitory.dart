@@ -31,10 +31,8 @@ import 'package:swanapp/Models/OrderChalaan.dart';
 // }
 
 class OrderChalaanHistory extends StatefulWidget {
-  const OrderChalaanHistory({Key? key, required this.invoice_id})
-      : super(key: key);
-
-  final String? invoice_id;
+  OrderController con;
+  OrderChalaanHistory({Key? key, required this.con}) : super(key: key);
 
   @override
   State createState() => _OrderChalaanHistoryState();
@@ -69,7 +67,7 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
   _OrderChalaanHistoryState() : super(OrderController()) {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
-    print("Invoice IS ${widget.invoice_id}");
+    // print("Invoice IS ${widget.invoice_id}");
   }
 
   // bool loading = false;
@@ -89,9 +87,12 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (widget.invoice_id != null) {
-      _con.getOrderChalan(widget.invoice_id.toString());
-    }
+    _con = widget.con;
+
+    setState(() {});
+    // if (widget.invoice_id != null) {
+    //   _con.getOrderChalan(widget.invoice_id.toString());
+    // }
   }
 
   @override
@@ -183,112 +184,121 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
                             ], //<Widget>[]
                           ), //Column
                         ) //Cen
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: _con
-                              .orderchalans.length, //_con.orderHistory.length,
-                          itemBuilder: (_, index) => InkWell(
-                            // onTap: () {
-                            //   // Navigator.pushNamed(context, '/OrderDetails');
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (BuildContext context) =>
-                            //           OrderHistoryDetails(_con.orderHistory[index]),
-                            //     ),
-                            //   );
-                            // },
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: SingleChildScrollView(
-                                  physics: BouncingScrollPhysics(),
-                                  child: Container(
-                                    height: 100,
-                                    // width: MediaQuery.of(context).size.width * .9,
-                                    decoration: BoxDecoration(
-                                      color: Colors.amber,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 20.0,
-                                          offset: Offset(
-                                            0.0,
-                                            0.0,
-                                          ),
-                                        ),
-                                      ],
-                                      // border: Border.all(
-                                      //     color: Colors.pink.shade100, width: 2),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Chalaan ID : ${_con.orderchalans[index].chalaan_id.toString()}",
-                                                // "Order ID : ",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                      : Expanded(
+                          child: Scrollbar(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: _con.orderchalans
+                                  .length, //_con.orderHistory.length,
+                              itemBuilder: (_, index) => InkWell(
+                                // onTap: () {
+                                //   // Navigator.pushNamed(context, '/OrderDetails');
+                                //   Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (BuildContext context) =>
+                                //           OrderHistoryDetails(_con.orderHistory[index]),
+                                //     ),
+                                //   );
+                                // },
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: SingleChildScrollView(
+                                      physics: BouncingScrollPhysics(),
+                                      child: Container(
+                                        height: 100,
+                                        // width: MediaQuery.of(context).size.width * .9,
+                                        decoration: BoxDecoration(
+                                          color: Colors.amber,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.grey,
+                                              blurRadius: 20.0,
+                                              offset: Offset(
+                                                0.0,
+                                                0.0,
                                               ),
-                                              // Text(
-                                              //   "Customer Name : ${_con.orderchalans[index].customer_name}",
-                                              //   // "Customer Name : ",
-                                              //   style: TextStyle(
-                                              //       fontSize: 15,
-                                              //       fontWeight:
-                                              //           FontWeight.w500),
+                                            ),
+                                          ],
+                                          // border: Border.all(
+                                          //     color: Colors.pink.shade100, width: 2),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Chalaan ID : ${_con.orderchalans[index].chalaan_id.toString()}",
+                                                    // "Order ID : ",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  // Text(
+                                                  //   "Customer Name : ${_con.orderchalans[index].customer_name}",
+                                                  //   // "Customer Name : ",
+                                                  //   style: TextStyle(
+                                                  //       fontSize: 15,
+                                                  //       fontWeight:
+                                                  //           FontWeight.w500),
+                                                  // ),
+                                                  // Text(
+                                                  //   "Total Amount : ${_con.orderHistory[index].total_amount}",
+                                                  //   // "Total Amount : ",
+                                                  //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                                                  // ),
+                                                ],
+                                              ),
+                                              // Padding(
+                                              //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                              //   child:
                                               // ),
-                                              // Text(
-                                              //   "Total Amount : ${_con.orderHistory[index].total_amount}",
-                                              //   // "Total Amount : ",
-                                              //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                                              // ),
+                                              ElevatedButton.icon(
+                                                onPressed: () {
+                                                  _con.getChallanDoc(_con
+                                                      .orderchalans[index]
+                                                      .chalaan_id);
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 10.0,
+                                                            vertical: 10.0),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        50.0)),
+                                                    primary:
+                                                        Colors.indigo[300]),
+                                                icon: Icon(Icons
+                                                    .print_rounded), //icon data for elevated button
+                                                label: Text(
+                                                    "Print Chalaan"), //label text
+                                              ),
+                                              // IconButton(
+                                              //     onPressed: () {
+                                              //       _con.getChallanDoc(_con
+                                              //           .chalans[index].chalaan_id);
+                                              //     },
+                                              //     icon: Icon(Icons.print))
                                             ],
                                           ),
-                                          // Padding(
-                                          //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                                          //   child:
-                                          // ),
-                                          ElevatedButton.icon(
-                                            onPressed: () {
-                                              _con.getChallanDoc(_con
-                                                  .orderchalans[index]
-                                                  .chalaan_id);
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 10.0,
-                                                    vertical: 10.0),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50.0)),
-                                                primary: Colors.indigo[300]),
-                                            icon: Icon(Icons
-                                                .print_rounded), //icon data for elevated button
-                                            label: Text(
-                                                "Print Chalaan"), //label text
-                                          ),
-                                          // IconButton(
-                                          //     onPressed: () {
-                                          //       _con.getChallanDoc(_con
-                                          //           .chalans[index].chalaan_id);
-                                          //     },
-                                          //     icon: Icon(Icons.print))
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
