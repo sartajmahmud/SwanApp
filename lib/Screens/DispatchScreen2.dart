@@ -39,12 +39,11 @@ class _DispatchScreen2State extends StateMVC<DispatchScreen2> {
             // backgroundColor: Colors.redAccent,
             appBar: AppBar(
               backgroundColor: Colors.red,
-              title: Text(
-                '${currentUser.value.currentZone} Dispatch Section',
-                style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold),
+              title: Center(
+                child: Text(
+                  '${currentUser.value.currentZone} Dispatch Section',
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                ),
               ),
               actions: [
                 IconButton(

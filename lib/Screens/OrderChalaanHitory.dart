@@ -103,12 +103,11 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
             // backgroundColor: Colors.redAccent,
             appBar: AppBar(
               backgroundColor: Colors.red,
-              title: Text(
-                '${currentUser.value.currentZone} Chalaan List',
-                style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold),
+              title: Center(
+                child: Text(
+                  '${currentUser.value.currentZone} Chalaan List',
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                ),
               ),
               // actions: [
               //   IconButton(
