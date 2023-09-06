@@ -8,28 +8,6 @@ import 'OrderHistoryDetails.dart';
 import 'package:swanapp/Models/OrderHistory.dart';
 import 'package:swanapp/Models/OrderChalaan.dart';
 
-// class OrderChalaanHistory extends StatelessWidget {
-//   final String invoice_id;
-//   OrderChalaanHistory({required this.invoice_id});
-//   // receive data from the FirstScreen as a parameter
-//   // OrderChalaanHistory({required Key key, required this.invoice_id})
-//   //     : super(key: key);
-//   // OrderChalaanHistory({Key key, required this.invoice_id}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Second screen')),
-//       body: Center(
-//         child: Text(
-//           invoice_id,
-//           style: TextStyle(fontSize: 24),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class OrderChalaanHistory extends StatefulWidget {
   OrderController con;
   OrderChalaanHistory({Key? key, required this.con}) : super(key: key);
@@ -38,61 +16,20 @@ class OrderChalaanHistory extends StatefulWidget {
   State createState() => _OrderChalaanHistoryState();
 }
 
-// class _OrderChalaanHistoryState extends State<OrderChalaanHistory> {
-//   @override
-//   Widget build(BuildContext context) {
-//     // Use the Todo to create the UI.
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: Center(
-//         child: Column(
-//           children: [
-//             SizedBox(
-//               height: 50,
-//             ),
-//             // Step 4 <-- SEE HERE
-//             Text(
-//               '${widget.invoice_id}',
-//               style: TextStyle(fontSize: 54),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
   late OrderController _con;
 
   _OrderChalaanHistoryState() : super(OrderController()) {
     /// Acquire a reference to the passed Controller.
     _con = controller as OrderController;
-    // print("Invoice IS ${widget.invoice_id}");
   }
-
-  // bool loading = false;
-  //  String subtotal = '';
-  //
-  // String calcSubtotal() {
-  //   subtotal = widget.invoice_id;
-  //   // subtotal+=int.parse(_con.orderProducts[index].product_amount);
-  //   // for (int index = 0; index >= _con.orderProducts.length; index++) {
-  //   //   subtotal += int.parse(_con.orderProducts[index].product_amount);
-  //   // }
-  //   print(subtotal);
-  //   return subtotal;
-  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _con = widget.con;
-
     setState(() {});
-    // if (widget.invoice_id != null) {
-    //   _con.getOrderChalan(widget.invoice_id.toString());
-    // }
   }
 
   @override
@@ -100,7 +37,6 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
     return _con.loading
         ? Loading()
         : Scaffold(
-            // backgroundColor: Colors.redAccent,
             appBar: AppBar(
               backgroundColor: Colors.red,
               title: Center(
@@ -109,14 +45,14 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
               ),
-              // actions: [
-              //   IconButton(
-              //       onPressed: () async {
-              //         await _con.getChalanHistory('');
-              //         setState(() {});
-              //       },
-              //       icon: Icon(Icons.refresh))
-              // ],
+              actions: [
+                IconButton(
+                    onPressed: () async {
+                      await _con.getOrderChalan;
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.refresh))
+              ],
             ),
             body: Container(
               padding: EdgeInsets.all(10),
@@ -128,38 +64,6 @@ class _OrderChalaanHistoryState extends StateMVC<OrderChalaanHistory> {
               // ),
               child: Column(
                 children: [
-                  // ElevatedButton.icon(
-                  //   onPressed: () async {
-                  //     // return
-                  //     // dateWidget();
-                  //
-                  //     var results = await showCalendarDatePicker2Dialog(
-                  //       context: context,
-                  //       config: CalendarDatePicker2WithActionButtonsConfig(),
-                  //       dialogSize: const Size(325, 400),
-                  //       borderRadius: BorderRadius.circular(15),
-                  //     );
-                  //     print(results.toString().split(' ')[0].substring(1));
-                  //
-                  //     await _con.updateChalaanDataWithSelectedDate(
-                  //         results.toString().split(' ')[0].substring(1));
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //       padding: EdgeInsets.symmetric(
-                  //           horizontal: 10.0, vertical: 10.0),
-                  //       shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(50.0)),
-                  //       primary: Colors.amber[700]),
-                  //   icon: Icon(
-                  //       Icons.search_outlined), //icon data for elevated button
-                  //   label: Text(
-                  //     "Search Chalaans By Date",
-                  //     style: TextStyle(
-                  //         fontSize: 20,
-                  //         fontWeight: FontWeight.w500,
-                  //         color: Colors.black87),
-                  //   ), //label text
-                  // ),
                   const SizedBox(
                     height: 20,
                   ),

@@ -28,16 +28,12 @@ class _ZoneBottomBarState extends State<ZoneBottomBar> {
   void _onButtonTapped(int Index) {
     setState(() {
       _selectedIndex = Index;
-      print(Index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("My Tickets"),
-      // ),
       body: Center(
         child: _widgetOptionsFactory[_selectedIndex],
       ),
@@ -48,11 +44,11 @@ class _ZoneBottomBarState extends State<ZoneBottomBar> {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey[400],
+        unselectedItemColor: Colors.grey[900],
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.red,
         iconSize: 30,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
               activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),

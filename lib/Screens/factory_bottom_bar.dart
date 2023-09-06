@@ -50,11 +50,11 @@ class _FactoryBottomBarState extends State<FactoryBottomBar> {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: Colors.grey[900],
         type: BottomNavigationBarType.shifting,
         backgroundColor: Colors.red.shade50,
         iconSize: 30,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
               activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
@@ -69,8 +69,8 @@ class _FactoryBottomBarState extends State<FactoryBottomBar> {
             label: "Chalaan History",
           ),
           BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_add_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_add_filled),
+              icon: Icon(FluentSystemIcons.ic_fluent_add_circle_regular),
+              activeIcon: Icon(FluentSystemIcons.ic_fluent_add_circle_filled),
               label: "Create Chalaan "),
           // if (currentUser.value.address_type == '0')
           //            BottomNavigationBarItem(

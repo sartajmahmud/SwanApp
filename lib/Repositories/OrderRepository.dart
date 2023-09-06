@@ -195,8 +195,6 @@ Future<List<OrderChalaan>> getOrderChalans(String ID) async {
     "Authorization": "Bearer ${currentUser.value.token}"
   }, body: {
     'ID': ID,
-    // 'mobile': currentUser.value.email,
-    // 'zone': currentUser.value.currentZone,
   });
   // print(ID);
   print(response.body);
