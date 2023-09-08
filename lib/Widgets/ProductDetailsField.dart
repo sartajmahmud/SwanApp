@@ -28,8 +28,10 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
     // TODO: implement initState
     super.initState();
     widget._con.setInitProduct();
+    // widget._con.setInitFabric();
     // widget._con.setInitLocation();
     setInitItems();
+    setInitFabrics();
   }
 
   setInitItems() async {
@@ -39,6 +41,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
       print("dkjshkdjhakj   "+widget._con.po.items[widget.serialNo].toMap().toString());
     });
 
+  }
+
+
+  setInitFabrics() async {
+    await widget._con.setInitFabric().then((val){
+      widget._con.po.items[widget.serialNo]
+          .fabID = widget._con.currentSelectedFabric?.id;
+      print("dkjshkdjhakj   "+widget._con.po.items[widget.serialNo].toMap().toString());
+    });
   }
 
   @override
@@ -303,14 +314,14 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             // isEmpty: _currentSelectedValue == '',
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<Fabric>(
-                                value: _SelectedFabric,
+                                value: widget._con.currentSelectedFabric,
                                 icon: const Icon(Icons.keyboard_arrow_down),
                                 onChanged: (Fabric? newValue) {
                                   setState(() {
                                     widget._con.po.items[widget.serialNo]
                                         .fabID = newValue?.id;
 
-                                    _SelectedFabric = newValue;
+                                    widget._con.currentSelectedFabric = newValue;
                                   });
                                 },
                                 items: widget._con.fabrics.map((Fabric value) {

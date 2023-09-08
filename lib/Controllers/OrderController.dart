@@ -27,6 +27,7 @@ class OrderController extends ControllerMVC {
   List<OrderHistory> factoryOrderHistory = [];
   late Product? currentSelectedValue;
   late DispatchLocation? currentSelectedLocation;
+  late Fabric? currentSelectedFabric;
 
   List<OrderHistory> orderProducts = [];
 
@@ -77,6 +78,10 @@ class OrderController extends ControllerMVC {
   Future setInitLocation() async {
     currentSelectedLocation = dispatchLocations[0];
     po.items[0].dispatchLocation = dispatchLocations[0].mobile_no;
+  }
+  Future setInitFabric() async {
+    currentSelectedFabric = fabrics[0];
+    po.items[0].fabID = fabrics[0].id;
   }
 
   getUniqueOrderData(int OrderId) async {
