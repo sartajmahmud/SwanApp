@@ -109,9 +109,9 @@ Future createOrder(ProductOrder po) async {
     // 'discount': po.discount,
     'products': products,
   };
-  print(post);
+  // print(post);
   var bytes = utf8.encode(json.encode(post));
-  print(bytes);
+  // print(bytes);
 
   Uri url = Uri.http(serverUrl, 'api/orders');
   http.Response response = await http.post(url,

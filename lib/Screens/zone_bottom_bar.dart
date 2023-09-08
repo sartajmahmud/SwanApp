@@ -21,9 +21,9 @@ class _ZoneBottomBarState extends State<ZoneBottomBar> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptionsFactory = <Widget>[
-    const HomeScreen(),
-    const OrderHistoryScreen(),
-    const CreateOrderScreen()
+     HomeScreen(),
+     OrderHistoryScreen(),
+     CreateOrderScreen()
   ];
   void _onButtonTapped(int Index) {
     setState(() {
@@ -33,11 +33,13 @@ class _ZoneBottomBarState extends State<ZoneBottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       body: Center(
         child: _widgetOptionsFactory[_selectedIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:
+      BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onButtonTapped,
         elevation: 10,

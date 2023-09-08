@@ -74,7 +74,7 @@ class OrderController extends ControllerMVC {
     po.items[0].productID = products[0].id;
   }
 
-  setInitLocation() async {
+  Future setInitLocation() async {
     currentSelectedLocation = dispatchLocations[0];
     po.items[0].dispatchLocation = dispatchLocations[0].mobile_no;
   }
@@ -165,7 +165,7 @@ class OrderController extends ControllerMVC {
     // po.printData();
     print(po.toMap());
     await createOrder(po).then((value) {
-      Navigator.popAndPushNamed(context, '/orderHistory');
+      Navigator.pushNamed(context, '/orderHistory');
     });
   }
 

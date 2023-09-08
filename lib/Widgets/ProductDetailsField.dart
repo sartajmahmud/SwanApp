@@ -28,7 +28,17 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
     // TODO: implement initState
     super.initState();
     widget._con.setInitProduct();
-    widget._con.setInitLocation();
+    // widget._con.setInitLocation();
+    setInitItems();
+  }
+
+  setInitItems() async {
+    await widget._con.setInitLocation().then((val){
+      widget._con.po.items[widget.serialNo]
+          .dispatchLocation = widget._con.currentSelectedLocation?.mobile_no;
+      print("dkjshkdjhakj   "+widget._con.po.items[widget.serialNo].toMap().toString());
+    });
+
   }
 
   @override
@@ -132,7 +142,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<DispatchLocation>(
                       isExpanded: true,
-                      value: widget._con.dispatchLocations[0],
+                      value: widget._con.currentSelectedLocation,
                       // value: widget._con.po.items[widget.se  rialNo].dispatchLocation,
                       // value: widget._con.currentSelectedLocation,
                       // value: null,
@@ -141,6 +151,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         color: Colors.black,
                       ),
                       onChanged: (DispatchLocation? newValue) {
+                        print(newValue?.name);
                         setState(() {
                           widget._con.po.items[widget.serialNo]
                               .dispatchLocation = newValue?.mobile_no;

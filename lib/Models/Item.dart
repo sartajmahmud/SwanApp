@@ -5,9 +5,9 @@ class Item {
   double height = 0;
   double width = 0;
   double length = 0;
-  late int discount;
+  int discount = 0;
 
-  late int quantity;
+  int quantity = 0;
 
   late int? fabID = 0;
   late String? dispatchLocation = '';
@@ -22,7 +22,7 @@ class Item {
     map["width"] = width;
     map["length"] = length;
     map["qty"] = quantity;
-    map["dispatch_location'"] = dispatchLocation;
+    map["dispatch_location"] = dispatchLocation;
 
     map["fab_id"] = fabID;
 

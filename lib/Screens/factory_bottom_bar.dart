@@ -36,14 +36,16 @@ class _FactoryBottomBarState extends State<FactoryBottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       // appBar: AppBar(
       //   title: const Text("My Tickets"),
       // ),
       body: Center(
         child: _widgetOptionsFactory[_selectedIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:
+      BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onButtonTapped,
         elevation: 10,
