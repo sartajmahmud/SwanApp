@@ -49,7 +49,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
               title: Center(
                 child: Text(
                   '${currentUser.value.currentZone} Order List',
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
               backgroundColor: Colors.red,
@@ -59,12 +59,12 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                       await _con.getOrderHistory('');
                       setState(() {});
                     },
-                    icon: Icon(Icons.refresh))
+                    icon: const Icon(Icons.refresh))
               ],
               // lead
             ),
             body: Container(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -82,14 +82,14 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                           results.toString().split(' ')[0].substring(1));
                     },
                     style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 10.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50.0)),
                         primary: Colors.amber[700]),
-                    icon: Icon(
+                    icon: const Icon(
                         Icons.search_outlined), //icon data for elevated button
-                    label: Text(
+                    label: const Text(
                       "Search Orders By Date",
                       style: TextStyle(
                           fontSize: 20,
@@ -111,7 +111,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                 height: 200,
                                 width: 200,
                               ),
-                              Text(
+                              const Text(
                                 'No Orders Found',
                                 style: TextStyle(
                                     fontSize: 20,
@@ -144,10 +144,11 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 8.0),
                                     child: Container(
-                                      height: 100,
+                                      height: MediaQuery.of(context).size.height *
+                                          .119,
                                       width: MediaQuery.of(context).size.width *
-                                          .9,
-                                      decoration: BoxDecoration(
+                                          1,
+                                      decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
@@ -155,7 +156,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                         //     color: Colors.indigo.shade300,
                                         //     width: 2),
 
-                                        boxShadow: const [
+                                        boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey,
                                             blurRadius: 5.0,
@@ -168,68 +169,75 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Column(
+                                            Text(
+                                              "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
+                                              // "Order ID : ",
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  color: Colors.black),
+                                            ),
+                                            SizedBox(height: MediaQuery.of(context).size.height *
+                                                .01),
+                                            Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                  MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Text(
-                                                  "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
-                                                  // "Order ID : ",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.black),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Customer Name : ${_con.orderHistory[index].customer_name}",
+                                                      // "Customer Name : ",
+                                                      style: const TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black),
+                                                    ),
+                                                    SizedBox(height: MediaQuery.of(context).size.height *
+                                                        .01),
+                                                    Text(
+                                                      "Total Amount : ${_con.orderHistory[index].total_amount}",
+                                                      // "Total Amount : ",
+                                                      style: const TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Text(
-                                                  "Customer Name : ${_con.orderHistory[index].customer_name}",
-                                                  // "Customer Name : ",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.black),
-                                                ),
-                                                Text(
-                                                  "Total Amount : ${_con.orderHistory[index].total_amount}",
-                                                  // "Total Amount : ",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.black),
+                                                // Padding(
+                                                //   padding: const EdgeInsets.symmetric(
+                                                //       horizontal: 25),
+                                                // ),
+                                                ElevatedButton.icon(
+                                                  onPressed: () {
+                                                    _con.getInvoiceDoc(int.parse(
+                                                        _con.orderHistory[index]
+                                                            .order_id));
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 8,
+                                                          vertical: 10),
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  16)),
+                                                      primary: Colors.indigo[300]),
+                                                  icon: const Icon(Icons
+                                                      .print_rounded), //icon data for elevated button
+                                                  label: const Text(
+                                                      "Print Invoice"), //label text
                                                 ),
                                               ],
-                                            ),
-                                            // Padding(
-                                            //   padding: const EdgeInsets.symmetric(
-                                            //       horizontal: 25),
-                                            // ),
-                                            ElevatedButton.icon(
-                                              onPressed: () {
-                                                _con.getInvoiceDoc(int.parse(
-                                                    _con.orderHistory[index]
-                                                        .order_id));
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 10.0,
-                                                      vertical: 10.0),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50.0)),
-                                                  primary: Colors.indigo[300]),
-                                              icon: Icon(Icons
-                                                  .print_rounded), //icon data for elevated button
-                                              label: Text(
-                                                  "Print Invoice"), //label text
                                             ),
                                           ],
                                         ),
