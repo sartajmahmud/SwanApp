@@ -46,18 +46,18 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                       child: Padding(
                         padding:
                             // EdgeInsets.symmetric(vertical: 250, horizontal: 20),
-                            EdgeInsets.all(100),
+                            const EdgeInsets.all(100),
                         child: Column(
                           children: [
-                            const SizedBox(
-                              height: 50,
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height*.05,
                             ),
                             Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.white70,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
-                                boxShadow: const [
+                                boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey,
                                     blurRadius: 20.0,
@@ -121,14 +121,14 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                                 }
                               },
                               minWidth: 220,
-                              height: 35,
+                              height: 45,
                               color: Colors.red,
                               shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "LOG IN",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Colors.white, fontSize: 15),
                               ),
                             ),

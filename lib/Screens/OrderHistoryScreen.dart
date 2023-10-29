@@ -145,7 +145,7 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                         vertical: 10, horizontal: 8.0),
                                     child: Container(
                                       height: MediaQuery.of(context).size.height *
-                                          .119,
+                                          .13,
                                       width: MediaQuery.of(context).size.width *
                                           1,
                                       decoration: const BoxDecoration(

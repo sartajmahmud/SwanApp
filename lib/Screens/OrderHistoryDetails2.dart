@@ -103,34 +103,34 @@ class _OrderHistoryDetails2State extends StateMVC<OrderHistoryDetails2> {
                                               .withOpacity(.90),
                                           fontWeight: FontWeight.w400),
                                     ),
-                                    ElevatedButton.icon(
-                                      onPressed: () async {
-                                        await _con.getOrderChalan(
-                                            widget.oh.invoice_id);
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                OrderChalaanHistory(
-                                              con: _con,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 8),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16)),
-                                          primary: Colors.indigo[300]),
-                                      icon: const Icon(Icons
-                                          .check_circle), //icon data for elevated button
-                                      label: const Text(
-                                        "View Chalaans",
-                                        style: TextStyle(fontSize: 16),
-                                      ), //label text
-                                    ),
+                                    // ElevatedButton.icon(
+                                    //   onPressed: () async {
+                                    //     await _con.getOrderChalan(
+                                    //         widget.oh.invoice_id);
+                                    //     Navigator.push(
+                                    //       context,
+                                    //       MaterialPageRoute(
+                                    //         builder: (BuildContext context) =>
+                                    //             OrderChalaanHistory(
+                                    //           con: _con,
+                                    //         ),
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    //   style: ElevatedButton.styleFrom(
+                                    //       padding: const EdgeInsets.symmetric(
+                                    //           horizontal: 7, vertical: 8),
+                                    //       shape: RoundedRectangleBorder(
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(16)),
+                                    //       primary: Colors.indigo[300]),
+                                    //   icon: const Icon(Icons
+                                    //       .check_circle), //icon data for elevated button
+                                    //   label: const Text(
+                                    //     "View Chalaans",
+                                    //     style: TextStyle(fontSize: 16),
+                                    //   ), //label text
+                                    // ),
                                   ],
                                 ),
                               ],
