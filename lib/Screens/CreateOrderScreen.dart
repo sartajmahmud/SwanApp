@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:swanapp/Models/DispatchLocation.dart';
 import '../Controllers/OrderController.dart';
@@ -20,6 +21,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     _con = controller as OrderController;
   }
   bool loading = false;
+  bool validateNumber = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -115,10 +117,20 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
           ),
           Container(
             margin: const EdgeInsets.all(10),
-            height: 45,
+            height: validateNumber?45:65,
             child: TextField(
-              onChanged: (String password) {
-                _con.po.mobile = password;
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              onChanged: (String number) {
+                _con.po.mobile = number;
+              },
+              onSubmitted: (String number){
+                number.length == 11 && number.isNotEmpty
+                    ? validateNumber = true
+                    : validateNumber = false;
+                setState(() { });
               },
               decoration: InputDecoration(
                 focusColor: Colors.black,
@@ -130,6 +142,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
+                errorText: validateNumber ? null : "Invalid Mobile Number",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -215,10 +228,195 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                     ),
                   ),
           ),
-          dynamicList.length > 0
+          dynamicList.isNotEmpty && validateNumber
               ? InkWell(
                   onTap: () async {
-                    await _con.submitOrder(context);
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.white70,
+                          content: Container(
+                            height: MediaQuery.of(context).size.height * 1,
+                            width: MediaQuery.of(context).size.width * 1,
+                            decoration: const BoxDecoration(color: Colors.grey),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Card(
+                                  elevation: 10,
+                                  shadowColor: Colors.black,
+                                  // color: Colors.amberAccent,
+                                  child: Container(
+                                    // height: MediaQuery.of(context).size.height*0.13,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            "Customer Details : ",
+                                            style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(
+                                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                            "Name: "
+                                            "${_con.po.name}",
+                                            style: TextStyle(
+                                                // color: Color(0xff525252),
+                                                fontSize: 18,
+                                                color: const Color(0xff525252)
+                                                    .withOpacity(.75),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          Text(
+                                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                            "Contact: "
+                                            "${_con.po.mobile}",
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: const Color(0xff525252)
+                                                    .withOpacity(.75),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          Text(
+                                            // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                            "Address: "
+                                            "${_con.po.address}",
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: const Color(0xff525252)
+                                                    .withOpacity(.75),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                  elevation: 10,
+                                  shadowColor: Colors.black,
+                                  // color: Colors.amberAccent,
+                                  child: Container(
+                                    // height: MediaQuery.of(context).size.height*0.13,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12),
+                                      child: ListView.separated(
+                                        separatorBuilder: (context, index) {
+                                          return const Divider();
+                                        },
+                                        shrinkWrap: true,
+                                        itemCount: _con.po.items
+                                            .length, //_con.orderHistory.length,
+                                        itemBuilder: (_, index) => Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: 10),
+                                                    child: Icon(
+                                                      Icons.card_giftcard,
+                                                      color: Colors.green,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                                    "${_con.po.items[index].productID}",
+                                                    style: const TextStyle(
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ],
+                                              ),
+                                              //
+                                              _con.po.items[index].height != 0
+                                                  ? Text(
+                                                      "Dimension : ${_con.po.items[index].height} X ${_con.po.items[index].width} X ${_con.po.items[index].length}",
+                                                      style: const TextStyle(
+                                                          fontSize: 17,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    )
+                                                  : Container(),
+                                              Text(
+                                                "x ${_con.po.items[index].quantity}",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color:
+                                                        const Color(0xff525252)
+                                                            .withOpacity(.75),
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              Text(
+                                                "Discount: ${_con.po.items[index].discount}",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color:
+                                                        const Color(0xff525252)
+                                                            .withOpacity(.75),
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              Text(
+                                                "Fabric ID: ${_con.po.items[index].fabID}",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color:
+                                                        const Color(0xff525252)
+                                                            .withOpacity(.75),
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await _con.submitOrder(context);
+                                  },
+                                  child: Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    child: const Icon(
+                                      Icons.check,
+                                      color: Colors.green,
+                                      size: 50,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                    // await _con.submitOrder(context);
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
