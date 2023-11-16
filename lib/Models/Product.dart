@@ -5,6 +5,7 @@ class Product{
   int rate = 0;
   String size = '';
   String unit = '';
+  int attribute = 0;
   String created_at = '';
   String updated_at = '';
 
@@ -17,6 +18,7 @@ class Product{
   jsonMap['product_name'] != null ? product_name = jsonMap['product_name'] : product_name = '';
   jsonMap['product_category'] != null ? product_category = jsonMap['product_category'] : product_category = '';
   jsonMap['rate'] != null ? rate = jsonMap['rate'] : rate = 0;
+  jsonMap['attribute'] != null ? attribute = jsonMap['attribute'] : attribute = 0;
   jsonMap['unit'] != null ? unit = jsonMap['unit'] : unit = '';
   jsonMap['size'] != null ? size = jsonMap['size'] : size = '';
   jsonMap['created_at'] != null ? created_at = jsonMap['created_at'] : created_at = '';

@@ -51,7 +51,12 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
     setState(() {
       loading = true;
     });
-    _con.po.items.add(Item());
+    _con.po.items.add(
+        Item()
+      ..dispatchLocation=_con.dispatchLocations[0].mobile_no
+      ..productName=_con.products[0].product_name
+      ..productID=_con.products[0].id,
+    );
     dynamicList.add(new ProductDetailsField(dynamicList.length, _con));
     setState(() {
       loading = false;
@@ -236,21 +241,20 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
+                          contentPadding: EdgeInsets.zero,
                           backgroundColor: Colors.white70,
-                          content: Container(
-                            height: MediaQuery.of(context).size.height * 1,
-                            width: MediaQuery.of(context).size.width * 1,
-                            decoration: const BoxDecoration(color: Colors.grey),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Card(
-                                  elevation: 10,
-                                  shadowColor: Colors.black,
-                                  // color: Colors.amberAccent,
-                                  child: Container(
-                                    // height: MediaQuery.of(context).size.height*0.13,
-                                    width: MediaQuery.of(context).size.width,
+                          content: SingleChildScrollView(
+                            child: Container(
+                              // height: MediaQuery.of(context).size.height * 1,
+                              width: MediaQuery.of(context).size.width * 1,
+                              decoration: const BoxDecoration(color: Colors.grey),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Card(
+                                    elevation: 10,
+                                    shadowColor: Colors.black,
+                                    // color: Colors.amberAccent,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -299,118 +303,119 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                                       ),
                                     ),
                                   ),
-                                ),
-                                Card(
-                                  elevation: 10,
-                                  shadowColor: Colors.black,
-                                  // color: Colors.amberAccent,
-                                  child: Container(
-                                    // height: MediaQuery.of(context).size.height*0.13,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12),
-                                      child: ListView.separated(
-                                        separatorBuilder: (context, index) {
-                                          return const Divider();
-                                        },
-                                        shrinkWrap: true,
-                                        itemCount: _con.po.items
-                                            .length, //_con.orderHistory.length,
-                                        itemBuilder: (_, index) => Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 6),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        right: 10),
-                                                    child: Icon(
-                                                      Icons.card_giftcard,
-                                                      color: Colors.green,
+                                  Card(
+                                    elevation: 10,
+                                    shadowColor: Colors.black,
+                                    // color: Colors.amberAccent,
+                                    child: Container(
+                                      // height: MediaQuery.of(context).size.height*0.13,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12),
+                                        child: ListView.separated(
+                                          separatorBuilder: (context, index) {
+                                            return const Divider();
+                                          },
+                                          shrinkWrap: true,
+                                          itemCount: _con.po.items
+                                              .length, //_con.orderHistory.length,
+                                          itemBuilder: (_, index) => Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 6),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    const Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: 10),
+                                                      child: Icon(
+                                                        Icons.card_giftcard,
+                                                        color: Colors.green,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    // "Order ID : ${_con.orderHistory[index].customer_name}",
-                                                    "${_con.po.items[index].productID}",
-                                                    style: const TextStyle(
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ],
-                                              ),
-                                              //
-                                              _con.po.items[index].height != 0
-                                                  ? Text(
-                                                      "Dimension : ${_con.po.items[index].height} X ${_con.po.items[index].width} X ${_con.po.items[index].length}",
+                                                    Text(
+                                                      // "Order ID : ${_con.orderHistory[index].customer_name}",
+                                                      "${_con.po.items[index].productName}",
                                                       style: const TextStyle(
+                                                        overflow: TextOverflow.ellipsis,
                                                           fontSize: 17,
                                                           fontWeight:
-                                                              FontWeight.w400),
-                                                    )
-                                                  : Container(),
-                                              Text(
-                                                "x ${_con.po.items[index].quantity}",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color:
-                                                        const Color(0xff525252)
-                                                            .withOpacity(.75),
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                "Discount: ${_con.po.items[index].discount}",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color:
-                                                        const Color(0xff525252)
-                                                            .withOpacity(.75),
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                "Fabric ID: ${_con.po.items[index].fabID}",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color:
-                                                        const Color(0xff525252)
-                                                            .withOpacity(.75),
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              )
-                                            ],
+                                                              FontWeight.w500),
+                                                    ),
+                                                  ],
+                                                ),
+                                                //
+                                                _con.po.items[index].height != 0
+                                                    ? Text(
+                                                        "Dimension : ${_con.po.items[index].height} X ${_con.po.items[index].width} X ${_con.po.items[index].length}",
+                                                        style: const TextStyle(
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight.w400),
+                                                      )
+                                                    : Container(),
+                                                Text(
+                                                  "x ${_con.po.items[index].quantity}",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color:
+                                                          const Color(0xff525252)
+                                                              .withOpacity(.75),
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                                Text(
+                                                  "Discount: ${_con.po.items[index].discount}",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color:
+                                                          const Color(0xff525252)
+                                                              .withOpacity(.75),
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                                _con.po.items[index].fabID != 0 ? Text(
+                                                  "Fabric Name: ${_con.po.items[index].fabName}",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color:
+                                                          const Color(0xff525252)
+                                                              .withOpacity(.75),
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ) : const SizedBox(),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                GestureDetector(
-                                  onTap: () async {
-                                    await _con.submitOrder(context);
-                                  },
-                                  child: Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
-                                    child: const Icon(
-                                      Icons.check,
-                                      color: Colors.green,
-                                      size: 50,
+                                  GestureDetector(
+                                    onTap: () async {
+                                      await _con.submitOrder(context);
+                                    },
+                                    child: Container(
+                                      height: 70,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: const Icon(
+                                        Icons.check,
+                                        color: Colors.green,
+                                        size: 50,
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );

@@ -13,6 +13,7 @@ class ProductOrder {
     for (Item item in items) {
       products.add({
         'product_id': item.productID,
+        'product_name': item.productName,
         'height': item.height,
         'width': item.width,
         'length': item.length,

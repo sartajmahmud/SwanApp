@@ -20,8 +20,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
 
   // late Product? _currentSelectedValue = widget._con.products[0];
 
-  var _SelectedFabric;
-  var _SelectedProduct;
+  // var _SelectedFabric;
+  // var _SelectedProduct;
 
   @override
   void initState() {
@@ -29,6 +29,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
     super.initState();
     widget._con.setInitProduct();
     widget._con.setInitLocation();
+    widget._con.setInitFabric();
   }
 
   @override
@@ -92,7 +93,10 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         setState(() {
                           widget._con.po.items[widget.serialNo].productID =
                               newValue?.id;
+                          widget._con.po.items[widget.serialNo].productName =
+                              newValue?.product_name;
                           widget._con.currentSelectedValue = newValue;
+                          // widget._con.setInitFabric();
                           // _SelectedProduct = newValue;
                         });
                       },
@@ -132,9 +136,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<DispatchLocation>(
                       isExpanded: true,
-                      value: widget._con.dispatchLocations[0],
+                      // value: widget._con.dispatchLocations[0],
                       // value: widget._con.po.items[widget.se  rialNo].dispatchLocation,
-                      // value: widget._con.currentSelectedLocation,
+                      value: widget._con.currentSelectedLocation,
                       // value: null,
                       icon: const Icon(
                         Icons.keyboard_arrow_down,
@@ -196,7 +200,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       child: TextField(
                         onChanged: (String password) {
                           widget._con.po.items[widget.serialNo].discount =
-                              int.parse(password);
+                              double.parse(password);
                         },
                         decoration: InputDecoration(
                           focusColor: Colors.black,
@@ -292,14 +296,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             // isEmpty: _currentSelectedValue == '',
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<Fabric>(
-                                value: _SelectedFabric,
+                                value: widget._con.currentSelectedFabric,
                                 icon: const Icon(Icons.keyboard_arrow_down),
                                 onChanged: (Fabric? newValue) {
                                   setState(() {
                                     widget._con.po.items[widget.serialNo]
                                         .fabID = newValue?.id;
-
-                                    _SelectedFabric = newValue;
+                                    widget._con.po.items[widget.serialNo]
+                                        .fabName = newValue?.fabric_name;
+                                    widget._con.currentSelectedFabric = newValue;
                                   });
                                 },
                                 items: widget._con.fabrics.map((Fabric value) {
@@ -355,7 +360,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           child: TextField(
                             onChanged: (String password) {
                               widget._con.po.items[widget.serialNo].discount =
-                                  int.parse(password);
+                                  double.parse(password);
                             },
                             decoration: InputDecoration(
                               focusColor: Colors.black,
@@ -460,6 +465,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           margin: const EdgeInsets.all(10),
                           height: 55,
                           child: FormField<Fabric>(
+                            // widget.po.items[0].fabID != 0
+                            // validator: (value) => widget._con.po.items[0].fabID != 0 ? 'field required' : null,
                             builder: (FormFieldState<Fabric> state) {
                               return InputDecorator(
                                 decoration: InputDecoration(
@@ -479,7 +486,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<Fabric>(
                                     isExpanded: true,
-                                    value: _SelectedFabric,
+                                    value:  widget._con.currentSelectedFabric,
                                     icon: const Icon(
                                       Icons.keyboard_arrow_down,
                                       color: Colors.black,
@@ -488,8 +495,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                       setState(() {
                                         widget._con.po.items[widget.serialNo]
                                             .fabID = newValue?.id;
-
-                                        _SelectedFabric = newValue;
+                                        widget._con.po.items[widget.serialNo]
+                                            .fabName = newValue?.fabric_name;
+                                        widget._con.currentSelectedFabric = newValue;
                                       });
                                     },
                                     items:
@@ -546,7 +554,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               child: TextField(
                                 onChanged: (String password) {
                                   widget._con.po.items[widget.serialNo]
-                                      .discount = int.parse(password);
+                                      .discount = double.parse(password);
                                 },
                                 decoration: InputDecoration(
                                   focusColor: Colors.black,
