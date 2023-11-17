@@ -37,6 +37,8 @@ class OrderController extends ControllerMVC {
   List<DispatchLocation> dispatchLocations = [];
 
   bool loading = false;
+  bool validateQuantity = false;
+  bool validateDiscount = false;
 
   updateChalaanDataWithSelectedDate(String date) async {
     await getChalanHistory(date);

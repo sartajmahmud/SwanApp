@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Models/DispatchLocation.dart';
 import '../Models/Product.dart';
@@ -171,14 +172,24 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   children: [
                     Container(
                       margin: const EdgeInsets.all(10),
-                      height: 45,
+                      height: widget._con.validateQuantity ? 45 : 65,
                       child: TextField(
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                         onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].quantity =
-                              int.parse(password);
+                          if (password != '') {
+                            widget._con.po.items[widget.serialNo].quantity =
+                                int.parse(password);
+                          }
 
-                          // this.password = password;
+                          widget._con.po.items[widget.serialNo].quantity > 0 &&
+                                  password != ''
+                              ? widget._con.validateQuantity = true
+                              : widget._con.validateQuantity = false;
+                          setState(() {});
+                          widget._con.setState(() {});
                         },
                         decoration: InputDecoration(
                           labelText: 'Quantity',
@@ -186,6 +197,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               fontWeight: FontWeight.w500,
                               fontFamily: 'PlayfairDisplay',
                               color: Colors.black54),
+                          errorText: widget._con.validateQuantity
+                              ? null
+                              : "Invalid Quantity",
                           focusColor: Colors.black,
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(13)),
@@ -196,11 +210,23 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      height: 45,
+                      height: widget._con.validateDiscount ? 45 : 65,
                       child: TextField(
-                        onChanged: (String password) {
-                          widget._con.po.items[widget.serialNo].discount =
-                              double.parse(password);
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
+                        ],
+                        onChanged: (String discount) {
+                          if (discount != '') {
+                            widget._con.po.items[widget.serialNo].discount =
+                                double.parse(discount);
+                          }
+
+                          discount != ''
+                              ? widget._con.validateDiscount = true
+                              : widget._con.validateDiscount = false;
+                          setState(() {});
+                          widget._con.setState(() {});
                         },
                         decoration: InputDecoration(
                           focusColor: Colors.black,
@@ -209,6 +235,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               fontWeight: FontWeight.w500,
                               fontFamily: 'PlayfairDisplay',
                               color: Colors.black54),
+                          errorText: widget._con.validateDiscount
+                              ? null
+                              : "Discount can't e empty",
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(13)),
                           border: OutlineInputBorder(
@@ -298,13 +327,19 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               child: DropdownButton<Fabric>(
                                 value: widget._con.currentSelectedFabric,
                                 icon: const Icon(Icons.keyboard_arrow_down),
+                                onTap: () {
+                                  print(widget
+                                      ._con.currentSelectedFabric?.fabric_name);
+                                },
                                 onChanged: (Fabric? newValue) {
+                                  print(newValue);
                                   setState(() {
                                     widget._con.po.items[widget.serialNo]
                                         .fabID = newValue?.id;
                                     widget._con.po.items[widget.serialNo]
                                         .fabName = newValue?.fabric_name;
-                                    widget._con.currentSelectedFabric = newValue;
+                                    widget._con.currentSelectedFabric =
+                                        newValue;
                                   });
                                 },
                                 items: widget._con.fabrics.map((Fabric value) {
@@ -322,6 +357,15 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             ),
                           );
                         },
+                        // initialValue: widget._con.currentSelectedFabric,
+                        // validator: (value) {
+                        //   if (widget._con.po.items[widget.serialNo].fabName == null) {
+                        //     print("dhukse");
+                        //     return "Select a Fabric";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
                       ),
                     ),
                   ],
@@ -331,14 +375,25 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       children: [
                         Container(
                           margin: const EdgeInsets.all(10),
-                          height: 45,
+                          height: widget._con.validateQuantity ? 45 : 65,
                           child: TextField(
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                             onChanged: (String password) {
-                              widget._con.po.items[widget.serialNo].quantity =
-                                  int.parse(password);
+                              if (password != '') {
+                                widget._con.po.items[widget.serialNo].quantity =
+                                    int.parse(password);
+                              }
 
-                              // this.password = password;
+                              widget._con.po.items[widget.serialNo].quantity >
+                                          0 &&
+                                      password != ''
+                                  ? widget._con.validateQuantity = true
+                                  : widget._con.validateQuantity = false;
+                              setState(() {});
+                              widget._con.setState(() {});
                             },
                             decoration: InputDecoration(
                               labelText: 'Quantiy',
@@ -346,6 +401,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'PlayfairDisplay',
                                   color: Colors.black54),
+                              errorText: widget._con.validateQuantity
+                                  ? null
+                                  : "Invalid Quantity",
                               focusColor: Colors.black,
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(13)),
@@ -356,11 +414,24 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         ),
                         Container(
                           margin: const EdgeInsets.all(10),
-                          height: 45,
+                          height: widget._con.validateDiscount ? 45 : 65,
                           child: TextField(
-                            onChanged: (String password) {
-                              widget._con.po.items[widget.serialNo].discount =
-                                  double.parse(password);
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[0-9.]")),
+                            ],
+                            onChanged: (String discount) {
+                              if (discount != '') {
+                                widget._con.po.items[widget.serialNo].discount =
+                                    double.parse(discount);
+                              }
+
+                              discount != ''
+                                  ? widget._con.validateDiscount = true
+                                  : widget._con.validateDiscount = false;
+                              setState(() {});
+                              widget._con.setState(() {});
                             },
                             decoration: InputDecoration(
                               focusColor: Colors.black,
@@ -369,6 +440,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'PlayfairDisplay',
                                   color: Colors.black54),
+                              errorText: widget._con.validateDiscount
+                                  ? null
+                                  : "Discount can't e empty",
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(13)),
                               border: OutlineInputBorder(
@@ -486,7 +560,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<Fabric>(
                                     isExpanded: true,
-                                    value:  widget._con.currentSelectedFabric,
+                                    value: widget._con.currentSelectedFabric,
                                     icon: const Icon(
                                       Icons.keyboard_arrow_down,
                                       color: Colors.black,
@@ -497,7 +571,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                             .fabID = newValue?.id;
                                         widget._con.po.items[widget.serialNo]
                                             .fabName = newValue?.fabric_name;
-                                        widget._con.currentSelectedFabric = newValue;
+                                        widget._con.currentSelectedFabric =
+                                            newValue;
                                       });
                                     },
                                     items:
@@ -525,14 +600,25 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           children: [
                             Container(
                               margin: const EdgeInsets.all(10),
-                              height: 45,
+                              height: widget._con.validateQuantity ? 45 : 65,
                               child: TextField(
                                 keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
                                 onChanged: (String password) {
+                                  if (password != '') {
+                                    widget._con.po.items[widget.serialNo]
+                                        .quantity = int.parse(password);
+                                  }
                                   widget._con.po.items[widget.serialNo]
-                                      .quantity = int.parse(password);
-
-                                  // this.password = password;
+                                                  .quantity >
+                                              0 &&
+                                          password != ''
+                                      ? widget._con.validateQuantity = true
+                                      : widget._con.validateQuantity = false;
+                                  setState(() {});
+                                  widget._con.setState(() {});
                                 },
                                 decoration: InputDecoration(
                                   labelText: 'Quantiy',
@@ -540,6 +626,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'PlayfairDisplay',
                                       color: Colors.black54),
+                                  errorText: widget._con.validateQuantity
+                                      ? null
+                                      : "Invalid Quantity",
                                   focusColor: Colors.black,
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(13)),
@@ -550,11 +639,24 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             ),
                             Container(
                               margin: const EdgeInsets.all(10),
-                              height: 45,
+                              height: widget._con.validateDiscount ? 45 : 65,
                               child: TextField(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp("[0-9.]")),
+                                ],
                                 onChanged: (String password) {
-                                  widget._con.po.items[widget.serialNo]
-                                      .discount = double.parse(password);
+                                  if (password != '') {
+                                    widget._con.po.items[widget.serialNo]
+                                        .discount = double.parse(password);
+                                  }
+
+                                  password != ''
+                                      ? widget._con.validateDiscount = true
+                                      : widget._con.validateDiscount = false;
+                                  setState(() {});
+                                  widget._con.setState(() {});
                                 },
                                 decoration: InputDecoration(
                                   focusColor: Colors.black,
@@ -563,6 +665,9 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'PlayfairDisplay',
                                       color: Colors.black54),
+                                  errorText: widget._con.validateDiscount
+                                      ? null
+                                      : "Discount can't e empty",
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(13)),
                                   border: OutlineInputBorder(
