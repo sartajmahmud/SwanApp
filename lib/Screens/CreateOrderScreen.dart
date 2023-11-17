@@ -83,8 +83,6 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             child: TextField(
               onChanged: (String name) {
                 _con.po.name = name;
-              },
-              onSubmitted: (String name) {
                 name.isNotEmpty
                     ? validateName = true
                     : validateName = false;
@@ -98,6 +96,14 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                     fontFamily: 'PlayfairDisplay',
                     color: Colors.black54),
                 errorText: validateName ? null : "Name Can't be Empty",
+                errorStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'PlayfairDisplay',
+                    color: Colors.black54),
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(width: 1,color: Colors.grey)
+                ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -111,15 +117,14 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
             margin: const EdgeInsets.all(5),
             height: validateAddress ? 55 : 65,
             child: TextField(
-              onChanged: (String password) {
-                _con.po.address = password;
-              },
-              onSubmitted: (String name) {
-                name.isNotEmpty
+              onChanged: (String address) {
+                _con.po.address = address;
+                address.isNotEmpty
                     ? validateAddress = true
                     : validateAddress = false;
                 setState(() {});
               },
+
               decoration: InputDecoration(
                 focusColor: Colors.black,
                 labelText: 'Customer Address',
@@ -128,11 +133,21 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                     fontFamily: 'PlayfairDisplay',
                     color: Colors.black54),
                 errorText: validateAddress ? null : "Address Can't be Empty",
+                errorStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'PlayfairDisplay',
+                    color: Colors.black54),
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(width: 1,color: Colors.grey)
+                ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
+                    borderSide: BorderSide(width: 1,color: Colors.green)
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
+                  borderSide: BorderSide(width: 1,color: Colors.green)
                 ),
               ),
             ),
@@ -147,8 +162,6 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
               ],
               onChanged: (String number) {
                 _con.po.mobile = number;
-              },
-              onSubmitted: (String number) {
                 number.length == 11 && number.isNotEmpty
                     ? validateNumber = true
                     : validateNumber = false;
@@ -165,6 +178,14 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                   borderRadius: BorderRadius.circular(13),
                 ),
                 errorText: validateNumber ? null : "Invalid Mobile Number",
+                errorStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'PlayfairDisplay',
+                    color: Colors.black54),
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(width: 1,color: Colors.grey)
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
@@ -253,7 +274,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
           ),
           dynamicList.isNotEmpty //&& validateNumber&& validateAddress&&validateName
               ? InkWell(
-                  onTap: _con.validateQuantity && _con.validateDiscount&& validateNumber&& validateAddress&&validateName
+                  onTap: validateNumber&& validateAddress&&validateName
                       ? () async {
                           showDialog(
                             barrierDismissible: true,
@@ -503,7 +524,7 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
                         vertical: 6, horizontal: 125),
                     width: 150,
                     decoration: BoxDecoration(
-                      color: _con.validateQuantity && _con.validateDiscount&& validateNumber&& validateAddress&&validateName? Colors.green : Colors.grey,
+                      color: validateNumber&& validateAddress&&validateName? Colors.green : Colors.grey,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       boxShadow: const [
                         BoxShadow(

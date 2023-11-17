@@ -8,6 +8,7 @@ import 'package:swanapp/Models/DispatchLocation.dart';
 import 'package:swanapp/Models/DispatchProduct.dart';
 import 'package:swanapp/Models/OrderChalaan.dart';
 import '../Models/Fabric.dart';
+import '../Models/Item.dart';
 import '../Models/OrderHistory.dart';
 import '../Models/Product.dart';
 import '../Models/ProductOrder.dart';
@@ -170,12 +171,55 @@ class OrderController extends ControllerMVC {
     // }
   }
 
+  String errorMsg = '';
   submitOrder(BuildContext context) async {
     // po.printData();
+
+    bool validation = false;
     print(po.toMap());
-    await createOrder(po).then((value) {
-      Navigator.popAndPushNamed(context, '/orderHistory');
-    });
+    if(
+    po.name != null &&
+    po.address != null &&
+    po.mobile != null
+    ){
+      for(Item i in po.items){
+        if(
+        i.quantity != null &&
+        i.quantity != 0 &&
+        i.discount != null
+        ){
+          if(
+          i.height != 0 &&
+          i.width != 0 &&
+              i.length != 0
+          ){
+            if(i.fabID != 0){
+              validation = true;
+            }else{
+              errorMsg = 'Fabric';
+              validation = false;
+            }
+          }else{
+            validation = false;
+          }
+        }else{
+          validation = false;
+        }
+      }
+    }
+    if (validation){
+      await createOrder(po).then((value) {
+        Navigator.popAndPushNamed(context, '/orderHistory');
+      });
+    }else{
+      return showDialog(context: context, builder:(context){
+        return AlertDialog(
+          content: Text('Please fill $errorMsg fields.'),
+        );
+      }
+      );
+    }
+
   }
 
   getChallanDoc(String ID) async {

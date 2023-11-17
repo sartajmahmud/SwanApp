@@ -32,7 +32,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
     widget._con.setInitLocation();
     widget._con.setInitFabric();
   }
-
+bool validateQuantity =false;
+bool validateDiscount =false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -172,7 +173,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                   children: [
                     Container(
                       margin: const EdgeInsets.all(10),
-                      height: widget._con.validateQuantity ? 45 : 65,
+                      height: validateQuantity ? 45 : 65,
                       child: TextField(
                         keyboardType: TextInputType.number,
                         inputFormatters: [
@@ -186,8 +187,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
 
                           widget._con.po.items[widget.serialNo].quantity > 0 &&
                                   password != ''
-                              ? widget._con.validateQuantity = true
-                              : widget._con.validateQuantity = false;
+                              ? validateQuantity = true
+                              : validateQuantity = false;
                           setState(() {});
                           widget._con.setState(() {});
                         },
@@ -197,7 +198,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               fontWeight: FontWeight.w500,
                               fontFamily: 'PlayfairDisplay',
                               color: Colors.black54),
-                          errorText: widget._con.validateQuantity
+                          errorText: validateQuantity
                               ? null
                               : "Invalid Quantity",
                           focusColor: Colors.black,
@@ -210,7 +211,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                     ),
                     Container(
                       margin: const EdgeInsets.all(10),
-                      height: widget._con.validateDiscount ? 45 : 65,
+                      height: validateDiscount ? 45 : 65,
                       child: TextField(
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
@@ -223,8 +224,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           }
 
                           discount != ''
-                              ? widget._con.validateDiscount = true
-                              : widget._con.validateDiscount = false;
+                              ? validateDiscount = true
+                              : validateDiscount = false;
                           setState(() {});
                           widget._con.setState(() {});
                         },
@@ -235,7 +236,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               fontWeight: FontWeight.w500,
                               fontFamily: 'PlayfairDisplay',
                               color: Colors.black54),
-                          errorText: widget._con.validateDiscount
+                          errorText: validateDiscount
                               ? null
                               : "Discount can't e empty",
                           focusedBorder: OutlineInputBorder(
@@ -375,7 +376,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                       children: [
                         Container(
                           margin: const EdgeInsets.all(10),
-                          height: widget._con.validateQuantity ? 45 : 65,
+                          height: validateQuantity ? 45 : 65,
                           child: TextField(
                             keyboardType: TextInputType.number,
                             inputFormatters: [
@@ -390,8 +391,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               widget._con.po.items[widget.serialNo].quantity >
                                           0 &&
                                       password != ''
-                                  ? widget._con.validateQuantity = true
-                                  : widget._con.validateQuantity = false;
+                                  ? validateQuantity = true
+                                  : validateQuantity = false;
                               setState(() {});
                               widget._con.setState(() {});
                             },
@@ -401,7 +402,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'PlayfairDisplay',
                                   color: Colors.black54),
-                              errorText: widget._con.validateQuantity
+                              errorText: validateQuantity
                                   ? null
                                   : "Invalid Quantity",
                               focusColor: Colors.black,
@@ -414,7 +415,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                         ),
                         Container(
                           margin: const EdgeInsets.all(10),
-                          height: widget._con.validateDiscount ? 45 : 65,
+                          height: validateDiscount ? 45 : 65,
                           child: TextField(
                             keyboardType: TextInputType.number,
                             inputFormatters: <TextInputFormatter>[
@@ -428,8 +429,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                               }
 
                               discount != ''
-                                  ? widget._con.validateDiscount = true
-                                  : widget._con.validateDiscount = false;
+                                  ? validateDiscount = true
+                                  : validateDiscount = false;
                               setState(() {});
                               widget._con.setState(() {});
                             },
@@ -440,7 +441,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'PlayfairDisplay',
                                   color: Colors.black54),
-                              errorText: widget._con.validateDiscount
+                              errorText: validateDiscount
                                   ? null
                                   : "Discount can't e empty",
                               focusedBorder: OutlineInputBorder(
@@ -600,7 +601,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                           children: [
                             Container(
                               margin: const EdgeInsets.all(10),
-                              height: widget._con.validateQuantity ? 45 : 65,
+                              height: validateQuantity ? 45 : 65,
                               child: TextField(
                                 keyboardType: TextInputType.number,
                                 inputFormatters: [
@@ -615,8 +616,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                                   .quantity >
                                               0 &&
                                           password != ''
-                                      ? widget._con.validateQuantity = true
-                                      : widget._con.validateQuantity = false;
+                                      ? validateQuantity = true
+                                      : validateQuantity = false;
                                   setState(() {});
                                   widget._con.setState(() {});
                                 },
@@ -626,7 +627,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'PlayfairDisplay',
                                       color: Colors.black54),
-                                  errorText: widget._con.validateQuantity
+                                  errorText: validateQuantity
                                       ? null
                                       : "Invalid Quantity",
                                   focusColor: Colors.black,
@@ -639,7 +640,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                             ),
                             Container(
                               margin: const EdgeInsets.all(10),
-                              height: widget._con.validateDiscount ? 45 : 65,
+                              height: validateDiscount ? 45 : 65,
                               child: TextField(
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -653,8 +654,8 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                   }
 
                                   password != ''
-                                      ? widget._con.validateDiscount = true
-                                      : widget._con.validateDiscount = false;
+                                      ? validateDiscount = true
+                                      : validateDiscount = false;
                                   setState(() {});
                                   widget._con.setState(() {});
                                 },
@@ -665,7 +666,7 @@ class _ProductDetailsFieldState extends StateMVC<ProductDetailsField> {
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'PlayfairDisplay',
                                       color: Colors.black54),
-                                  errorText: widget._con.validateDiscount
+                                  errorText: validateDiscount
                                       ? null
                                       : "Discount can't e empty",
                                   focusedBorder: OutlineInputBorder(
