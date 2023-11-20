@@ -49,7 +49,8 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
               title: Center(
                 child: Text(
                   '${currentUser.value.currentZone} Order List',
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
               backgroundColor: Colors.red,
@@ -144,10 +145,11 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 8.0),
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height *
-                                          .13,
-                                      width: MediaQuery.of(context).size.width *
-                                          1,
+                                      // height:
+                                      //     MediaQuery.of(context).size.height *
+                                      //         .13,
+                                      width:
+                                          MediaQuery.of(context).size.width * 1,
                                       decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
@@ -170,72 +172,98 @@ class _OrderHistoryScreenState extends StateMVC<OrderHistoryScreen> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "Invoice ID : ${_con.orderHistory[index].invoice_id.toString()}",
                                               // "Order ID : ",
                                               style: const TextStyle(
                                                   fontSize: 15,
-                                                  fontWeight:
-                                                  FontWeight.w500,
+                                                  fontWeight: FontWeight.w500,
                                                   color: Colors.black),
                                             ),
-                                            SizedBox(height: MediaQuery.of(context).size.height *
-                                                .01),
+                                            SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .01),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "Customer Name : ${_con.orderHistory[index].customer_name}",
-                                                      // "Customer Name : ",
-                                                      style: const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.black),
-                                                    ),
-                                                    SizedBox(height: MediaQuery.of(context).size.height *
-                                                        .01),
-                                                    Text(
-                                                      "Total Amount : ${_con.orderHistory[index].total_amount}",
-                                                      // "Total Amount : ",
-                                                      style: const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.black),
-                                                    ),
-                                                  ],
+                                                Expanded(
+                                                  flex: 35,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        "Customer Name : ${_con.orderHistory[index].customer_name}",
+                                                        // "Customer Name : ",
+                                                        style: const TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.black),
+                                                        overflow: TextOverflow.ellipsis,
+                                                        maxLines: 2,
+                                                        softWrap: false,
+                                                      ),
+                                                      SizedBox(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              .01),
+                                                      Text(
+                                                        "Total Amount : ${_con.orderHistory[index].total_amount}",
+                                                        // "Total Amount : ",
+                                                        style: const TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.black),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 // Padding(
                                                 //   padding: const EdgeInsets.symmetric(
                                                 //       horizontal: 25),
                                                 // ),
-                                                ElevatedButton.icon(
-                                                  onPressed: () {
-                                                    _con.getInvoiceDoc(int.parse(
-                                                        _con.orderHistory[index]
-                                                            .order_id));
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                      padding: const EdgeInsets.symmetric(
-                                                          horizontal: 8,
-                                                          vertical: 10),
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  16)),
-                                                      primary: Colors.indigo[300]),
-                                                  icon: const Icon(Icons
-                                                      .print_rounded), //icon data for elevated button
-                                                  label: const Text(
-                                                      "Print Invoice"), //label text
+                                                Expanded(
+                                                  flex: 15,
+                                                  child: ElevatedButton.icon(
+                                                    onPressed: () {
+                                                      _con.getInvoiceDoc(
+                                                          int.parse(_con
+                                                              .orderHistory[index]
+                                                              .order_id));
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                        padding: EdgeInsets.symmetric(
+                                                            horizontal:
+                                                                MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    .01,
+                                                            vertical: 10),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            16)),
+                                                        primary:
+                                                            Colors.indigo[300]),
+                                                    icon: const Icon(Icons
+                                                        .print_rounded), //icon data for elevated button
+                                                    label: const Text(
+                                                        "Print Inv."), //label text
+                                                  ),
                                                 ),
                                               ],
                                             ),

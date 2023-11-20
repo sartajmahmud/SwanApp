@@ -58,7 +58,8 @@ class _CreateOrderScreenState extends StateMVC<CreateOrderScreen> {
       Item()
         ..dispatchLocation = _con.dispatchLocations[0].mobile_no
         ..productName = _con.products[0].product_name
-        ..productID = _con.products[0].id,
+        ..productID = _con.products[0].id
+        ..attribute = _con.products[0].attribute,
     );
     dynamicList.add(new ProductDetailsField(dynamicList.length, _con));
     setState(() {

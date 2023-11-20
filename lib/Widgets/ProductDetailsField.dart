@@ -97,6 +97,8 @@ bool validateDiscount =false;
                               newValue?.id;
                           widget._con.po.items[widget.serialNo].productName =
                               newValue?.product_name;
+                          widget._con.po.items[widget.serialNo].attribute =
+                              newValue?.attribute;
                           widget._con.currentSelectedValue = newValue;
                           // widget._con.setInitFabric();
                           // _SelectedProduct = newValue;

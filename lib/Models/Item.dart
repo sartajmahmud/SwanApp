@@ -9,7 +9,7 @@ class Item {
 
   late int quantity;
   late String? fabName;
-
+  late int? attribute = 0;
   late int? fabID = 0;
   late String? dispatchLocation = '';
   late String? productName = '';

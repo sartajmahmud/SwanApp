@@ -171,9 +171,9 @@ class OrderController extends ControllerMVC {
     // }
   }
 
-  String errorMsg = '';
   submitOrder(BuildContext context) async {
     // po.printData();
+    String errorMsg = '';
 
     bool validation = false;
     print(po.toMap());
@@ -188,19 +188,20 @@ class OrderController extends ControllerMVC {
         i.quantity != 0 &&
         i.discount != null
         ){
-          if(
-          i.height != 0 &&
-          i.width != 0 &&
-              i.length != 0
-          ){
-            if(i.fabID != 0){
-              validation = true;
-            }else{
-              errorMsg = 'Fabric';
+          if(i.attribute != 2){
+            if (i.height != 0 && i.width != 0 && i.length != 0) {
+              if (i.fabID != 0) {
+                validation = true;
+              } else {
+                errorMsg += 'Fabric';
+                validation = false;
+              }
+            } else {
+              errorMsg += 'Size';
               validation = false;
             }
           }else{
-            validation = false;
+            validation = true;
           }
         }else{
           validation = false;
